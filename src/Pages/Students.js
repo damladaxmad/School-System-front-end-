@@ -1,0 +1,14 @@
+import React from "react";
+
+const Students = () => {
+
+  
+  return (
+    <div style={{marginTop: "20px", height: "525px",
+    marginLeft: "10px"}}>
+        <h3> Students</h3>
+    </div>
+  );
+};
+
+export default Students;
