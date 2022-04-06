@@ -117,12 +117,13 @@ const Layout = ({ children }) => {
   ];
 
   return (
-    <div className={classes.root} style={{ backgroundColor: "#f2f2f2" }}>
+    <div className={classes.root} style={{ backgroundColor: "#f2f2f2",
+ }}>
       {/* app bar */}
       <AppBar
         position="fixed"
         className={classes.appBar}
-        elevation={0}
+        elevation={1}
         color="primary"
       >
         <Toolbar>
