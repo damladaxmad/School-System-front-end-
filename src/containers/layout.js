@@ -9,8 +9,8 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@material-ui/core";
-import { MdMenuOpen } from 'react-icons/md';
-import { SiGoogleclassroom } from 'react-icons/si';
+import { MdMenuOpen } from "react-icons/md";
+import { SiGoogleclassroom } from "react-icons/si";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import GroupIcon from "@material-ui/icons/Group";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
@@ -19,8 +19,9 @@ import { useNavigate, useLocation } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import BottomProfile from "./BottomProfile";
-import jaabirLogo from "../assets/images/jaabirLogo.jpg"
-import profile from "../assets/images/profileDrawer.jpg"
+import jaabirLogo from "../assets/images/jaabirLogo.jpg";
+import profile from "../assets/images/profileDrawer.jpg";
+import Footer from "./Footer";
 
 const drawerWidth = 225;
 const useStyles = makeStyles((theme) => {
@@ -28,6 +29,7 @@ const useStyles = makeStyles((theme) => {
     page: {
       background: "#F0F2FA",
       width: "100%",
+      marginTop: "90px"
     },
     root: {
       display: "flex",
@@ -56,7 +58,7 @@ const useStyles = makeStyles((theme) => {
     title: {
       padding: theme.spacing(2),
       fontSize: 18,
-      fontWeight: "700"
+      fontWeight: "700",
     },
     appBar: {
       width: `calc(100% - ${drawerWidth}px)`,
@@ -74,7 +76,6 @@ const useStyles = makeStyles((theme) => {
       cursor: "pointer",
     },
 
-    toolbar: theme.mixins.toolbar,
   };
 });
 
@@ -96,7 +97,7 @@ const Layout = ({ children }) => {
     },
     {
       text: "Classes",
-      icon: <SiGoogleclassroom style = {{fontSize: "20px", color: "white"}}/>,
+      icon: <SiGoogleclassroom style={{ fontSize: "20px", color: "white" }} />,
       path: "/classes",
     },
     {
@@ -117,8 +118,7 @@ const Layout = ({ children }) => {
   ];
 
   return (
-    <div className={classes.root} style={{ backgroundColor: "#f2f2f2",
- }}>
+    <div className={classes.root} style={{ backgroundColor: "#f2f2f2" }}>
       {/* app bar */}
       <AppBar
         position="fixed"
@@ -135,10 +135,13 @@ const Layout = ({ children }) => {
             className={classes.avatar}
             style={{ backgroundColor: "#041E42" }}
           >
-           <img src = {profile} style = {{
-            width: '100%',
-            height: '100%',
-        }}/>
+            <img
+              src={profile}
+              style={{
+                width: "100%",
+                height: "100%",
+              }}
+            />
           </Avatar>
         </Toolbar>
       </AppBar>
@@ -150,20 +153,34 @@ const Layout = ({ children }) => {
         classes={{ paper: classes.drawerPaper }}
         anchor="left"
       >
-        <div style={{display:"flex", justifyContent: "center",
-      alignItems: "center", padding: "10px"}}>
-          <Avatar style ={{backgroundColor: "white", color: "orange"}}>
-          <img src = {jaabirLogo} style = {{
-            width: '100%',
-            height: '100%',
-        }}/>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: "10px",
+          }}
+        >
+          <Avatar style={{ backgroundColor: "white", color: "orange" }}>
+            <img
+              src={jaabirLogo}
+              style={{
+                width: "100%",
+                height: "100%",
+              }}
+            />
           </Avatar>
           <Typography variant="h5" className={classes.title}>
             JAABIR
           </Typography>
-          <MdMenuOpen style={{fontSize: "20px",
-        color: "rgba(255, 255, 255, 0.5)",
-        marginLeft: "50px", cursor: "pointer"}}/>
+          <MdMenuOpen
+            style={{
+              fontSize: "20px",
+              color: "rgba(255, 255, 255, 0.5)",
+              marginLeft: "50px",
+              cursor: "pointer",
+            }}
+          />
         </div>
         <Divider style={{ backgroundColor: "white", opacity: 0.1 }} />
         {/* links/list section */}
@@ -187,13 +204,21 @@ const Layout = ({ children }) => {
             </ListItem>
           ))}
         </List>
-       <BottomProfile/>
+        <BottomProfile />
       </Drawer>
 
       {/* main content */}
       <div className={classes.page}>
-        <div className={classes.toolbar}></div>
-        {children}
+        <div className={classes.toolbar}>
+          {children}
+          <Divider
+            style={{
+              backgroundColor: "#E0E1EA",
+              marginTop: "40px",
+            }}
+          />
+          <Footer />
+        </div>
       </div>
     </div>
   );

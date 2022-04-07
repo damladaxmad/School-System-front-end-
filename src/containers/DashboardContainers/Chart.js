@@ -36,6 +36,7 @@ const Chart = () => {
         padding: "20px",
         borderRadius: "10px",
         height: "350px",
+        boxShadow: "1px 1px 1px #9E9E9E"
       }}
     >
       <VictoryPie
@@ -62,7 +63,7 @@ const Chart = () => {
               margin: "opx",
               marginRight: "70px",
               position: "absolute",
-              top: "215px",
+              top: "225px",
               right: "90px",
             }}
             responsive={false}

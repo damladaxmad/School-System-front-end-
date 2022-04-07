@@ -12,7 +12,8 @@ const QuickActions = () => {
         borderRadius: "10px",
         height: "200px",
         width: "75%",
-        float: "left"
+        float: "left",
+        boxShadow: "1px 1px 1px #9E9E9E"
       }}
     >
       <Typography

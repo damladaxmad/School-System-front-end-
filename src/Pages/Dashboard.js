@@ -3,6 +3,7 @@ import React from "react";
 import Chart from "../containers/DashboardContainers/Chart";
 import QuickActions from "../containers/DashboardContainers/QuickActions";
 import StatCard from "../containers/DashboardContainers/StatCard";
+import UpdateStudents from "../containers/DashboardContainers/UpdateStudents";
 
 
 const Dashboard = () => {
@@ -16,10 +17,9 @@ const Dashboard = () => {
   return (
     <div
       style={{
-        marginTop: "20px",
         height: "100%",
         width: "95%",
-        margin: "20px auto",
+        margin: "0px auto",
         display: "flex",
         gap: "14px",
         flexDirection: "column",
@@ -32,8 +32,10 @@ const Dashboard = () => {
         ))}
       </div>
       <Chart />
+      <div style={{ display: "flex", gap: "30px"}}>
       <QuickActions />
-    
+     <UpdateStudents/>
+      </div>  
       
     </div>
   );

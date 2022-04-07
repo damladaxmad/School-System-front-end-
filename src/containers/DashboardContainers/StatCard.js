@@ -28,6 +28,7 @@ const StatCard = (props) => {
         justifyContent: "start",
         alignItems: "center",
         gap: "8px",
+        boxShadow: "1px 1px 1px #9E9E9E"
       }}
     >
       <Avatar className={classes.avatar}>
