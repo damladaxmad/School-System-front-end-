@@ -5,7 +5,7 @@ const UpdateStudents = () => {
   return (
     <div style = {{ padding: "15px",
     borderRadius: "10px", display: "flex", gap: "58px",
-    backgroundImage: "linear-gradient(180deg,#0061F7,  #F2994A)"}}
+    background: "#0061F7" }}
     class = "updateStudents">
         <div style={{}}>
           <p

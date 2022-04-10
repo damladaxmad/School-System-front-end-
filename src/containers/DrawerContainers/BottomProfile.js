@@ -4,7 +4,7 @@ import {
     makeStyles,
   } from "@material-ui/core";
    import React from "react";
-   import profile from "../assets/images/profileDrawer.jpg"
+   import profile from "../../assets/images/profileDrawer.jpg"
 
   const useStyles = makeStyles((theme) => {
     return {

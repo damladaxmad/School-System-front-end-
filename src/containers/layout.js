@@ -1,15 +1,10 @@
 import {
   Avatar,
   Divider,
-  Drawer,
   Typography,
   makeStyles,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
 } from "@material-ui/core";
-import { MdMenuOpen } from "react-icons/md";
+// import { MdMenuOpen } from "react-icons/md";
 import { SiGoogleclassroom } from "react-icons/si";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import GroupIcon from "@material-ui/icons/Group";
@@ -18,10 +13,9 @@ import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import BottomProfile from "./BottomProfile";
-import jaabirLogo from "../assets/images/jaabirLogo.jpg";
 import profile from "../assets/images/profileDrawer.jpg";
 import Footer from "./Footer";
+import DrawerFile from "./DrawerContainers/DrawerFile";
 
 const drawerWidth = 225;
 const useStyles = makeStyles((theme) => {
@@ -146,66 +140,7 @@ const Layout = ({ children }) => {
         </Toolbar>
       </AppBar>
       {/* side drawer */}
-      <Drawer
-        className={classes.drawer}
-        color="secondary"
-        variant="permanent"
-        classes={{ paper: classes.drawerPaper }}
-        anchor="left"
-      >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            padding: "10px",
-          }}
-        >
-          <Avatar style={{ backgroundColor: "white", color: "orange" }}>
-            <img
-              src={jaabirLogo}
-              style={{
-                width: "100%",
-                height: "100%",
-              }}
-            />
-          </Avatar>
-          <Typography variant="h5" className={classes.title}>
-            JAABIR
-          </Typography>
-          <MdMenuOpen
-            style={{
-              fontSize: "20px",
-              color: "rgba(255, 255, 255, 0.5)",
-              marginLeft: "50px",
-              cursor: "pointer",
-            }}
-          />
-        </div>
-        <Divider style={{ backgroundColor: "white", opacity: 0.1 }} />
-        {/* links/list section */}
-        <List>
-          {menuItems.map((item) => (
-            <ListItem
-              button
-              key={item.text}
-              onClick={() => navigate(item.path)}
-              classes={{
-                primary: classes.fontSize,
-              }}
-              className={
-                location.pathname === item.path
-                  ? classes.active
-                  : classes.inActive
-              }
-            >
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.text} />
-            </ListItem>
-          ))}
-        </List>
-        <BottomProfile />
-      </Drawer>
+      <DrawerFile/>
 
       {/* main content */}
       <div className={classes.page}>
