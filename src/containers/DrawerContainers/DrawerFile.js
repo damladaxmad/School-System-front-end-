@@ -122,6 +122,7 @@ import {
           icon: <FiSettings style={{fontSize: "20px", color: "white" }} />,
           path: "/settings",
         },
+        
       ];
     
 

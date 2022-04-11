@@ -4,20 +4,7 @@ import { MdAdd } from "react-icons/md";
 import ClassContainer from "../containers/ClassContainers/ClassContainer";
 
 function Classes() {
-  const classes = [
-    {
-      name: "Form 1 B",
-      isActive: true,
-      description: `  Secondary School Class with 60 student, 10 teachers
-  and 10 courses.`,
-    },
-    {
-      name: "Form 2 B",
-      isActive: true,
-      description: `  Secondary School Class with 60 student, 10 teachers
-  and 10 courses.`,
-    },
-  ];
+  const classes = ["Form1", "Form2", "Form3", "Form4", "Form5","Form1", "Form", "Form3"]
 
   return (
     <div
@@ -52,20 +39,14 @@ function Classes() {
             />
           }
         >
-          {" "}
           Add New Class
         </Button>
       </div>
 
       <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
-        <ClassContainer />
-        <ClassContainer />
-        <ClassContainer />
-        <ClassContainer />
-        <ClassContainer />
-        <ClassContainer />
-        <ClassContainer />
-        <ClassContainer />
+      {classes.map((c) => (
+          <ClassContainer />
+        ))}
       </div>
     </div>
   );
