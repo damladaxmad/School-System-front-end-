@@ -78,38 +78,6 @@ const Layout = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const menuItems = [
-    {
-      text: "Dashboard",
-      icon: <DashboardIcon style={{ color: "white" }} />,
-      path: "/dashboard",
-    },
-    {
-      text: "Students",
-      icon: <GroupIcon style={{ color: "white" }} />,
-      path: "/students",
-    },
-    {
-      text: "Classes",
-      icon: <SiGoogleclassroom style={{ fontSize: "20px", color: "white" }} />,
-      path: "/classes",
-    },
-    {
-      text: "Dashboard",
-      icon: <GroupIcon style={{ color: "white" }} />,
-      // path: "/dashboard",
-    },
-    {
-      text: "Customers",
-      icon: <AddCircleIcon style={{ color: "white" }} />,
-      // path: "/customers",
-    },
-    {
-      text: "Transactions",
-      icon: <DashboardIcon style={{ color: "white" }} />,
-      // path: "/lends",
-    },
-  ];
 
   return (
     <div className={classes.root} style={{ backgroundColor: "#f2f2f2" }}>

@@ -18,6 +18,11 @@ import {
   import { useNavigate, useLocation } from "react-router-dom";
   import jaabirLogo from "../../assets/images/jaabirLogo.jpg";
   import BottomProfile from "./BottomProfile"
+  import { AiOutlineDollar } from "react-icons/ai";
+  import { FaRegNewspaper } from "react-icons/fa";
+  import { MdAdminPanelSettings } from "react-icons/md";
+  import { FiSettings } from "react-icons/fi";
+  
   
   const drawerWidth = 225;
   const useStyles = makeStyles((theme) => {
@@ -84,12 +89,12 @@ import {
     const menuItems = [
         {
           text: "Dashboard",
-          icon: <DashboardIcon style={{ color: "white" }} />,
+          icon: <DashboardIcon style={{fontSize: "20px", color: "white" }} />,
           path: "/dashboard",
         },
         {
           text: "Students",
-          icon: <GroupIcon style={{ color: "white" }} />,
+          icon: <GroupIcon style={{fontSize: "20px", color: "white" }} />,
           path: "/students",
         },
         {
@@ -98,19 +103,24 @@ import {
           path: "/classes",
         },
         {
-          text: "Dashboard",
-          icon: <GroupIcon style={{ color: "white" }} />,
-          // path: "/dashboard",
+          text: "Finance",
+          icon: <AiOutlineDollar style={{ fontSize: "20px", color: "white" }} />,
+          path: "/Finance",
         },
         {
-          text: "Customers",
-          icon: <AddCircleIcon style={{ color: "white" }} />,
-          // path: "/customers",
+          text: "Examinantion",
+          icon: <FaRegNewspaper style={{fontSize: "20px", color: "white" }} />,
+          path: "/examination",
         },
         {
-          text: "Transactions",
-          icon: <DashboardIcon style={{ color: "white" }} />,
-          // path: "/lends",
+          text: "Adminstration",
+          icon: <MdAdminPanelSettings style={{fontSize: "20px", color: "white" }} />,
+          path: "/adminstration",
+        },
+        {
+          text: "Settings",
+          icon: <FiSettings style={{fontSize: "20px", color: "white" }} />,
+          path: "/settings",
         },
       ];
     

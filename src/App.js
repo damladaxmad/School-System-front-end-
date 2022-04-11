@@ -4,6 +4,10 @@ import Dashboard from "./Pages/Dashboard";
 import Customers from "./Pages/Students";
 import Lends from "./Pages/Classes";
 import Layout from "./containers/layout";
+import Finance from "./Pages/Finance";
+import Examinantion from "./Pages/Examination";
+import Adminstration from "./Pages/Adminstration";
+import SettingsFile from "./Pages/SettingsFile";
 
 function App() {
   return (
@@ -14,6 +18,10 @@ function App() {
             <Route path= "/dashboard" element = {<Dashboard/>} />
             <Route path= "/students" element = {<Customers/>} />
             <Route path= "/classes" element = {<Lends/>} />
+            <Route path= "/finance" element = {<Finance/>} />
+            <Route path= "/examination" element = {<Examinantion/>} />
+            <Route path= "/adminstration" element = {<Adminstration/>} />
+            <Route path= "/settings" element = {<SettingsFile/>} />
             <Route path="*" element={<Navigate to="/dashboard" replace />} />
           </Routes>
         </Layout>

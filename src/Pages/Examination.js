@@ -1,6 +1,6 @@
 import React from "react";
 
-const Students = () => {
+const Examinantion = () => {
 
   
   return (
@@ -14,9 +14,9 @@ const Students = () => {
       flexDirection: "column",
     }}
   >
-    <h2> Students</h2>
+    <h2> Examinantion</h2>
     </div>
   );
 };
 
-export default Students;
+export default Examinantion;
