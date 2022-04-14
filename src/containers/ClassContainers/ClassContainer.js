@@ -7,7 +7,7 @@ function ClassContainer() {
   
   return (
     <div style = {{backgroundColor: "#FFFFFF",
-    padding: "14px", borderRadius: "10px", width: "31.98%", display: "flex",
+    padding: "14px", borderRadius: "10px", width: "31.9%", display: "flex",
     gap: "10px", flexDirection: "column"}}>
 
 
@@ -31,7 +31,7 @@ function ClassContainer() {
       <Divider style = {{backgroundColor: "#EEEEEE"}}/>
 
       <div style = {{display: "flex", gap: "16px",
-        justifyContent: "end"}}>
+        justifyContent: "flex-end"}}>
         <Button variant = "outlined" style={{
             backgroundColor: "white", color: "black"
         }}> Edit</Button>

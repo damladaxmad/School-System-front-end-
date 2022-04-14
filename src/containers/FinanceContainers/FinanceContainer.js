@@ -10,7 +10,7 @@ function FinanceContainer() {
         backgroundColor: "#FFFFFF",
         padding: "14px 14px 4px 14px",
         borderRadius: "10px",
-        width: "31.98%",
+        width: "31.9%",
         display: "flex",
         gap: "10px",
         flexDirection: "column",
@@ -107,7 +107,7 @@ function FinanceContainer() {
        
       </div>
       <Typography style = {{color: "#767676", fontSize: "12px",
-    marginLeft: "225px"}}> This Month</Typography>
+    marginLeft: "220px"}}> This Month</Typography>
     </div>
   );
 }
