@@ -1,8 +1,7 @@
 import React from "react";
 import { Typography, Divider, Button, Avatar } from "@material-ui/core";
-import { MdAdd } from "react-icons/md";
 
-function ClassContainer() {
+function ClassContainer(props) {
 
   
   return (
@@ -22,7 +21,7 @@ function ClassContainer() {
       </div>
       <Typography style={{color: "#171717", fontWeight: "600",
     fontSize: "18px", marginTop: "5px"}}>
-        Form 3 B
+       {props.value.name}
       </Typography>
       <p style = {{color: "#767676", margin: "0px"}}>
     Secondary School Class with 60 student, 10 teachers

@@ -76,5 +76,6 @@
     "electron-builder": "^22.9.1",
     "prettier": "^2.2.1",
     "wait-on": "^5.2.1"
-  }
+  },
+  "proxy": "http://localhost:4000"
 }
