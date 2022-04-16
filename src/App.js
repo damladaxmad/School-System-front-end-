@@ -8,6 +8,7 @@ import Finance from "./Pages/Finance";
 import Examinantion from "./Pages/Examination";
 import Adminstration from "./Pages/Adminstration";
 import SettingsFile from "./Pages/SettingsFile";
+import Schedules from "./Pages/Schedules";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path= "/examination" element = {<Examinantion/>} />
             <Route path= "/adminstration" element = {<Adminstration/>} />
             <Route path= "/settings" element = {<SettingsFile/>} />
+            <Route path= "/schedules" element = {<Schedules/>} />
             <Route path="*" element={<Navigate to="/dashboard" replace />} />
           </Routes>
         </Layout>

@@ -8,7 +8,7 @@ function FinanceContainer() {
     <div
       style={{
         backgroundColor: "#FFFFFF",
-        padding: "14px 14px 4px 14px",
+        padding: "14px",
         borderRadius: "10px",
         width: "31.9%",
         display: "flex",
@@ -106,8 +106,6 @@ function FinanceContainer() {
         </div>
        
       </div>
-      <Typography style = {{color: "#767676", fontSize: "12px",
-    marginLeft: "220px"}}> This Month</Typography>
     </div>
   );
 }

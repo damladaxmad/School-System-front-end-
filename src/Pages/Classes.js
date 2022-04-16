@@ -18,7 +18,7 @@ function Classes() {
       .catch((err) => {
         console.log("Err: ", err);
       });
-      // console.log(response)
+      console.log(response)
     dispatch(setFasalo(response.data.data.classes));
   };
 
@@ -26,7 +26,7 @@ function Classes() {
     fetchProducts();
   }, []);
 
-  console.log("Products :", fasalo);
+  console.log("Fasalo :", fasalo);
   return (
     <div
       style={{

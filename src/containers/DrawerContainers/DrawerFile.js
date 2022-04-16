@@ -22,6 +22,8 @@ import {
   import { FaRegNewspaper } from "react-icons/fa";
   import { MdAdminPanelSettings } from "react-icons/md";
   import { FiSettings } from "react-icons/fi";
+  import { GrSchedules } from "react-icons/gr";
+  import { Schedule } from "@material-ui/icons";
   
   
   const drawerWidth = 225;
@@ -122,6 +124,11 @@ import {
           icon: <FiSettings style={{fontSize: "20px", color: "white" }} />,
           path: "/settings",
         },
+        {
+          text: "Schedules",
+          icon: <Schedule style={{fontSize: "20px", color: "white" }} />,
+          path: "/schedules",
+        }
         
       ];
     
