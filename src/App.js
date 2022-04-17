@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { HashRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Dashboard from "./Pages/Dashboard";
 import Customers from "./Pages/Students";
@@ -9,8 +9,27 @@ import Examinantion from "./Pages/Examination";
 import Adminstration from "./Pages/Adminstration";
 import SettingsFile from "./Pages/SettingsFile";
 import Schedules from "./Pages/Schedules";
+import {useSelector, useDispatch } from "react-redux";
+import axios from "axios";
+import { setFasalo } from "./redux/actions/fasalActions";
 
 function App() {
+
+  const fetchFasalo = async () => {
+    const response = await axios
+      .get("/api/v1/classes")
+      .catch((err) => {
+        console.log("Err: ", err);
+      });
+    dispatch(setFasalo(response.data.data.classes));
+  };
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    fetchFasalo();
+  }, []);
+
   return (
     <div className="App" style={{backgroundColor: "#F0F2FA"}}>
       <Router>

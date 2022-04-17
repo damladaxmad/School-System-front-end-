@@ -3,7 +3,7 @@ import timeTable from "../../assets/images/timeTable.png";
 
 
 const TableHeader = (props) => {
-
+    
     return (
         <div style={{display: "flex", margin: "20px 30px",
         gap: "15px"}}>
