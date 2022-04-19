@@ -1,62 +1,13 @@
 import React, {useEffect} from "react";
 import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
-import {useSelector, useDispatch } from "react-redux";
-import axios from "axios";
 
 const CellsTable = (props) => {
-
-  // const xi = useSelector((state) => state.xiso.xisooyin);
-  // console.log(xi)
-  let periods = [
-    {
-      saturday: [
-        "Math",
-        "Philosphy",
-        "English",
-        "Physics",
-        "Biology",
-        "Somali",
-      ],
-    },
-    {
-      sunday: ["Math", "Philosphy", "English", "Physics", "Biology", "Somali"],
-    },
-    {
-      monday: ["Math", "Philosphy", "English", "Physics", "Biology", "Somali"],
-    },
-    {
-      tuesday: ["Math", "Philosphy", "English", "Physics", "Biology", "Somali"],
-    },
-    {
-      wednesday: [
-        "Math",
-        "Philosphy",
-        "English",
-        "Physics",
-        "Biology",
-        "Somali",
-      ],
-    },
-    {
-      thursday: [
-        "Math",
-        "Philosphy",
-        "English",
-        "Physics",
-        "Biology",
-        "Somali",
-      ],
-    },
-    {
-      friday: ["Math", "Philosphy", "English", "Physics", "Biology", "Somali"],
-    },
-  ];
-
-
+  
+ 
+  
   return (
     <>
+    <br></br>
       <Grid
         item
         xs={1.71}
@@ -82,7 +33,7 @@ const CellsTable = (props) => {
           {props.value}
         </p>
       </Grid>
-      {periods[0].saturday.map((period) => (
+      {props.periods.map((period) => (
         <Grid
           item
           xs={1.71}
@@ -106,18 +57,18 @@ const CellsTable = (props) => {
             }}
           >
             {" "}
-            7:30 - 8:00
+            {period.startHour}:{period.startMinute} - {period.endHour}:{period.endMinute}
           </p>
           <p
             style={{
               margin: "0px",
               fontSize: "18px",
               fontWeight: "600",
-              color: "#676767",
+              color: period.course.name == "Empty" ? "lightGrey": "#676767",
             }}
           >
             {" "}
-            {period}
+            {period.course.name}
           </p>
           <p
             style={{
@@ -127,8 +78,8 @@ const CellsTable = (props) => {
               color: "#B9B9B9",
             }}
           >
-            {" "}
-            Damlad Axmad
+       
+            {period.teacher ? period.teacher.name : "______________"}
           </p>
         </Grid>
       ))}

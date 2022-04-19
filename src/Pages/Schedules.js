@@ -1,9 +1,33 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Button } from "@material-ui/core";
 import { MdAdd } from "react-icons/md";
 import ScheduleContainer from "../containers/SchedulesContainers/ScheduleContainer";
+import axios from "axios";
+import { setXisooyin } from "../redux/actions/xisoActions";
+import { useDispatch, useSelector } from "react-redux";
 
 const Schedules = () => {
+
+  // const [x, setX] = useState([])
+  const dispatch = useDispatch();
+
+      const fetchXisooyin = async () => {
+        const response = await axios
+          .get("/api/v1/periods")
+          .catch((err) => {
+            console.log("Err: ", err);
+          });
+    
+        dispatch(setXisooyin(response.data.data.classes));
+  
+      };
+  
+
+
+  useEffect(() => {
+    fetchXisooyin();
+  }, []);
+
   return (
     <div
       style={{

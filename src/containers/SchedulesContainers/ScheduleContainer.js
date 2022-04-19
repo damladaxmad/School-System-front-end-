@@ -3,32 +3,17 @@ import { FormControl, InputLabel, Select, MenuItem, Divider } from "@mui/materia
 import { useDispatch, useSelector } from "react-redux";
 import TableHeader from "./TableHeader";
 import TheTable from "./TheTabke";
-import axios from "axios";
-import { setXisooyin } from "../../redux/actions/xisoActions";
 import { Button } from "@material-ui/core";
 import { AiOutlineEdit } from "react-icons/ai";
 
 const ScheduleContainer = () => {
+
   const dispatch = useDispatch();
     const fasalo = useSelector((state) => state.allFasalo.fasalo);
+    const xi = useSelector((state) => state.xiso);
     
     const [value, setValue] = useState(fasalo[0].name);
-    
-    const fetchXisooyin = async () => {
-      const response = await axios
-        .get("/api/v1/periods/classPeriods/6257fac4218826aa86e99335")
-        .catch((err) => {
-          console.log("Err: ", err);
-        });
-       
-      dispatch(setXisooyin("1aad",response.data.periods));
-    };
 
-   
-  
-    useEffect(() => {
-      fetchXisooyin();
-    }, []);
  
 
   const selectHandler = (e) => {
@@ -67,7 +52,7 @@ const ScheduleContainer = () => {
       <Divider style = {{backgroundColor: "#DADBE4", opacity: 0.4}}/>
       
       <TableHeader value = {value}/>
-      <TheTable/>
+      <TheTable value = {value}/>
       <Button
           variant="contained"
           style={{
