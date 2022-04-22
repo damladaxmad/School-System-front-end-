@@ -1,14 +1,11 @@
-import React, {useEffect} from "react";
+import React from "react";
 import Grid from "@mui/material/Grid";
 
 const CellsTable = (props) => {
-  
- 
-  
   return (
     <>
-    <br></br>
       <Grid
+        
         item
         xs={1.71}
         style={{
@@ -35,6 +32,7 @@ const CellsTable = (props) => {
       </Grid>
       {props.periods.map((period) => (
         <Grid
+          key={period._id}
           item
           xs={1.71}
           style={{
@@ -57,14 +55,14 @@ const CellsTable = (props) => {
             }}
           >
             {" "}
-            {period.startHour}:{period.startMinute} - {period.endHour}:{period.endMinute}
+            {period.startTime}  :  {period.endTime}
           </p>
           <p
             style={{
               margin: "0px",
               fontSize: "18px",
               fontWeight: "600",
-              color: period.course.name == "Empty" ? "lightGrey": "#676767",
+              color: period.course.name == "Empty" ? "lightGrey" : "#676767",
             }}
           >
             {" "}
@@ -78,7 +76,6 @@ const CellsTable = (props) => {
               color: "#B9B9B9",
             }}
           >
-       
             {period.teacher ? period.teacher.name : "______________"}
           </p>
         </Grid>

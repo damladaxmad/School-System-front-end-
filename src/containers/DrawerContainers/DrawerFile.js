@@ -13,7 +13,6 @@ import {
   import { SiGoogleclassroom } from "react-icons/si";
   import DashboardIcon from "@material-ui/icons/Dashboard";
   import GroupIcon from "@material-ui/icons/Group";
-  import AddCircleIcon from "@material-ui/icons/AddCircle";
   import React from "react";
   import { useNavigate, useLocation } from "react-router-dom";
   import jaabirLogo from "../../assets/images/jaabirLogo.jpg";
@@ -22,7 +21,6 @@ import {
   import { FaRegNewspaper } from "react-icons/fa";
   import { MdAdminPanelSettings } from "react-icons/md";
   import { FiSettings } from "react-icons/fi";
-  import { GrSchedules } from "react-icons/gr";
   import { Schedule } from "@material-ui/icons";
   
   
@@ -174,10 +172,10 @@ return (
         <Divider style={{ backgroundColor: "white", opacity: 0.1 }} />
         {/* links/list section */}
         <List>
-          {menuItems.map((item) => (
+          {menuItems.map((item, index) => (
             <ListItem
               button
-              key={item.text}
+              key={index}
               onClick={() => navigate(item.path)}
               classes={{
                 primary: classes.fontSize,

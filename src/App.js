@@ -12,9 +12,11 @@ import Schedules from "./Pages/Schedules";
 import {useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { setFasalo } from "./redux/actions/fasalActions";
+import { setMaadooyin } from "./redux/actions/maadoActions";
+import { setMacalimiin } from "./redux/actions/macalinActions";
 
 function App() {
-
+  const dispatch = useDispatch();
   const fetchFasalo = async () => {
     const response = await axios
       .get("/api/v1/classes")
@@ -24,10 +26,30 @@ function App() {
     dispatch(setFasalo(response.data.data.classes));
   };
 
-  const dispatch = useDispatch();
+  const fetchMaadooyin = async () => {
+    const response = await axios
+      .get("/api/v1/courses")
+      .catch((err) => {
+        console.log("Err: ", err);
+      });
+      console.log(response.data.data.courses)
+    dispatch(setMaadooyin(response.data.data.courses));
+  };
 
+  
+
+  const fetchMacalimiin = async () => {
+    const response = await axios
+      .get("/api/v1/teachers")
+      .catch((err) => {
+        console.log("Err: ", err);
+      });
+    dispatch(setMacalimiin(response.data.data.teachers));
+  };
   useEffect(() => {
     fetchFasalo();
+    fetchMaadooyin();
+    fetchMacalimiin();
   }, []);
 
   return (

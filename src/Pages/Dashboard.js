@@ -1,4 +1,3 @@
-import { Typography } from "@material-ui/core";
 import React from "react";
 import Chart from "../containers/DashboardContainers/Chart";
 import QuickActions from "../containers/DashboardContainers/QuickActions";
@@ -27,8 +26,8 @@ const Dashboard = () => {
     >
       <h2> Dashboard</h2>
       <div style={{ display: "flex", gap: "12px", width: "100%" }}>
-        {stats.map((stat) => (
-          <StatCard value={stat} key={stat.id} />
+        {stats.map((stat, index) => (
+          <StatCard value={stat} key={index} />
         ))}
       </div>
       <Chart />

@@ -1,30 +1,14 @@
-import { Typography, Divider, Button } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import { MdAdd } from "react-icons/md";
 import ClassContainer from "../containers/ClassContainers/ClassContainer";
 
-import React, { } from "react";
+import React from "react";
 import {useSelector } from "react-redux";
 
 function Classes() {
-  const classes = ["Form1", "Form2", "Form3", "Form4", "Form5","Form1", "Form", "Form3"]
   
   const fasalo = useSelector((state) => state.allFasalo.fasalo);
-  // const dispatch = useDispatch();
-  // const fetchProducts = async () => {
-  //   const response = await axios
-  //     .get("/api/v1/classes")
-  //     .catch((err) => {
-  //       console.log("Err: ", err);
-  //     });
-  //     console.log(response)
-  //   dispatch(setFasalo(response.data.data.classes));
-  // };
 
-  // useEffect(() => {
-  //   fetchProducts();
-  // }, []);
-
-  console.log("Fasalo :", fasalo);
   return (
     <div
       style={{
@@ -63,8 +47,8 @@ function Classes() {
       </div>
 
       <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
-      {fasalo.map((product) => (
-          <ClassContainer value = {product}/>
+      {fasalo.map((product, index) => (
+          <ClassContainer value = {product} key = {index}/>
         ))}
       </div>
     </div>

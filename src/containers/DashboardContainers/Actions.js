@@ -11,12 +11,10 @@ const Actions = () => {
           height: "100px",
           backgroundColor: "#F2994A",
           borderRadius: "10px",
-          // padding: "40px 5px",
           display: "flex",
           justifyContent: "center",
           flexDirection: "column",
           alignItems: "center",
-          // gap: "8px",
           color: "white",
           marginTop: "15px",
         }}

@@ -9,16 +9,6 @@ const myData = [
   { x: "others", y: 400 },
 ];
 
-const useStyles = makeStyles((theme) => {
-  return {
-    avatar: {
-      marginLeft: theme.spacing(2),
-      cursor: "pointer",
-      backgroundColor: "#F0F2FA",
-    },
-  };
-});
-
 const Chart = () => {
   const secondary = {
     color: "#F2994A",
@@ -27,7 +17,7 @@ const Chart = () => {
   };
   const primary = { color: "#0061F7", title: "Primary School", value: "2,55" };
   const others = { color: "#F5EFFF", title: "Others", value: "1,55" };
-  const classes = useStyles();
+
 
   return (
     <div

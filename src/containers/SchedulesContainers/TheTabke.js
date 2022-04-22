@@ -1,12 +1,12 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import CellsTable from "./CellsTable";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+
 
 const TheTable = (props) => {
-  const xi = useSelector((state) => state.xiso.xisooyin);
+  const xisooyin = useSelector((state) => state.xiso.xisooyin);
 
   let timeTable = {
     saturday: [
@@ -102,16 +102,15 @@ const TheTable = (props) => {
   ];
 
   let classPeriods = 0
-  xi.map((x) => {
-    if (x.name == props.value){
-      classPeriods = x.periods
+  xisooyin.map((fasalXiso) => {
+    if (fasalXiso.name == props.value){
+      classPeriods = fasalXiso.periods
     }
   })
-   
-  let fullXiso = 0
+
   if (classPeriods.length > 0){
-    classPeriods.map((c, index) => {
-      
+    classPeriods.map((c) => {
+
       if (c.day == "saturday") {
         timeTable.saturday.splice(c.period, 1, c)
       }
@@ -125,13 +124,13 @@ const TheTable = (props) => {
         timeTable.tuesday.splice(c.period, 1, c)
       }
       if (c.day == "wednesday") {
-        timeTable.wednesday.splice(index, 1, c)
+       timeTable.wednesday.splice(c.period, 1, c)
       }
       if (c.day == "thursday") {
-        timeTable.thursday.splice(index, 1, c)
+        timeTable.thursday.splice(c.period, 1, c)
       }
       if (c.day == "friday") {
-        timeTable.splice(index, 1, c)
+        timeTable.friday.splice(c.period, 1, c)
       }
     })
   }
@@ -153,7 +152,7 @@ const TheTable = (props) => {
         >
           {periods.map((p) => (
             <CellsTable value={p.name} periods = {p.xisooyin}
-            startHour = {p.startHour}/>
+             key = {p._id}/>
           ))}
         </Grid>
       </Box>

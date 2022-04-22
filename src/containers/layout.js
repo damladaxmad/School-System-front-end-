@@ -4,11 +4,7 @@ import {
   Typography,
   makeStyles,
 } from "@material-ui/core";
-// import { MdMenuOpen } from "react-icons/md";
-import { SiGoogleclassroom } from "react-icons/si";
-import DashboardIcon from "@material-ui/icons/Dashboard";
-import GroupIcon from "@material-ui/icons/Group";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
+
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
@@ -75,9 +71,6 @@ const useStyles = makeStyles((theme) => {
 
 const Layout = ({ children }) => {
   const classes = useStyles();
-  const navigate = useNavigate();
-  const location = useLocation();
-
 
   return (
     <div className={classes.root} style={{ backgroundColor: "#f2f2f2" }}>
@@ -90,7 +83,7 @@ const Layout = ({ children }) => {
       >
         <Toolbar>
           <Typography className={classes.appBarTitle}>
-            {/* Lending Management System */}
+         
           </Typography>
           <Typography style={{ fontWeight: "bold" }}></Typography>
           <Avatar
@@ -107,10 +100,10 @@ const Layout = ({ children }) => {
           </Avatar>
         </Toolbar>
       </AppBar>
-      {/* side drawer */}
+   
       <DrawerFile/>
 
-      {/* main content */}
+
       <div className={classes.page}>
         <div className={classes.toolbar}>
           {children}

@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Schedules = () => {
 
-  // const [x, setX] = useState([])
+  const newPeriod = useSelector((state) => state.xiso.newPeriods);
   const dispatch = useDispatch();
 
       const fetchXisooyin = async () => {
@@ -17,12 +17,11 @@ const Schedules = () => {
           .catch((err) => {
             console.log("Err: ", err);
           });
-    
         dispatch(setXisooyin(response.data.data.classes));
-  
       };
-  
-
+      
+     
+     console.log(newPeriod)
 
   useEffect(() => {
     fetchXisooyin();

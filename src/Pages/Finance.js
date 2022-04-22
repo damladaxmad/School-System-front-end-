@@ -74,8 +74,8 @@ function Finance() {
       </div>
 
       <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
-      {value == "one" ? classes.map((c) => (
-          <FinanceContainer />
+      {value == "one" ? classes.map((index) => (
+          <FinanceContainer key = {index}/>
         )) : null}
         
       </div>

@@ -1,6 +1,5 @@
 import React from "react";
-import { Avatar, Typography, makeStyles } from "@material-ui/core";
-import { MdPersonAddAlt1 } from "react-icons/md";
+import {  Typography } from "@material-ui/core";
 import Actions from "./Actions";
 
 const QuickActions = () => {
@@ -17,7 +16,7 @@ const QuickActions = () => {
       }}
     >
       <Typography
-        style={{ fontWeight: "600", fontSize: "24px", color: "#171717;" }}
+        style={{ fontWeight: "600", fontSize: "24px", color: "#171717" }}
       >
         Quick Actions
       </Typography>

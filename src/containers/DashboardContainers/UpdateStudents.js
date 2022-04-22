@@ -1,4 +1,4 @@
-import { Typography, Divider } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import React from "react";
 
 const UpdateStudents = () => {
@@ -6,7 +6,7 @@ const UpdateStudents = () => {
     <div style = {{ padding: "15px",
     borderRadius: "10px", display: "flex", gap: "58px",
     background: "#0061F7" }}
-    class = "updateStudents">
+   >
         <div style={{}}>
           <p
             style={{

@@ -1,24 +1,21 @@
-import React, { useState, useEffect } from "react";
-import { FormControl, InputLabel, Select, MenuItem, Divider } from "@mui/material";
+import React, { useState} from "react";
+import { FormControl, Select, MenuItem, Divider } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import TableHeader from "./TableHeader";
 import TheTable from "./TheTabke";
 import { Button } from "@material-ui/core";
 import { AiOutlineEdit } from "react-icons/ai";
 
+
 const ScheduleContainer = () => {
 
   const dispatch = useDispatch();
     const fasalo = useSelector((state) => state.allFasalo.fasalo);
-    const xi = useSelector((state) => state.xiso);
     
     const [value, setValue] = useState(fasalo[0].name);
-
- 
-
-  const selectHandler = (e) => {
+    const selectHandler = (e) => {
     setValue(e.target.value);
-  };
+    };
 
 
   return (
@@ -35,15 +32,14 @@ const ScheduleContainer = () => {
         <Select
           style={{ margin: "20px", height: "40px", color: "#B9B9B9",
          }}
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
+          
           value={value}
           onChange={selectHandler}
         //   label="Gender"
         >
             
             {fasalo.map((fasal) => (
-                <MenuItem value={fasal.name}>{fasal.name}</MenuItem>
+                <MenuItem value={fasal.name} key = {fasal._id}>{fasal.name}</MenuItem>
             ))}
         
         
@@ -71,8 +67,11 @@ const ScheduleContainer = () => {
         >
          Edit Schedule
         </Button>
+        
     </div>
   );
 };
+
+
 
 export default ScheduleContainer;

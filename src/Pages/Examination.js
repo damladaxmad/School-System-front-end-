@@ -1,22 +1,24 @@
-import React from "react";
+import React, { useState } from 'react';
+import TimePicker from 'react-time-picker';
+import './Examination.css'
 
-const Examinantion = () => {
 
-  
+const Examination = () => {
+  const [value, setValue] = useState('10:00');
+
+  const changeHandler = (e) => {
+    setValue(e)
+  }
+
+  console.log(value)
+
   return (
-    <div
-    style={{
-      height: "100%",
-      width: "95%",
-      margin: "0px auto",
-      display: "flex",
-      gap: "14px",
-      flexDirection: "column",
-    }}
-  >
-    <h2> Examinantion</h2>
+    <div>
+       <TimePicker onChange={(e)=> changeHandler(e)} value={value}
+      className = "timePicker"
+       />
     </div>
   );
 };
 
-export default Examinantion;
+export default Examination
