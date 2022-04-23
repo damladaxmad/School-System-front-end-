@@ -11,15 +11,12 @@ import { setActiveClass, setActiveDay } from "../redux/actions/xisoActions";
 
 
 const SettingsFile = () => {
-  const dispatch = useDispatch()
 
-  const [active, setActive] = useState(1)
   let numbers = [1,2,3,4,5,6]
   let days = [{name: "saturday"}, {name: "sunday"},
   {name: "monday"},{name: "tuesday"}, {name: "wednesday"},
   {name: "thursday"}, {name: "friday"},]
   const fasalo = useSelector((state) => state.allFasalo.fasalo);
-    console.log(active)
 
     const [fasal, setFasal] = useState(fasalo[0]._id);
     const fasalHandler = (e) => {
@@ -32,26 +29,7 @@ const SettingsFile = () => {
       setDay(e.target.value);
       // dispatch(setActiveDay(e.target.value));
     };
-    
-    const activeHandler = () => {
-      if (active >= 6){
-        return
-      }
-      else if (active <6){
-        setActive((prevState)=> prevState + 1)
-      }
-    }
 
-    const previousHandler = () => {
-     
-      if (active <= 1){
-        return
-      }
-      else if (active >1){
-        setActive((prevState)=> prevState - 1)
-        
-      }
-    }
   return (
     <div
       style={{
@@ -160,65 +138,12 @@ const SettingsFile = () => {
     >
       {numbers.map((number, index)=> (
         <NewScheduleContainer number = {number} fasal = {fasal}
-        key = {index}  active = {active} day = {day}/>
+        key = {index}  day = {day}/>
       ))}
   
 
   </div>
-  <Button
-          variant="contained"
-          style={{
-            backgroundColor: "#2F49D1",
-            color: "white",
-            width: "160px",
-            height: "40px",
-            float: "right",
-            margin: "40px 30px",
-            marginBottom: "0px",
-            display: "flex",
-            justifyContent: "space-evenly"
-          }}
-          size = "large"
-          startIcon={
-            <MdSkipNext
-              style={{
-                color: "white",
-              }}
-              
-            />
-            
-          }
-          onClick = {activeHandler}
-        >
-         NEXT PERIOD
-        </Button>
-        <Button
-          variant="contained"
-          style={{
-            backgroundColor: "#2F49D1",
-            color: "white",
-            width: "160px",
-            height: "40px",
-            float: "right",
-            margin: "40px 30px",
-            marginBottom: "0px",
-            display: "flex",
-            justifyContent: "space-evenly"
-          }}
-          size = "large"
-          startIcon={
-            <MdSkipPrevious
-              style={{
-                color: "white",
-              }}
-              
-            />
-            
-          }
-          onClick = {previousHandler}
-        >
-         prev PERIOD
-        </Button>
+ 
       </div>
     </div>
   );
