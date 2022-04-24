@@ -3,13 +3,10 @@ import { FormControl, Select, MenuItem, Divider } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import TableHeader from "./TableHeader";
 import TheTable from "./TheTabke";
-import { Button } from "@material-ui/core";
-import { AiOutlineEdit } from "react-icons/ai";
 
+const ScheduleContainer = (props) => {
 
-const ScheduleContainer = () => {
-
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(props);
     const fasalo = useSelector((state) => state.allFasalo.fasalo);
     
     const [value, setValue] = useState(fasalo[0].name);
@@ -47,26 +44,9 @@ const ScheduleContainer = () => {
       </FormControl>
       <Divider style = {{backgroundColor: "#DADBE4", opacity: 0.4}}/>
       
-      <TableHeader value = {value}/>
+      <TableHeader value = {value} onEdit = {props.onEdit}/>
       <TheTable value = {value}/>
-      <Button
-          variant="contained"
-          style={{
-            backgroundColor: "#2F49D1",
-            color: "white",
-            float: "right",
-            margin: "20px 53px"
-          }}
-          startIcon={
-            <AiOutlineEdit
-              style={{
-                color: "white",
-              }}
-            />
-          }
-        >
-         Edit Schedule
-        </Button>
+      
         
     </div>
   );

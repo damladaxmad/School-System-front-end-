@@ -137,8 +137,9 @@ const TheTable = (props) => {
  
 
   return (
-    <div style={{ display: "flex", margin: "0px 30px", gap: "15px" }}>
-      <Box sx={{ width: "95%" }} style={{}}>
+    <div style={{ display: "flex", margin: "0px 30px", 
+    gap: "15px", marginBottom: "40px" }}>
+      <Box sx={{ width: "97.5%" }} style={{}}>
         <Grid
           container
           rowSpacing={1}

@@ -1,14 +1,16 @@
 import React, {useEffect, useState} from "react";
 import { Button } from "@material-ui/core";
-import { MdAdd } from "react-icons/md";
+import { MdAdd } from "react-icons/md"; 
+import { BiArrowBack } from "react-icons/bi";
 import ScheduleContainer from "../containers/SchedulesContainers/ScheduleContainer";
 import axios from "axios";
 import { setXisooyin } from "../redux/actions/xisoActions";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import SettingsFile from "./NewSchedule";
 
 const Schedules = () => {
-
-  const newPeriod = useSelector((state) => state.xiso.newPeriods);
+  const [newSchedule, setNewSchedule] = useState(false)
+  const [buttonName, setButtonName] = useState('New Schedule')
   const dispatch = useDispatch();
 
       const fetchXisooyin = async () => {
@@ -20,8 +22,17 @@ const Schedules = () => {
         dispatch(setXisooyin(response.data.data.classes));
       };
       
-     
-     console.log(newPeriod)
+      const addScheduleHandler = () => {
+        if (buttonName == "New Schedule"){
+          setNewSchedule(true)
+          setButtonName("Go To Schedules")
+          return
+        }
+
+        setNewSchedule(false)
+          setButtonName("New Schedule")
+       
+      }
 
   useEffect(() => {
     fetchXisooyin();
@@ -45,7 +56,7 @@ const Schedules = () => {
           alignItems: "center",
         }}
       >
-        <h2> Schedules</h2>
+        <h2> {newSchedule ? "Create New Schdule" : "Schedules"}</h2>
         <Button
           variant="contained"
           style={{
@@ -53,18 +64,25 @@ const Schedules = () => {
             color: "white",
           }}
           startIcon={
-            <MdAdd
+            newSchedule ? <BiArrowBack
               style={{
                 color: "white",
               }}
-            />
+            /> : <MdAdd
+            style={{
+              color: "white",
+            }}
+          />
+            
           }
+          onClick = {addScheduleHandler}
         >
-          Add Schedules
+        {buttonName}
         </Button>
       </div>
 
-      <ScheduleContainer />
+      {!newSchedule && <ScheduleContainer onEdit = {addScheduleHandler} />}
+      {newSchedule && <SettingsFile/>}
       
     </div>
   );

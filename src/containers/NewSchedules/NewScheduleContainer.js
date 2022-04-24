@@ -231,13 +231,13 @@ const NewScheduleContainer = (props) => {
             justifyContent: "center",
             alignItems: "center",
             fontWeight: "bolder",
-            marginRight: saved ? "180px" : "188px",
+            marginRight: "248px",
           }}
         >
           {" "}
           {props.number}
         </p>
-        <Button
+        {/* <Button
           variant="contained"
           style={{
             backgroundColor: saved ? "green" : "#2F49D1",
@@ -247,7 +247,7 @@ const NewScheduleContainer = (props) => {
         >
           {" "}
           {saved ? "saved" : "save"}
-        </Button>
+        </Button> */}
       </div>
       <TimePicker
         onChange={(e) => startChangeHandler(e)}

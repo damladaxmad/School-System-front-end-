@@ -1,9 +1,19 @@
 import React from "react";
 import timeTable from "../../assets/images/timeTable.png";
+import { Button } from "@material-ui/core";
+import { AiOutlineEdit } from "react-icons/ai";
 
 const TableHeader = (props) => {
+
+  const clickHandler = () => {
+    props.onEdit()
+    console.log("editing")
+  }
   return (
-    <div style={{ display: "flex", margin: "20px 30px", gap: "15px" }}>
+    <div style={{ display: "flex", margin: "20px 30px", 
+    alignItems: "center", justifyContent: "space-between",  }}>
+      <div style={{display: "flex", gap: "15px",}}>
+
       <div
         style={{
           padding: "0px",
@@ -54,6 +64,25 @@ const TableHeader = (props) => {
           10 Courses
         </p>
       </div>
+      </div>
+      <Button
+          variant="contained"
+          style={{
+            backgroundColor: "#2F49D1",
+            color: "white",
+            float: "right",
+          }}
+          startIcon={
+            <AiOutlineEdit
+              style={{
+                color: "white",
+              }}
+            />
+          }
+          onClick = {clickHandler}
+        >
+         Edit Schedule
+        </Button>
     </div>
   );
 };

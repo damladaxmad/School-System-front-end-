@@ -7,9 +7,9 @@ import Layout from "./containers/layout";
 import Finance from "./Pages/Finance";
 import Examinantion from "./Pages/Examination";
 import Adminstration from "./Pages/Adminstration";
-import SettingsFile from "./Pages/SettingsFile";
+import SettingsPage from "./Pages/SettingsPage";
 import Schedules from "./Pages/Schedules";
-import {useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import axios from "axios";
 import { setFasalo } from "./redux/actions/fasalActions";
 import { setMaadooyin } from "./redux/actions/maadoActions";
@@ -63,7 +63,7 @@ function App() {
             <Route path= "/finance" element = {<Finance/>} />
             <Route path= "/examination" element = {<Examinantion/>} />
             <Route path= "/adminstration" element = {<Adminstration/>} />
-            <Route path= "/settings" element = {<SettingsFile/>} />
+            <Route path= "/settings" element = {<SettingsPage/>} />
             <Route path= "/schedules" element = {<Schedules/>} />
             <Route path="*" element={<Navigate to="/dashboard" replace />} />
           </Routes>
