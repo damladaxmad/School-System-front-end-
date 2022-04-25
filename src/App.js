@@ -16,7 +16,9 @@ import { setMaadooyin } from "./redux/actions/maadoActions";
 import { setMacalimiin } from "./redux/actions/macalinActions";
 
 function App() {
+
   const dispatch = useDispatch();
+
   const fetchFasalo = async () => {
     const response = await axios
       .get("/api/v1/classes")
@@ -34,9 +36,7 @@ function App() {
       });
       console.log(response.data.data.courses)
     dispatch(setMaadooyin(response.data.data.courses));
-  };
-
-  
+  }; 
 
   const fetchMacalimiin = async () => {
     const response = await axios
@@ -46,14 +46,17 @@ function App() {
       });
     dispatch(setMacalimiin(response.data.data.teachers));
   };
+
+
   useEffect(() => {
     fetchFasalo();
     fetchMaadooyin();
-    fetchMacalimiin();
+    fetchMacalimiin(); 
   }, []);
 
   return (
-    <div className="App" style={{backgroundColor: "#F0F2FA"}}>
+   
+   <div className="App" style={{backgroundColor: "#F0F2FA"}}>
       <Router>
       <Layout>
           <Routes>
@@ -64,7 +67,7 @@ function App() {
             <Route path= "/examination" element = {<Examinantion/>} />
             <Route path= "/adminstration" element = {<Adminstration/>} />
             <Route path= "/settings" element = {<SettingsPage/>} />
-            <Route path= "/schedules" element = {<Schedules/>} />
+            <Route path= "/schedules" element = {<Schedules />} />
             <Route path="*" element={<Navigate to="/dashboard" replace />} />
           </Routes>
         </Layout>

@@ -8,7 +8,7 @@ import { setXisooyin } from "../redux/actions/xisoActions";
 import { useDispatch } from "react-redux";
 import SettingsFile from "./NewSchedule";
 
-const Schedules = () => {
+const Schedules = (props) => {
   const [newSchedule, setNewSchedule] = useState(false)
   const [buttonName, setButtonName] = useState('New Schedule')
   const dispatch = useDispatch();
@@ -34,7 +34,7 @@ const Schedules = () => {
        
       }
 
-  useEffect(() => {
+  useEffect(async() => {
     fetchXisooyin();
   }, []);
 

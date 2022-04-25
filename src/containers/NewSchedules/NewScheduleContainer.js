@@ -1,21 +1,141 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FormControl, Select, MenuItem } from "@mui/material";
-import { Button } from "@material-ui/core";
 import TimePicker from "react-time-picker";
 import "../../Pages/Examination.css";
 import axios from "axios";
 import { setNewPeriods } from "../../redux/actions/xisoActions";
 
 const NewScheduleContainer = (props) => {
+
   const [saved, setSaved] = useState(false);
+  const xisooyin = useSelector((state) => state.xiso.xisooyin);
   const maadooyin = useSelector((state) => state.maado.maadooyin);
   const macalimiin = useSelector((state) => state.macalin.macalimiin);
-  const [maado, setMaado] = useState(maadooyin[0]._id);
-  const [startTimer, setStartTimer] = useState();
-  const [endTimer, setEndTimer] = useState();
-  const [macalin, setMacalin] = useState(macalimiin[0]._id);
+
   const dispatch = useDispatch();
+  
+  let population = 0
+  let currentPeriods = []
+  xisooyin.map((x)=> {
+    if (x.id == props.fasal){
+      population = x.periods
+      return
+    }
+  })
+  population.map((p)=> {
+    if (p.day == props.day){
+      currentPeriods.push(p)
+      return
+    }
+  })
+  console.log(currentPeriods)
+  console.log(props.day)
+
+  const stateReducer = (period, type) => {
+      let course = 0
+      let teacher = 0
+      let startTimer = 0
+      let endTimer = 0
+      if (type == "course"){
+        currentPeriods.map((p)=> {
+          if (p.period == period){
+            course = p.course._id
+          }
+        })
+        return course
+      }  if (type == "teacher"){
+        currentPeriods.map((p)=> {
+          if (p.period == period){
+            teacher = p.teacher._id
+          }
+        })
+        return teacher
+      }  if (type == "startTimer"){
+        currentPeriods.map((p)=> {
+          if (p.period == period){
+            startTimer = p.startTime
+          }
+        })
+        return startTimer
+      }  if (type == "endTimer"){
+        currentPeriods.map((p)=> {
+          if (p.period == period){
+            endTimer = p.endTime
+          }
+        })
+        return endTimer
+      }   
+  }
+
+  const courseFunction = () => {
+    if (props.number == 1){
+      return stateReducer(0, "course")
+    } if (props.number == 2){
+      return stateReducer(1, "course")
+    } if (props.number == 3){
+      return stateReducer(2, "course")
+    }  if (props.number == 4){
+      return stateReducer(3, "course")
+    }  if (props.number == 5){
+      return stateReducer(4, "course")
+    }  if (props.number == 6){
+      return stateReducer(5, "course")
+    }
+  }
+
+  const teacherFunction = () => {
+    if (props.number == 1){
+      return stateReducer(0, "teacher")
+    } if (props.number == 2){
+      return stateReducer(1, "teacher")
+    } if (props.number == 3){
+      return stateReducer(2, "teacher")
+    }  if (props.number == 4){
+      return stateReducer(3, "teacher")
+    }  if (props.number == 5){
+      return stateReducer(4, "teacher")
+    }  if (props.number == 6){
+      return stateReducer(5, "teacher")
+    }
+  }
+
+  const startTimerFunction = () => {
+    if (props.number == 1){
+      return stateReducer(0, "startTimer")
+    } if (props.number == 2){
+      return stateReducer(1, "startTimer")
+    } if (props.number == 3){
+      return stateReducer(2, "startTimer")
+    }  if (props.number == 4){
+      return stateReducer(3, "startTimer")
+    }  if (props.number == 5){
+      return stateReducer(4, "startTimer")
+    }  if (props.number == 6){
+      return stateReducer(5, "startTimer")
+    }
+  }
+
+  const endTimerFunction = () => {
+    if (props.number == 1){
+      return stateReducer(0, "endTimer")
+    } if (props.number == 2){
+      return stateReducer(1, "endTimer")
+    } if (props.number == 3){
+      return stateReducer(2, "endTimer")
+    }  if (props.number == 4){
+      return stateReducer(3, "endTimer")
+    }  if (props.number == 5){
+      return stateReducer(4, "endTimer")
+    }  if (props.number == 6){
+      return stateReducer(5, "endTimer")
+    }
+  }
+
+  const [maado, setMaado] = useState(() => courseFunction("kkk"));
+  const [macalin, setMacalin] = useState(() => teacherFunction());
+  const [startTimer, setStartTimer] = useState(() => startTimerFunction());
+  const [endTimer, setEndTimer] = useState(() => endTimerFunction());
 
   const [periodOne, setPeriodOne] = useState({
     course: maado,
@@ -160,7 +280,15 @@ const NewScheduleContainer = (props) => {
     setPeriodFour({ ...periodFour, day: props.day, class: props.fasal });
     setPeriodFive({ ...periodFive, day: props.day, class: props.fasal });
     setPeriodSix({ ...periodSix, day: props.day, class: props.fasal });
+
   }, [props.day, props.fasal]);
+
+  useEffect(()=>{
+    setMaado(() => courseFunction())
+    setMacalin(() => teacherFunction())
+    setStartTimer(() => startTimerFunction())
+    setEndTimer(() => endTimerFunction());
+  }, [props.day, props.fasal])
 
   const postNewPeriod = (period) => {
     axios.post(`/api/v1/periods`, period).then((res) => {
@@ -168,8 +296,6 @@ const NewScheduleContainer = (props) => {
       console.log(res.data);
     });
   };
-
-  
 
   const saveFunction = (period) => {
       if (
@@ -237,17 +363,7 @@ const NewScheduleContainer = (props) => {
           {" "}
           {props.number}
         </p>
-        {/* <Button
-          variant="contained"
-          style={{
-            backgroundColor: saved ? "green" : "#2F49D1",
-            color: "white",
-          }}
-          onClick={saveHandler}
-        >
-          {" "}
-          {saved ? "saved" : "save"}
-        </Button> */}
+  
       </div>
       <TimePicker
         onChange={(e) => startChangeHandler(e)}
@@ -309,10 +425,6 @@ const NewScheduleContainer = (props) => {
         </Select>
       </FormControl>
 
-      {/* <p style={{margin: "0px", fontSize: '16px',
-    fontWeight: "bold", marginLeft: "245px",
-    padding: "5px 15px", backgroundColor: "#2F49D1",
-    borderRadius: "5px", color: "white"}}> {props.number}</p> */}
     </div>
   );
 };
