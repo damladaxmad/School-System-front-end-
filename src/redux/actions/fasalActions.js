@@ -7,14 +7,4 @@ export const setFasalo = (fasalo) => {
   };
 };
 
-export const selectedFasal = (fasal) => {
-  return {
-    type: ActionTypes.SELECTED_FASAL,
-    payload: fasal,
-  };
-};
-export const removeSelectedFasal = () => {
-  return {
-    type: ActionTypes.REMOVE_SELECTED_FASAL,
-  };
-};
+

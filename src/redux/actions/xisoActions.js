@@ -14,18 +14,6 @@ export const setNewPeriods = (newPeriods) => {
   };
 };
 
-// export const setActiveClass = (activeClass) => {
-//   return {
-//     type: ActionTypes.SET_ACTIVECLASS,
-//     payload: activeClass
-//   };
-// };
 
-// export const setActiveDay = (activeDay) => {
-//   return {
-//     type: ActionTypes.SET_ACTIVEDAY,
-//     payload: activeDay
-//   };
-// };
 
 

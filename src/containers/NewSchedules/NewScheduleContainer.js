@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { forwardRef, useRef, useImperativeHandle } from "react"
 import { useSelector, useDispatch } from "react-redux";
 import { FormControl, Select, MenuItem } from "@mui/material";
 import TimePicker from "react-time-picker";
@@ -6,9 +7,8 @@ import "../../Pages/Examination.css";
 import axios from "axios";
 import { setNewPeriods } from "../../redux/actions/xisoActions";
 
-const NewScheduleContainer = (props) => {
-
-  const [saved, setSaved] = useState(false);
+const NewScheduleContainer = forwardRef((props, ref) => {
+  const [saved, setSaved] = useState(false)
   const xisooyin = useSelector((state) => state.xiso.xisooyin);
   const maadooyin = useSelector((state) => state.maado.maadooyin);
   const macalimiin = useSelector((state) => state.macalin.macalimiin);
@@ -138,8 +138,8 @@ const NewScheduleContainer = (props) => {
   const [endTimer, setEndTimer] = useState(() => endTimerFunction());
 
   const [periodOne, setPeriodOne] = useState({
-    course: maado,
-    teacher: macalin,
+    course: null,
+    teacher: null,
     class: props.fasal,
     period: 0,
     day: props.day,
@@ -147,8 +147,8 @@ const NewScheduleContainer = (props) => {
     endTime: null,
   });
   const [periodTwo, setPeriodTwo] = useState({
-    course: maado,
-    teacher: macalin,
+    course: null,
+    teacher: null,
     class: props.fasal,
     period: 1,
     day: props.day,
@@ -158,7 +158,8 @@ const NewScheduleContainer = (props) => {
 
   const [periodThree, setPeriodThree] = useState({
     course: maado,
-    teacher: macalin,
+    course: null,
+    teacher: null,
     class: props.fasal,
     period: 2,
     day: props.day,
@@ -167,8 +168,8 @@ const NewScheduleContainer = (props) => {
   });
   
   const [periodFour, setPeriodFour] = useState({
-    course: maado,
-    teacher: macalin,
+    course: null,
+    teacher: null,
     class: props.fasal,
     period: 3,
     day: props.day,
@@ -177,8 +178,8 @@ const NewScheduleContainer = (props) => {
   });
 
   const [periodFive, setPeriodFive] = useState({
-    course: maado,
-    teacher: macalin,
+    course: null,
+    teacher: null,
     class: props.fasal,
     period: 4,
     day: props.day,
@@ -187,8 +188,8 @@ const NewScheduleContainer = (props) => {
   });
 
   const [periodSix, setPeriodSix] = useState({
-    course: maado,
-    teacher: macalin,
+     course: null,
+    teacher: null,
     class: props.fasal,
     period: 5,
     day: props.day,
@@ -299,18 +300,24 @@ const NewScheduleContainer = (props) => {
 
   const saveFunction = (period) => {
       if (
-        (period.startTime,
-        period.endTime == null)
+        (period.startTime !== null &&
+        period.endTime !== null && period.course !== null && 
+        period.teacher !== null)
       ) {
+        dispatch(setNewPeriods(periodOne));
+      postNewPeriod(period);
+      setSaved(true); 
+      } else {
         alert("Please fill in all the data");
         return;
       }
-      dispatch(setNewPeriods(periodOne));
-      postNewPeriod(period);
-      setSaved(true);  
+       
+      
+      
   }
 
-  const saveHandler = () => {
+  useImperativeHandle(ref, () => ({saveHandler () {
+    
     if (props.number == 1) {
      saveFunction(periodOne)
     } else if (props.number == 2) {
@@ -324,7 +331,8 @@ const NewScheduleContainer = (props) => {
     }  else if (props.number == 6) {
       saveFunction(periodSix)
     }
-  };
+  },
+}))
 
   return (
     <div
@@ -373,6 +381,7 @@ const NewScheduleContainer = (props) => {
         disableClock={true}
         clearIcon={null}
         minutePlaceholder="mm"
+        format = "h:mm:a"
       />
       <TimePicker
         onChange={(e) => endChangeHandler(e)}
@@ -382,6 +391,7 @@ const NewScheduleContainer = (props) => {
         minutePlaceholder="mm"
         clearIcon={null}
         disableClock={true}
+        format = "h:mm:a"
       />
       {/* </div> */}
       <FormControl>
@@ -427,6 +437,6 @@ const NewScheduleContainer = (props) => {
 
     </div>
   );
-};
+});
 
 export default NewScheduleContainer;

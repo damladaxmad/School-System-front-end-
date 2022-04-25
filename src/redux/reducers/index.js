@@ -5,7 +5,6 @@ import { maadoReducer } from "./maadoReducer";
 import { macalinReducer } from "./macalinReducer";
 const reducers = combineReducers({
   allFasalo: fasaloReducer,
-  fasal: selectedFasaloReducer,
   xiso: xisoReducer,
   maado: maadoReducer,
   macalin: macalinReducer

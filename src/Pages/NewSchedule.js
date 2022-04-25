@@ -1,21 +1,19 @@
 import React, { useState } from "react";
 import { Button } from "@material-ui/core";
 import { FaSave } from "react-icons/fa";
-import { MdSkipNext } from "react-icons/md";
-import { MdSkipPrevious } from "react-icons/md";
 import { useSelector, useDispatch } from "react-redux";
 import {
   FormControl,
-  InputLabel,
   Select,
   MenuItem,
   Divider,
 } from "@mui/material";
 import NewScheduleContainer from "../containers/NewSchedules/NewScheduleContainer";
-import { act } from "@testing-library/react";
-import { setActiveClass, setActiveDay } from "../redux/actions/xisoActions";
+import { forwardRef, useRef, useImperativeHandle } from "react"
 
 const NewSchedule = () => {
+  const childCompRef = useRef()
+
   let numbers = [1, 2, 3, 4, 5, 6];
   let days = [
     { name: "saturday" },
@@ -37,8 +35,8 @@ const NewSchedule = () => {
   const [day, setDay] = useState(days[0].name);
   const dayHandler = (e) => {
     setDay(e.target.value);
-    // dispatch(setActiveDay(e.target.value));
   };
+
 
   return (
     <div
@@ -51,33 +49,7 @@ const NewSchedule = () => {
         flexDirection: "column",
       }}
     >
-      {/* <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-
-        }}
-      >
-        <h2> Create Schedule</h2>
-        <Button
-          variant="contained"
-          style={{
-            backgroundColor: "#2F49D1",
-            color: "white",
-          }}
-          startIcon={
-            <FaSave
-              style={{
-                color: "white",
-              }}
-            />
-          }
-        >
-          Save Schedule
-        </Button>
-      </div> */}
-
+     
       <div
         style={{
           backgroundColor: "white",
@@ -151,6 +123,7 @@ const NewSchedule = () => {
                 }}
               />
             }
+            onClick={() => childCompRef.current.saveHandler()}
           >
             Save Schedule
           </Button>
@@ -168,6 +141,7 @@ const NewSchedule = () => {
               fasal={fasal}
               key={index}
               day={day}
+              ref={childCompRef}
             />
           ))}
         </div>

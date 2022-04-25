@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import SettingsFile from "./NewSchedule";
 
 const Schedules = (props) => {
+  
   const [newSchedule, setNewSchedule] = useState(false)
   const [buttonName, setButtonName] = useState('New Schedule')
   const dispatch = useDispatch();
@@ -36,7 +37,7 @@ const Schedules = (props) => {
 
   useEffect(async() => {
     fetchXisooyin();
-  }, []);
+  }, [buttonName]);
 
   return (
     <div
