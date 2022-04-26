@@ -306,7 +306,8 @@ const NewScheduleContainer = forwardRef((props, ref) => {
       ) {
         dispatch(setNewPeriods(periodOne));
       postNewPeriod(period);
-      setSaved(true); 
+      setSaved(true);
+      alert("succesfully saved") 
       } else {
         alert("Please fill in all the data");
         return;

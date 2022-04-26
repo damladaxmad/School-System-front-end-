@@ -11,7 +11,7 @@ import {
 import NewScheduleContainer from "../containers/NewSchedules/NewScheduleContainer";
 import { forwardRef, useRef, useImperativeHandle } from "react"
 
-const NewSchedule = () => {
+const NewSchedule = (props) => {
   const childCompRef = useRef()
 
   let numbers = [1, 2, 3, 4, 5, 6];
@@ -26,7 +26,7 @@ const NewSchedule = () => {
   ];
   const fasalo = useSelector((state) => state.allFasalo.fasalo);
 
-  const [fasal, setFasal] = useState(fasalo[0]._id);
+  const [fasal, setFasal] = useState(typeof props.value === 'string' ? props.value : fasalo[0]._id);
   const fasalHandler = (e) => {
     setFasal(e.target.value);
     // dispatch(setActiveClass(e.target.value));

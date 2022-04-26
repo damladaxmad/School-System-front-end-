@@ -103,7 +103,7 @@ const TheTable = (props) => {
 
   let classPeriods = 0
   xisooyin.map((fasalXiso) => {
-    if (fasalXiso.name == props.value){
+    if (fasalXiso.id == props.value){
       classPeriods = fasalXiso.periods
     }
   })

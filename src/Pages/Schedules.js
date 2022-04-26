@@ -11,7 +11,9 @@ import SettingsFile from "./NewSchedule";
 const Schedules = (props) => {
   
   const [newSchedule, setNewSchedule] = useState(false)
+  const [value, setValue] = useState()
   const [buttonName, setButtonName] = useState('New Schedule')
+
   const dispatch = useDispatch();
 
       const fetchXisooyin = async () => {
@@ -23,10 +25,11 @@ const Schedules = (props) => {
         dispatch(setXisooyin(response.data.data.classes));
       };
       
-      const addScheduleHandler = () => {
+      const addScheduleHandler = (value) => {
         if (buttonName == "New Schedule"){
           setNewSchedule(true)
           setButtonName("Go To Schedules")
+          setValue(value)
           return
         }
 
@@ -83,7 +86,7 @@ const Schedules = (props) => {
       </div>
 
       {!newSchedule && <ScheduleContainer onEdit = {addScheduleHandler} />}
-      {newSchedule && <SettingsFile/>}
+      {newSchedule && <SettingsFile value = {value}/>}
       
     </div>
   );

@@ -9,11 +9,20 @@ const ScheduleContainer = (props) => {
   const dispatch = useDispatch(props);
     const fasalo = useSelector((state) => state.allFasalo.fasalo);
     
-    const [value, setValue] = useState(fasalo[0].name);
+    const [value, setValue] = useState(fasalo[0]._id);
+    const [fasalName, setFasalName] = useState(fasalo[0].name);
     const selectHandler = (e) => {
     setValue(e.target.value);
+    
+    fasalo.map((fasal)=> {
+      if (fasal._id == e){
+        setFasalName(fasal.name)
+        console.log(fasalName)
+      }
+    })
     };
 
+  
 
   return (
     <div
@@ -34,9 +43,9 @@ const ScheduleContainer = (props) => {
           onChange={selectHandler}
         //   label="Gender"
         >
-            
+    
             {fasalo.map((fasal) => (
-                <MenuItem value={fasal.name} key = {fasal._id}>{fasal.name}</MenuItem>
+                <MenuItem value={fasal._id} key = {fasal._id}>{fasal.name}</MenuItem>
             ))}
         
         

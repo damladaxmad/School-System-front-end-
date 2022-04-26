@@ -1,14 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import timeTable from "../../assets/images/timeTable.png";
 import { Button } from "@material-ui/core";
 import { AiOutlineEdit } from "react-icons/ai";
+import { useSelector } from "react-redux";
 
 const TableHeader = (props) => {
+  const  [jinni, setJinni] = useState("aaa")
+  const fasalo = useSelector((state) => state.allFasalo.fasalo);
+
+  const classSetter = () => {
+    fasalo.map((f)=>{
+      if (f._id == props.value){
+        setJinni(f.name)
+      }
+    })   
+  }
+
+  useEffect(()=>{
+    classSetter();
+  }, [props.value])
 
   const clickHandler = () => {
-    props.onEdit()
+    props.onEdit(props.value)
     console.log("editing")
   }
+  
   return (
     <div style={{ display: "flex", margin: "20px 30px", 
     alignItems: "center", justifyContent: "space-between",  }}>
@@ -50,7 +66,7 @@ const TableHeader = (props) => {
           }}
         >
           {" "}
-          {props.value}
+          {jinni}
         </p>
         <p
           style={{
