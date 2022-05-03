@@ -1,19 +1,83 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { forwardRef, useRef, useImperativeHandle } from "react"
+import React, { useState, useEffect, useMemo } from "react";
+import { forwardRef,  useImperativeHandle } from "react"
 import { useSelector, useDispatch } from "react-redux";
 import { FormControl, Select, MenuItem } from "@mui/material";
 import TimePicker from "react-time-picker";
 import "../../Pages/Examination.css";
 import axios from "axios";
-import { setNewPeriods } from "../../redux/actions/xisoActions";
+import { emptyUpdatedPeriods, setNewPeriods, setUpdatedPeriods } from "../../redux/actions/xisoActions";
 
 const NewScheduleContainer = forwardRef((props, ref) => {
   const [saved, setSaved] = useState(false)
   const xisooyin = useSelector((state) => state.xiso.xisooyin);
   const maadooyin = useSelector((state) => state.maado.maadooyin);
   const macalimiin = useSelector((state) => state.macalin.macalimiin);
+  const newPeriods = useSelector((state)=> state.xiso.newPeriods)
+  const updatedPeriods = useSelector((state)=> state.xiso.updatedPeriods)
+  const [engaged, setEngaged] = useState(false)
 
   const dispatch = useDispatch();
+
+  const [periodOne, setPeriodOne] = useState({
+    course: null,
+    teacher: null,
+    class: props.fasal,
+    period: 0,
+    day: props.day,
+    startTime: null,
+    endTime: null,
+  });
+
+  const [periodTwo, setPeriodTwo] = useState({
+    course: null,
+    teacher: null,
+    class: props.fasal,
+    period: 1,
+    day: props.day,
+    startTime: null,
+    endTime: null,
+  });
+
+  const [periodThree, setPeriodThree] = useState({
+    course: null,
+    course: null,
+    teacher: null,
+    class: props.fasal,
+    period: 2,
+    day: props.day,
+    startTime: null,
+    endTime: null,
+  });
+  
+  const [periodFour, setPeriodFour] = useState({
+    course: null,
+    teacher: null,
+    class: props.fasal,
+    period: 3,
+    day: props.day,
+    startTime: null,
+    endTime: null,
+  });
+
+  const [periodFive, setPeriodFive] = useState({
+    course: null,
+    teacher: null,
+    class: props.fasal,
+    period: 4,
+    day: props.day,
+    startTime: null,
+    endTime: null,
+  });
+
+  const [periodSix, setPeriodSix] = useState({
+     course: null,
+    teacher: null,
+    class: props.fasal,
+    period: 5,
+    day: props.day,
+    startTime: null,
+    endTime: null,
+  });
   
   let population = 0
   let currentPeriods = []
@@ -29,9 +93,40 @@ const NewScheduleContainer = forwardRef((props, ref) => {
       return
     }
   })
-  console.log(currentPeriods)
-  console.log(props.day)
 
+  useEffect(()=>{
+
+    currentPeriods.map((p)=>{
+      if (p.period === 0){
+          if (periodOne.course === null){
+          setPeriodOne(p);
+        }
+      } if (p.period === 1){
+          if (periodTwo.course === null){
+          setPeriodTwo(p);
+        }
+      } if (p.period === 2){
+        if (periodThree.course === null){
+        setPeriodThree(p);
+      } if (p.period === 3){
+        if (periodFour.course === null){
+        setPeriodFour(p);
+      } if (p.period === 4){
+        if (periodFive.course === null){
+        setPeriodFive(p);
+      } if (p.period === 5){
+        if (periodSix.course === null){
+        setPeriodSix(p);
+      }
+    }
+    }
+    }
+    }
+    })
+  
+  }, [currentPeriods])
+console.log(periodOne)
+  
   const stateReducer = (period, type) => {
       let course = 0
       let teacher = 0
@@ -132,74 +227,18 @@ const NewScheduleContainer = forwardRef((props, ref) => {
     }
   }
 
-  const [maado, setMaado] = useState(() => courseFunction("kkk"));
+  const [maado, setMaado] = useState(() => courseFunction());
   const [macalin, setMacalin] = useState(() => teacherFunction());
   const [startTimer, setStartTimer] = useState(() => startTimerFunction());
   const [endTimer, setEndTimer] = useState(() => endTimerFunction());
 
-  const [periodOne, setPeriodOne] = useState({
-    course: null,
-    teacher: null,
-    class: props.fasal,
-    period: 0,
-    day: props.day,
-    startTime: null,
-    endTime: null,
-  });
-  const [periodTwo, setPeriodTwo] = useState({
-    course: null,
-    teacher: null,
-    class: props.fasal,
-    period: 1,
-    day: props.day,
-    startTime: null,
-    endTime: null,
-  });
 
-  const [periodThree, setPeriodThree] = useState({
-    course: maado,
-    course: null,
-    teacher: null,
-    class: props.fasal,
-    period: 2,
-    day: props.day,
-    startTime: null,
-    endTime: null,
-  });
   
-  const [periodFour, setPeriodFour] = useState({
-    course: null,
-    teacher: null,
-    class: props.fasal,
-    period: 3,
-    day: props.day,
-    startTime: null,
-    endTime: null,
-  });
 
-  const [periodFive, setPeriodFive] = useState({
-    course: null,
-    teacher: null,
-    class: props.fasal,
-    period: 4,
-    day: props.day,
-    startTime: null,
-    endTime: null,
-  });
-
-  const [periodSix, setPeriodSix] = useState({
-     course: null,
-    teacher: null,
-    class: props.fasal,
-    period: 5,
-    day: props.day,
-    startTime: null,
-    endTime: null,
-  });
-
-  // TIME STATES AND HANDLERS
+  // TIME HANDLERS
   const startChangeHandler = (e) => {
     setStartTimer(e);
+    setEngaged(true)
     if (props.number === 1) {
       setPeriodOne({ ...periodOne, startTime: e });
     }
@@ -215,11 +254,11 @@ const NewScheduleContainer = forwardRef((props, ref) => {
       setPeriodSix({ ...periodSix, startTime: e });
     }
 
-
   };
 
   const endChangeHandler = (e) => {
     setEndTimer(e);
+    setEngaged(true)
     if (props.number === 1) {
       setPeriodOne({ ...periodOne, endTime: e });
     }
@@ -236,14 +275,14 @@ const NewScheduleContainer = forwardRef((props, ref) => {
     }
   };
 
-  // TEACHERS AND COURSES STATES AND HANDLERS
+  // TEACHERS AND COURSES HANDLERS
 
   const maadoHandler = (e) => {
     setMaado(e.target.value);
+    setEngaged(true)
     if (props.number === 1) {
       setPeriodOne({ ...periodOne, course: e.target.value });
-    }
-    if (props.number === 2) {
+    } if (props.number === 2) {
       setPeriodTwo({ ...periodTwo, course: e.target.value });
     } if (props.number === 3) {
       setPeriodThree({ ...periodThree, course: e.target.value });
@@ -258,10 +297,10 @@ const NewScheduleContainer = forwardRef((props, ref) => {
 
   const macalinHandler = (e) => {
     setMacalin(e.target.value);
+    setEngaged(true)
     if (props.number === 1) {
       setPeriodOne({ ...periodOne, teacher: e.target.value });
-    }
-    if (props.number === 2) {
+    } if (props.number === 2) {
       setPeriodTwo({ ...periodTwo, teacher: e.target.value });
     } if (props.number === 3) {
       setPeriodThree({ ...periodThree, teacher: e.target.value });
@@ -296,42 +335,58 @@ const NewScheduleContainer = forwardRef((props, ref) => {
       console.log(res);
       console.log(res.data);
     });
+
+    dispatch(emptyUpdatedPeriods())
   };
 
-  const saveFunction = (period) => {
-      if (
-        (period.startTime !== null &&
-        period.endTime !== null && period.course !== null && 
-        period.teacher !== null)
-      ) {
-        dispatch(setNewPeriods(periodOne));
-      postNewPeriod(period);
-      setSaved(true);
-      alert("succesfully saved") 
+  console.log(periodOne)
+
+  const newPeriodChecker = (newPeriod) => {
+    
+    if (
+      (newPeriod.startTime !== null &&
+        newPeriod.endTime !== null && newPeriod.course !== null && 
+        newPeriod.teacher !== null && !newPeriods.includes(newPeriod))
+    ) {
+      
+      if ( newPeriod.hasOwnProperty('_id')){
+        if (!updatedPeriods.includes(newPeriod)){
+          dispatch(setUpdatedPeriods(newPeriod))
+        }
       } else {
-        alert("Please fill in all the data");
-        return;
+        dispatch(setNewPeriods(newPeriod))
       }
-       
       
-      
+    }
   }
+  
+  // 1 
+  newPeriodChecker(periodOne)
+  newPeriodChecker(periodTwo)
+  newPeriodChecker(periodThree)
+  newPeriodChecker(periodFour)
+  newPeriodChecker(periodFive)
+  newPeriodChecker(periodSix)
+  
+  
+ 
+  console.log(periodOne)
+
+  const saveFunction = () => {
+    if (newPeriods.length > 0){
+      postNewPeriod(newPeriods);
+      setSaved(true);
+      alert("succesfully saved")      
+    } else if (newPeriods.length < 1 && !engaged){
+      alert("Nothing to save")
+    } else if (newPeriods.length < 1 && engaged){
+      alert("Fill in the blanks")
+    }   
+}
 
   useImperativeHandle(ref, () => ({saveHandler () {
-    
-    if (props.number == 1) {
-     saveFunction(periodOne)
-    } else if (props.number == 2) {
-      saveFunction(periodTwo)
-    }  else if (props.number == 3) {
-      saveFunction(periodThree)
-    }  else if (props.number == 4) {
-      saveFunction(periodFour)
-    }  else if (props.number == 5) {
-      saveFunction(periodFive)
-    }  else if (props.number == 6) {
-      saveFunction(periodSix)
-    }
+   saveFunction()
+
   },
 }))
 

@@ -1,17 +1,40 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Chart from "../containers/DashboardContainers/Chart";
 import QuickActions from "../containers/DashboardContainers/QuickActions";
 import StatCard from "../containers/DashboardContainers/StatCard";
 import UpdateStudents from "../containers/DashboardContainers/UpdateStudents";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { setDashboard } from "../redux/actions/dashboardActions";
 
 
 const Dashboard = () => {
+
+  const dashboard = useSelector((state) => state.dashboard.dashboard);
+
+  const dispatch = useDispatch();
   const stats = [
     { value: "$10.89k", title: "salary", id: 1 },
     { value: "$5.77k", title: "income", id: 2 },
     { value: "$67.98k", title: "salary", id: 1 },
     { value: "$89.90k", title: "income", id: 2 },
+    { value: "$89.90k", title: "income", id: 2 },
   ];
+
+  const fetchDashboard = async () => {
+    const response = await axios
+      .get("/api/v1/dashboard")
+      .catch((err) => {
+        console.log("Err: ", err);
+      });
+    dispatch(setDashboard(response.data.data));
+  };
+
+  useEffect(() => {
+    fetchDashboard();
+  }, []);
+
+  console.log(dashboard)
 
   return (
     <div
@@ -25,9 +48,10 @@ const Dashboard = () => {
       }}
     >
       <h2> Dashboard</h2>
-      <div style={{ display: "flex", gap: "12px", width: "100%" }}>
-        {stats.map((stat, index) => (
-          <StatCard value={stat} key={index} />
+      <div style={{ display: "flex", gap: "12px", width: "100%",
+    flexWrap: "wrap", }}>
+        {dashboard.map((d, index) => (
+          <StatCard value={d} key={index} />
         ))}
       </div>
       <Chart />

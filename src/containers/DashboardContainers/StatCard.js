@@ -19,7 +19,7 @@ const StatCard = (props) => {
       
     <div
       style={{
-        width: "250px",
+        width: "237px",
         height: "95px",
         background: "#FFFFFF",
         borderRadius: "10px",
@@ -53,7 +53,7 @@ const StatCard = (props) => {
             fontWeight: "500",
           }}
         >
-          {props.value.title}
+          {props.value.label}
         </Typography>
       </div>
     </div>

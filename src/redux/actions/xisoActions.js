@@ -14,6 +14,19 @@ export const setNewPeriods = (newPeriods) => {
   };
 };
 
+export const setUpdatedPeriods = (updatedPeriods) => {
+  return {
+    type: ActionTypes.SET_UPDATED_PERIODS,
+    payload: updatedPeriods
+  };
+};
+
+export const emptyUpdatedPeriods = () => {
+  return {
+    type: ActionTypes.EMPTY_UPDATED_PERIODS,
+  };
+};
+
 
 
 
