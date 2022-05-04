@@ -1,142 +1,48 @@
-import React, { useState } from "react";
-import MaterialTable, { MTableToolbar } from "material-table";
+import React, { useState, useEffect } from "react";
 import { Button } from "@material-ui/core";
 import { MdAdd } from "react-icons/md";
 import { FormControl, Select, MenuItem } from "@mui/material";
-import { BiDotsHorizontalRounded } from "react-icons/bi";
+import StudentsTable from "../containers/StudentContainers/StudentsTable";
+import { setStudents } from "../redux/actions/studentsActions";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 
 const Students = () => {
-  const [tableData, setTableData] = useState([
-    {
-      name: "Raj",
-      email: "Raj@gmail.com",
-      phone: 7894561230,
-      age: null,
-      gender: "M",
-      city: "Chennai",
-      fee: 78456,
-    },
-    {
-      name: "Mohan",
-      email: "mohan@gmail.com",
-      phone: 7845621590,
-      age: 35,
-      gender: "M",
-      city: "Delhi",
-      fee: 456125,
-    },
-    {
-      name: "Sweety",
-      email: "sweety@gmail.com",
-      phone: 741852912,
-      age: 17,
-      gender: "F",
-      city: "Noida",
-      fee: 458796,
-    },
-    {
-      name: "Vikas",
-      email: "vikas@gmail.com",
-      phone: 9876543210,
-      age: 20,
-      gender: "M",
-      city: "Mumbai",
-      fee: 874569,
-    },
-    {
-      name: "Neha",
-      email: "neha@gmail.com",
-      phone: 7845621301,
-      age: 25,
-      gender: "F",
-      city: "Patna",
-      fee: 748521,
-    },
-    {
-      name: "Mohan",
-      email: "mohan@gmail.com",
-      phone: 7845621590,
-      age: 35,
-      gender: "M",
-      city: "Delhi",
-      fee: 456125,
-    },
-    {
-      name: "Sweety",
-      email: "sweety@gmail.com",
-      phone: 741852912,
-      age: 17,
-      gender: "F",
-      city: "Noida",
-      fee: 458796,
-    },
-    {
-      name: "Vikas",
-      email: "vikas@gmail.com",
-      phone: 9876543210,
-      age: 20,
-      gender: "M",
-      city: "Mumbai",
-      fee: 874569,
-    },
-    {
-      name: "Raj",
-      email: "Raj@gmail.com",
-      phone: 7894561230,
-      age: null,
-      gender: "M",
-      city: "Chennai",
-      fee: 78456,
-    },
-    {
-      name: "Mohan",
-      email: "mohan@gmail.com",
-      phone: 7845621590,
-      age: 35,
-      gender: "M",
-      city: "Delhi",
-      fee: 456125,
-    },
-    {
-      name: "Sweety",
-      email: "sweety@gmail.com",
-      phone: 741852912,
-      age: 17,
-      gender: "F",
-      city: "Noida",
-      fee: 458796,
-    },
-    {
-      name: "Vikas",
-      email: "vikas@gmail.com",
-      phone: 9876543210,
-      age: 20,
-      gender: "M",
-      city: "Mumbai",
-      fee: 874569,
-    },
-  ]);
+  const dispatch = useDispatch()
+  const students = useSelector((state) => state.students.students);
+
   const [value, setValue] = useState("ji");
   const [query, setQuery] = useState("");
 
   const handler = (data) => {
-    return data.filter(
-      (asd) =>
-        asd.name.toLowerCase().includes(query) ||
-        asd.city.toLowerCase().includes(query)
-    );
+    
+    if (data.length > 0) {
+      return data.filter(
+        (std) =>
+        std.first_name.toLowerCase().includes(query) ||
+        std.city.toLowerCase().includes(query)
+      );
+    } else {
+      return
+    }
+    
   };
 
-  const columns = [
-    { title: "Name", field: "name",  cellStyle: {
-      textAlign: "left"
-  } },
-    { title: "Email", field: "email" },
-    { title: "Phone", field: "phone" },
-    { title: "Age", field: "age", emptyValue: ()=> <em>null</em> },
-    { title: "City", field: "city" },
-    { title: "Fee", field: "fee" },
-  ];
+  const fetchStudents = async () => {
+    const response = await axios
+      .get("/api/v1/students")
+      .catch((err) => {
+        console.log("Err: ", err);
+      });
+    dispatch(setStudents(response.data.data.students));
+  };
+
+  useEffect(() => {
+    if (students.length > 0) return
+    fetchStudents();
+  }, []);
+
+  console.log(students)
 
   return (
     <div
@@ -237,38 +143,7 @@ const Students = () => {
           </FormControl>
         </div>
       </div>
-
-      <div style={{ width: "95%", margin: "auto" }}>
-        <MaterialTable
-          columns={columns}
-          data={handler(tableData)}
-          options={{
-            rowStyle: {
-              
-            },
-            showTitle: false,
-            selection: true,
-            sorting: false,
-            showTextRowsSelected: false,
-            toolbar: false,
-            pageSizeOptions: [2, 5, 8, 10, 20, 25, 50, 100],
-            pageSize: 8,
-            actionsColumnIndex: -1,
-            headerStyle: { background: "#EFF0F6",  },
-          }}
-          // onSelectionChange={(rows) => alert('You selected ' + rows + ' rows')}
-          actions={[
-            {
-              icon: () => <BiDotsHorizontalRounded />,
-              tooltip: "Save User",
-              onClick: (event, rowData) => alert("You saved " + rowData.name),
-              position: "row",
-            },
-            
-          ]}
-          style={{ borderRadius: "10px", boxShadow: "none" }}
-        />
-      </div>
+      {<StudentsTable data={handler(students)} />}
     </div>
   );
 };
