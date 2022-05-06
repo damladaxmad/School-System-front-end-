@@ -13,10 +13,17 @@ const Examination = () => {
   console.log(value)
 
   return (
-    <div>
-       <TimePicker onChange={(e)=> changeHandler(e)} value={value}
-      className = "timePicker"
-       />
+    <div
+    style={{
+      height: "100%",
+      width: "95%",
+      margin: "0px auto",
+      display: "flex",
+      gap: "14px",
+      flexDirection: "column",
+    }}
+  >
+    <h2> Examination</h2>
     </div>
   );
 };

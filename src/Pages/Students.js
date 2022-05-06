@@ -6,16 +6,39 @@ import StudentsTable from "../containers/StudentContainers/StudentsTable";
 import { setStudents } from "../redux/actions/studentsActions";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import { BiArrowBack } from "react-icons/bi";
+import RegisterStudents from "../containers/StudentContainers/RegisterStudents";
 
 const Students = () => {
+  const [newStudents, setNewStudents] = useState(false)
+  const [buttonName, setButtonName] = useState('Add New Students')
+
   const dispatch = useDispatch()
   const students = useSelector((state) => state.students.students);
 
   const [value, setValue] = useState("ji");
   const [query, setQuery] = useState("");
 
-  const handler = (data) => {
-    
+  const addStudentHandler = () => {
+    if (buttonName == "Add New Students"){
+      setNewStudents(true)
+      setButtonName("Go To Students")
+      return
+    }
+    setNewStudents(false)
+    setButtonName("Add New Students") 
+  }
+
+  const handler = (data) => { 
+    if (data.length > 0) {
+    data.map((d)=> {
+      if (d.class){
+        console.log(d.class.name)
+      } else {
+      
+      }
+    })
+  }
     if (data.length > 0) {
       return data.filter(
         (std) =>
@@ -24,8 +47,7 @@ const Students = () => {
       );
     } else {
       return
-    }
-    
+    }  
   };
 
   const fetchStudents = async () => {
@@ -64,24 +86,30 @@ const Students = () => {
           margin: "auto",
         }}
       >
-        <h2> Students</h2>
+        <h2> {newStudents ? "Create New Students" : "Students"}</h2>
         <Button
           variant="contained"
           style={{
             backgroundColor: "#2F49D1",
             color: "white",
           }}
+          onClick = {addStudentHandler}
           startIcon={
-            <MdAdd
+            newStudents ? <BiArrowBack
               style={{
                 color: "white",
               }}
-            />
+            /> : <MdAdd
+            style={{
+              color: "white",
+            }}
+          />
           }
         >
-          Add New Student
+          {buttonName}
         </Button>
       </div>
+      {!newStudents &&
       <div
         style={{
           display: "flex",
@@ -142,8 +170,9 @@ const Students = () => {
             </Select>
           </FormControl>
         </div>
-      </div>
-      {<StudentsTable data={handler(students)} />}
+      </div>}
+      {!newStudents && <StudentsTable data={handler(students)} />}
+      {newStudents && <RegisterStudents/>}
     </div>
   );
 };

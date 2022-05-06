@@ -32,10 +32,8 @@ const Schedules = (props) => {
           setValue(value)
           return
         }
-
         setNewSchedule(false)
-          setButtonName("New Schedule")
-       
+          setButtonName("New Schedule") 
       }
 
   useEffect(async() => {
