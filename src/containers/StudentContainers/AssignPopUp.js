@@ -5,7 +5,7 @@ import { FormControl, Select, MenuItem } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 
-const PopupForm = (props) => {
+const AssignPopUp = (props) => {
   const fasalo = useSelector((state) => state.allFasalo.fasalo);
 
   const [fasal, setFasal] = useState(fasalo[0]._id);
@@ -19,9 +19,12 @@ const PopupForm = (props) => {
     axios.post(`/api/v1/students/${props.student}/${fasal}`).then((res) => {
         alert(res.data.data.message)
     });
+
   };
+
+ 
   return (
-    <Modal>
+    <Modal onClose = {props.hideModal}>
       <div
         style={{
           display: "flex",
@@ -57,7 +60,7 @@ const PopupForm = (props) => {
           style={{
             margin: "20px auto",
             width: "180px",
-            backgroundColor: "#041E42",
+            backgroundColor: "#2F49D1",
           }}
           variant="contained"
           color="primary"
@@ -70,4 +73,4 @@ const PopupForm = (props) => {
   );
 };
 
-export default PopupForm;
+export default AssignPopUp;

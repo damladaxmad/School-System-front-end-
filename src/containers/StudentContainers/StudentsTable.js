@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MaterialTable from "material-table";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import Button from '@mui/material/Button';
+import {Typography, Button, MenuItem, Menu, Avatar} from "@mui/material"
 import PopupForm from "./AssignPopUp";
+import axios from "axios";
+import profile from "../../assets/images/tablePic.png"
 
 const StudentsTable = (props) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -12,15 +12,30 @@ const StudentsTable = (props) => {
   const [show, setShow] = useState(false)
   const [student, setStudent] = useState('')
 
+
+
   const columns = [
    
-    { title: "First Name", field: "first_name" },
-    { title: "Middle Name", field: "middle_name" },
-    { title: "Last Name", field: "last_name" },
+    { title: "Student Full Name", field: "fullName" , width: "4%",
+  render: (row)=> <div style={{display: "flex",
+  alignItems: "center", gap:"10px"}}>
+    <Avatar sx={{ height: '25px', width: '25px' }}>
+    <img src = {profile} style = {{
+            width: '100%',
+            height: '100%',
+        }}/>
+    </Avatar>
+  <Typography> {row.fullName}</Typography></div>},
     { title: "Sex", field: "sex" },
     { title: "Parent", field: "parent" },
+    { title: "Class", field: "className" },
     { title: "City", field: "city" },   
     { title: "Fee", field: "monthlyFee" },
+    { title: "Stutus", field: "status", render: (row)=> <div style={{
+      backgroundColor: "#EEF3FF", borderRadius: "100px",
+    padding: "1px 8px", color: "#5887FF"}}>
+    <Typography style = {{textAlign: "center", fontSize: "12px"}}> {row.status} </Typography>
+  </div> },
     { title: "Phone", field: "phone" },
     
   ];
@@ -32,6 +47,7 @@ const StudentsTable = (props) => {
 
   const hideModal = () =>{
     setShow(false)
+    props.change()
   }
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>, student) => {
@@ -42,9 +58,25 @@ const StudentsTable = (props) => {
     setAnchorEl(null);
   };
 
+  const deleteStudent = (id) => {
+    axios.delete(`/api/v1/students/${student._id}`)
+    handleClose()
+    props.change()
+  };
+
+  const updateStudent = () => {
+    props.update(student)
+  }
+
+  const selectionHandler = (data) => {
+    props.selectStudents(data)
+  }
+
+
   return (
     <div style={{ width: "95%", margin: "auto" }}>
- {show && <PopupForm hideModal = {hideModal} student = {student}/>}
+ {show && <PopupForm hideModal = {hideModal} student = {student}
+ />}
         <Menu
         id="basic-menu"
         anchorEl={anchorEl}
@@ -56,6 +88,8 @@ const StudentsTable = (props) => {
         style = {{}}
       >
         <MenuItem onClick={showModal}>Assign to class</MenuItem>
+        <MenuItem onClick={deleteStudent}>Delete Student</MenuItem>
+        <MenuItem onClick={updateStudent}>Update Student</MenuItem>
       </Menu>
       <MaterialTable
         columns={columns}
@@ -70,10 +104,13 @@ const StudentsTable = (props) => {
           toolbar: false,
           pageSizeOptions: [2, 5, 8, 10, 20, 25, 50, 100],
           pageSize: 8,
+          // rowStyle: {
+          //   overflowWrap: 'break-word'
+          // },
           actionsColumnIndex: -1,
-          headerStyle: { background: "#EFF0F6", fontSize: "13px" },
+          headerStyle: { background: "#EFF0F6", fontSize: "13px", },
         }}
-        // onSelectionChange={(rows) => alert('You selected ' + rows + ' rows')}
+        onSelectionChange={(rows) => selectionHandler(rows)}
         actions={[
           {
             icon: () => <BiDotsHorizontalRounded 
@@ -84,7 +121,7 @@ const StudentsTable = (props) => {
            />,
             tooltip: "Save User",
             onClick: (event, rowData) => {
-              handleClick(event, rowData._id)
+              handleClick(event, rowData)
             },
             position: "row",
           },
