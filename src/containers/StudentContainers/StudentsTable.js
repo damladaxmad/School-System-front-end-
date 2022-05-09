@@ -32,8 +32,9 @@ const StudentsTable = (props) => {
     { title: "City", field: "city" },   
     { title: "Fee", field: "monthlyFee" },
     { title: "Stutus", field: "status", render: (row)=> <div style={{
-      backgroundColor: "#EEF3FF", borderRadius: "100px",
-    padding: "1px 8px", color: "#5887FF"}}>
+      backgroundColor: row.status === "Inactive" ? "#FFF7EB" :  "#EEF3FF" ,
+      borderRadius: "100px",
+    padding: "1px 8px", color: row.status == "Inactive" ? "#FFAC32"  : "#5887FF"}}>
     <Typography style = {{textAlign: "center", fontSize: "12px"}}> {row.status} </Typography>
   </div> },
     { title: "Phone", field: "phone" },
@@ -72,6 +73,10 @@ const StudentsTable = (props) => {
     props.selectStudents(data)
   }
 
+  const showProfile = () => {
+    props.showProfile()
+  }
+
 
   return (
     <div style={{ width: "95%", margin: "auto" }}>
@@ -90,6 +95,7 @@ const StudentsTable = (props) => {
         <MenuItem onClick={showModal}>Assign to class</MenuItem>
         <MenuItem onClick={deleteStudent}>Delete Student</MenuItem>
         <MenuItem onClick={updateStudent}>Update Student</MenuItem>
+        <MenuItem onClick={showProfile}>Student Profile</MenuItem>
       </Menu>
       <MaterialTable
         columns={columns}
@@ -104,6 +110,7 @@ const StudentsTable = (props) => {
           toolbar: false,
           pageSizeOptions: [2, 5, 8, 10, 20, 25, 50, 100],
           pageSize: 8,
+          draggable: false,
           // rowStyle: {
           //   overflowWrap: 'break-word'
           // },

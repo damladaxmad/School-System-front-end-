@@ -16,7 +16,7 @@ const AssignPopUp = (props) => {
 
   const buttonHandler = () => {
     props.hideModal();
-    axios.post(`/api/v1/students/${props.student}/${fasal}`).then((res) => {
+    axios.post(`/api/v1/students/${props.student._id}/${fasal}`).then((res) => {
         alert(res.data.data.message)
     });
 

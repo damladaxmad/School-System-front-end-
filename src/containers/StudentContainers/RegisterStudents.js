@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import { TextField, Button } from "@mui/material";
 import axios from "axios";
@@ -82,6 +82,10 @@ const RegisterStudents = (props) => {
     
     },
   });
+
+  useEffect(()=>{
+
+  }, [props])
 
   return (
     <div

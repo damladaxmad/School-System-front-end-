@@ -9,6 +9,7 @@ import axios from "axios";
 import { BiArrowBack } from "react-icons/bi";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import RegisterStudents from "../containers/StudentContainers/RegisterStudents";
+import StudentProfile from "../containers/StudentContainers/StudentProfile";
 
 const Students = () => {
   const [newStudents, setNewStudents] = useState(false)
@@ -19,6 +20,7 @@ const Students = () => {
   const open = Boolean(anchorEl);
   const [updatedStudent, setUpdatedStudent] = useState(null)
   const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
+  const [showProfile, setShowProfile] = useState(false)
 
   
 
@@ -35,8 +37,8 @@ const Students = () => {
 
   const dispatch = useDispatch()
   const students = useSelector((state) => state.students.students);
-
-  const [value, setValue] = useState("ji");
+  const statusArr = ["All", "Active", "Inactive"]
+  const [status, setStatus] = useState(statusArr[0]);
   const [query, setQuery] = useState("");
   const fasalo = useSelector((state) => state.allFasalo.fasalo);
 
@@ -44,17 +46,26 @@ const Students = () => {
   const fasalHandler = (e) => {
     setFasal(e.target.value);
     // dispatch(setActiveClass(e.target.value));
-  };
+  }; 
+
+  const statusHandler = (e) => {
+    setStatus(e.target.value)
+  }
 
   const addStudentHandler = () => {
     if (buttonName == "Add New Students"){
       setNewStudents(true)
       setButtonName("Go To Students")
+      setShowProfile(false)
       return
+    } else if (buttonName == "Go To Students") {
+      setShowProfile(false)
+      setNewStudents(false)
+      setButtonName("Add New Students") 
+      setUpdate(false)
     }
-    setNewStudents(false)
-    setButtonName("Add New Students") 
-    setUpdate(false)
+   
+    
   }
 
   const handler = (data) => { 
@@ -78,19 +89,29 @@ const Students = () => {
     }  
   };
 
-  const fetchStudents = async () => {
-    const response = await axios
+  const fetchStudents = async (status) => {
+    if (status !== "All"){
+      const response = await axios
+      .get(`/api/v1/students?status=${status}`)
+      .catch((err) => {
+        console.log("Err: ", err);
+      });
+    dispatch(setStudents(response.data.data.students));
+    } else {
+      const response = await axios
       .get("/api/v1/students")
       .catch((err) => {
         console.log("Err: ", err);
       });
     dispatch(setStudents(response.data.data.students));
+    }
+
   };
 
   useEffect(() => {
     // if (students.length > 0) return
-    fetchStudents();
-  }, [ignored]);
+    fetchStudents(status);
+  }, [ignored, status]);
 
   const selectHandler = (data) => {
     console.log(data)
@@ -109,6 +130,11 @@ const Students = () => {
 
   const resetFomr = () => {
     setUpdate(false)
+  }
+
+  const showProfileHandler = () => {
+    setShowProfile(true)
+    setButtonName("Go To Students")
   }
 
   return (
@@ -131,7 +157,8 @@ const Students = () => {
           margin: "auto",
         }}
       >
-        <h2> {newStudents ? "Create New Students" : "Students"}</h2>
+        <h2> {newStudents ? "Create New Students" : 
+        showProfile ? "Student Profile" : "Students"}</h2>
         <Button
           variant="contained"
           style={{
@@ -140,7 +167,7 @@ const Students = () => {
           }}
           onClick = {addStudentHandler}
           startIcon={
-            newStudents ? <BiArrowBack
+            newStudents || showProfile ? <BiArrowBack
               style={{
                 color: "white",
               }}
@@ -154,7 +181,7 @@ const Students = () => {
           {buttonName}
         </Button>
       </div>
-      {!newStudents &&
+      {!newStudents && !showProfile &&
       <div
         style={{
           display: "flex",
@@ -203,19 +230,20 @@ const Students = () => {
           </Select>
         </FormControl>
           <FormControl style={{ padding: "0px", margin: "0px" }}>
-            <Select
-              style={{
-                margin: "0px",
-                height: "40px",
-                width: "150px",
-                color: "black",
-                backgroundColor: "white",
-              }}
-              value={value}
-              // onChange={maadoHandler}
-            >
-              <MenuItem value={value}> Status</MenuItem>
-            </Select>
+          <Select
+            style={{  height: "40px", color: "#B9B9B9",
+            width: "150px", }}
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={status}
+            onChange={statusHandler}
+          >
+            {statusArr.map((status, index) => (
+              <MenuItem value={status} key={index}>
+                {status}
+              </MenuItem>
+            ))}
+          </Select>
           </FormControl>
           {showCornerIcon && <BiDotsVerticalRounded style = {{
             fontSize: "24px", margin: "auto 0px",
@@ -223,11 +251,13 @@ const Students = () => {
           }} onClick = {handleClick} />}
         </div>
       </div>}
-      {!newStudents && <StudentsTable data={handler(students)} 
+      {!newStudents && !showProfile && <StudentsTable data={handler(students)} 
       change = {changeHandler} selectStudents = {selectHandler}
-      update = {updateHandler}/>}
+      update = {updateHandler} showProfile = {showProfileHandler}/>}
       {newStudents && <RegisterStudents update = {update}
       student = {updatedStudent} reset = {resetFomr}/>}
+      {showProfile && <StudentProfile/>}
+
       <Menu
         id="basic-menu"
         anchorEl={anchorEl}
