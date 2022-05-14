@@ -15,14 +15,16 @@ const ExamTable = (props) => {
   const columns = [ 
     { title: "Student Full Name", field: "studentName" , width: "4%"},
     { title: "Class", field: "className" },
-    { title: "Last Exam", render:()=> <div> Final Exam</div>},
+    { title: "Last Exam", render:()=> <div> {props.lastExam}</div>},
     { title: "Class Position", render:()=> <div> 5 of 25 students</div>},
     { title: "Total Marks", field: "totolMarks" },
     { title: "Percentage", field: "percentage" },
 
   ];
 
-
+  const transcriptHandler = () => {
+    props.showTranscript(true)
+  }
 
 
 
@@ -58,9 +60,9 @@ const ExamTable = (props) => {
             backgroundColor: "#2F49D1"}}>
                 Transcript
             </Button>,
-            tooltip: "Save User",
+            tooltip: "",
             onClick: (event, rowData) => {
-              console.log(rowData)
+              transcriptHandler()
             },
             position: "row",
           },

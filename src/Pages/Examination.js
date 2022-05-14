@@ -13,6 +13,7 @@ import { BiDotsVerticalRounded } from "react-icons/bi";
 import RegisterStudents from "../containers/StudentContainers/RegisterStudents";
 import StudentProfile from "../containers/StudentContainers/StudentProfile";
 import { setExams } from "../redux/actions/examsActions";
+import TranscriptPage from "../containers/ExamContainers/TranscriptPage";
 
 const Examination = () => {
 
@@ -21,6 +22,8 @@ const Examination = () => {
   const [updatedStudent, setUpdatedStudent] = useState(null)
   const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
   const [showProfile, setShowProfile] = useState(false)
+  const [showTranscript, setShowTranscript] = useState(true)
+
 
   const [value, setValue] = useState("students");
 
@@ -74,6 +77,10 @@ const Examination = () => {
 
   };
 
+  const showHandler = (value) => {
+    setShowTranscript(value)
+  }
+
   useEffect(() => {
     // if (students.length > 0) return
     fetchExams(term);
@@ -82,7 +89,9 @@ const Examination = () => {
 
 
   return (
-    <div
+    <>
+ 
+    {!showTranscript && <div
       style={{
         height: "100%",
         width: "100%",
@@ -196,11 +205,12 @@ const Examination = () => {
         </div>
       </div>
       { <ExamTable data={handler(exams)} 
-      // change = {changeHandler} selectStudents = {selectHandler}
-      // update = {updateHandler} showProfile = {showProfileHandler}
+      lastExam = {term} showTranscript = {showHandler}
       />}
 
-    </div>
+    </div>}
+    {showTranscript && <TranscriptPage showTranscript = {showHandler}/>}
+    </>
   );
 };
 

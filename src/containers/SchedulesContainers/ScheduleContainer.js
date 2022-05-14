@@ -22,8 +22,6 @@ const ScheduleContainer = (props) => {
     })
     };
 
-  
-
   return (
     <div
       style={{
