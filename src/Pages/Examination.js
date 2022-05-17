@@ -14,6 +14,8 @@ import RegisterStudents from "../containers/StudentContainers/RegisterStudents";
 import StudentProfile from "../containers/StudentContainers/StudentProfile";
 import { setExams } from "../redux/actions/examsActions";
 import TranscriptPage from "../containers/ExamContainers/TranscriptPage";
+import NewExam from "../containers/ExamContainers/NewExam";
+import AssignPopUp from "../containers/StudentContainers/AssignPopUp";
 
 const Examination = () => {
 
@@ -22,15 +24,18 @@ const Examination = () => {
   const [updatedStudent, setUpdatedStudent] = useState(null)
   const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
   const [showProfile, setShowProfile] = useState(false)
-  const [showTranscript, setShowTranscript] = useState(true)
+  const [showTranscript, setShowTranscript] = useState(false)
 
 
   const [value, setValue] = useState("students");
+  const [id, setId] = useState('');
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
-
+  const modalHandler = () => {
+    setValue("students")
+  }
   const changeHandler = () => {
     forceUpdate()
   }
@@ -79,6 +84,10 @@ const Examination = () => {
 
   const showHandler = (value) => {
     setShowTranscript(value)
+  }
+
+  const passId = (id) => {
+    setId(id)
   }
 
   useEffect(() => {
@@ -148,7 +157,7 @@ const Examination = () => {
           background: "white",
           width: "95.3%",
           margin: "auto",
-          marginTop: "20px",
+          marginTop: "15px",
           borderRadius: "8px 8px 0px 0px",
         }}
       >
@@ -206,10 +215,13 @@ const Examination = () => {
       </div>
       { <ExamTable data={handler(exams)} 
       lastExam = {term} showTranscript = {showHandler}
+      passId = {passId}
       />}
 
     </div>}
-    {showTranscript && <TranscriptPage showTranscript = {showHandler}/>}
+    {showTranscript && <TranscriptPage showTranscript = {showHandler}
+    id = {id}/>}
+    {value == "new exam" && <NewExam hideModal = {modalHandler}  />}
     </>
   );
 };

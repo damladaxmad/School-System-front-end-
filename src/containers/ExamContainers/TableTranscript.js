@@ -14,9 +14,6 @@ const TableTranscript = () => {
             border: "1px #EEEEEE solid",
             textAlign: "center"
           },
-        // headerStyle: {
-        //     marginLeft: "35px"
-        // }
         },
         { title: "CW1", field: "cw1", cellStyle: {
             border: "1px #EEEEEE solid",
@@ -78,10 +75,10 @@ const TableTranscript = () => {
             options = {{
                 toolbar: false,
                 headerStyle: {fontWeight: "700", border: "1px #EEEEEE solid",
-                },
+               }
             }}
             
-            style = {{margin: "15px 30px", boxShadow: "none"}}
+            style = {{margin: "5px 30px", boxShadow: "none"}}
             />
 
         </div>

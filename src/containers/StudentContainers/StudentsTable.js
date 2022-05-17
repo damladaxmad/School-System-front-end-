@@ -19,12 +19,12 @@ const StudentsTable = (props) => {
     { title: "Student Full Name", field: "fullName" , width: "4%",
   render: (row)=> <div style={{display: "flex",
   alignItems: "center", gap:"10px"}}>
-    <Avatar sx={{ height: '25px', width: '25px' }}>
+    {/* <Avatar sx={{ height: '25px', width: '25px' }}>
     <img src = {profile} style = {{
             width: '100%',
             height: '100%',
         }}/>
-    </Avatar>
+    </Avatar> */}
   <Typography> {row.fullName}</Typography></div>},
     { title: "Sex", field: "sex" },
     { title: "Parent", field: "parent" },

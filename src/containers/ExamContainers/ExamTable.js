@@ -24,6 +24,7 @@ const ExamTable = (props) => {
 
   const transcriptHandler = () => {
     props.showTranscript(true)
+    props.passId('627792f7e77d040947de4409')
   }
 
 

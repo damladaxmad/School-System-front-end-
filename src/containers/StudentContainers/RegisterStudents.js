@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import { TextField, Button } from "@mui/material";
 import axios from "axios";
-import SelectBox from "../../ReUsables/SelectBox";
+import SelectBox from "../../ReUsables/CustomSelect";
 
 const RegisterStudents = (props) => {
   const arr = [

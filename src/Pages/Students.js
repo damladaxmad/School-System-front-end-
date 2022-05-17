@@ -53,6 +53,7 @@ const Students = () => {
   }
 
   const addStudentHandler = () => {
+    setQuery('')
     if (buttonName == "Add New Students"){
       setNewStudents(true)
       setButtonName("Go To Students")

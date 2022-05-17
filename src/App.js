@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useState,useEffect} from "react";
 import { HashRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Dashboard from "./Pages/Dashboard";
 import Customers from "./Pages/Students";
@@ -14,9 +14,12 @@ import axios from "axios";
 import { setFasalo } from "./redux/actions/fasalActions";
 import { setMaadooyin } from "./redux/actions/maadoActions";
 import { setMacalimiin } from "./redux/actions/macalinActions";
+import SignupAndLogin from "./SignupAndLogin/SignupAndLogin";
+import "./App.css"
 
 function App() {
 
+  const [showLayout, setShowLayout] = useState(false)
   const dispatch = useDispatch();
 
   const fetchFasalo = async () => {
@@ -47,6 +50,10 @@ function App() {
     dispatch(setMacalimiin(response.data.data.teachers));
   };
 
+  const showHandler = () => {
+    setShowLayout(true)
+  }
+
 
   useEffect(() => {
     fetchFasalo();
@@ -58,7 +65,10 @@ function App() {
    
    <div className="App" style={{backgroundColor: "#F0F2FA"}}>
       <Router>
-      <Layout>
+    {!showLayout && 
+    <Route path= "/signup" element = {<SignupAndLogin
+    showHandler = {showHandler}/>} />}
+      {showLayout && <Layout>
           <Routes>
             <Route path= "/dashboard" element = {<Dashboard/>} />
             <Route path= "/students" element = {<Customers/>} />
@@ -70,7 +80,7 @@ function App() {
             <Route path= "/schedules" element = {<Schedules />} />
             <Route path="*" element={<Navigate to="/dashboard" replace />} />
           </Routes>
-        </Layout>
+        </Layout>}
       </Router>
     </div>
   );
