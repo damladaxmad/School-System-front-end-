@@ -13,12 +13,12 @@ const CustomSelect = (props) => {
 
   return (
       <FormControl >
-      <label style = {{fontWeight: "600", marginBottom: "5px"}}>
-        {props.name} </label>
+     {props.isLabel && <label style = {{fontWeight: "600", marginBottom: "5px"}}>
+        {props.name} </label>}
 
       <Select
         style={{  height: props.height, width: props.width,
-          color: "#B9B9B9" }}
+          color: "black", backgroundColor: "white" }}
         labelId="demo-simple-select-label"
         id="demo-simple-select"
         value={data}

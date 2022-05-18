@@ -9,10 +9,8 @@ import {
   Divider,
 } from "@mui/material";
 import NewScheduleContainer from "../containers/NewSchedules/NewScheduleContainer";
-import { forwardRef, useRef, useImperativeHandle } from "react"
 
 const NewSchedule = (props) => {
-  const childCompRef = useRef()
 
   let numbers = [1, 2, 3, 4, 5, 6];
   let days = [
@@ -52,17 +50,20 @@ const NewSchedule = (props) => {
      
       <div
         style={{
-          backgroundColor: "white",
+          backgroundColor: "#F0F2FA",
           borderRadius: "10px",
           width: "100%",
           paddingBottom: "50px",
         }}
       >
-        <FormControl fullWidth>
+        <div style={{backgroundColor: "white",
+          borderRadius: "8px 8px 0px 0px"}}>
+        <FormControl >
           {/* <InputLabel>Gender</InputLabel> */}
 
           <Select
-            style={{ margin: "20px", height: "40px", color: "#B9B9B9" }}
+            style={{ margin: "20px", height: "40px", color: "#B9B9B9",
+          width: "445px" }}
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             value={fasal}
@@ -76,24 +77,12 @@ const NewSchedule = (props) => {
             ))}
           </Select>
         </FormControl>
-        <Divider style={{ backgroundColor: "#DADBE4", opacity: 0.4 }} />
-
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            margin: "25px",
-            gap: "20px",
-          }}
-        >
-          <FormControl>
-
+        <FormControl>
             <Select
               style={{
-                margin: "0px",
+                margin: "20px",
                 height: "40px",
-                width: "300px",
+                width: "445px",
                 color: "black",
                 backgroundColor: "white",
               }}
@@ -110,23 +99,21 @@ const NewSchedule = (props) => {
               ))}
             </Select>
           </FormControl>
-          <Button
-            variant="contained"
-            style={{
-              backgroundColor: "#2F49D1",
-              color: "white",
-            }}
-            startIcon={
-              <FaSave
-                style={{
-                  color: "white",
-                }}
-              />
-            }
-            onClick={() => childCompRef.current.saveHandler()}
-          >
-            Save Schedule
-          </Button>
+        <Divider style={{ backgroundColor: "#DADBE4", opacity: 0.4 }} />
+        </div>
+     
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            margin: "25px",
+            gap: "20px",
+          }}
+        >
+         
+         
         </div>
 
         <div
@@ -135,15 +122,12 @@ const NewSchedule = (props) => {
             flexWrap: "wrap",
           }}
         >
-          {numbers.map((number, index) => (
+          
             <NewScheduleContainer
-              number={number}
+              
               fasal={fasal}
-              key={index}
               day={day}
-              ref={childCompRef}
             />
-          ))}
         </div>
       </div>
     </div>

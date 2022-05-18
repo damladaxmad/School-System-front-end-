@@ -22,7 +22,6 @@ const TableHeader = (props) => {
 
   const clickHandler = () => {
     props.onEdit(props.value)
-    console.log("editing")
   }
   
   return (

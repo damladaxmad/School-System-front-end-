@@ -36,6 +36,7 @@ const SignupAndLogin = (props) => {
         // alignItems: "center",
         borderRadius: "10px",
         padding: "25px 44px",
+        overflowX: "hidden"
       }}
     >
  

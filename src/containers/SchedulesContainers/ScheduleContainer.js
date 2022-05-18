@@ -17,7 +17,6 @@ const ScheduleContainer = (props) => {
     fasalo.map((fasal)=> {
       if (fasal._id == e){
         setFasalName(fasal.name)
-        console.log(fasalName)
       }
     })
     };
@@ -50,10 +49,9 @@ const ScheduleContainer = (props) => {
         </Select>
       </FormControl>
       <Divider style = {{backgroundColor: "#DADBE4", opacity: 0.4}}/>
-      
+          
       <TableHeader value = {value} onEdit = {props.onEdit}/>
       <TheTable value = {value}/>
-      
         
     </div>
   );

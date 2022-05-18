@@ -6,7 +6,7 @@ import ScheduleContainer from "../containers/SchedulesContainers/ScheduleContain
 import axios from "axios";
 import { setXisooyin } from "../redux/actions/xisoActions";
 import { useDispatch } from "react-redux";
-import SettingsFile from "./NewSchedule";
+import NewSchedule from "./NewSchedule";
 
 const Schedules = (props) => {
   
@@ -36,7 +36,7 @@ const Schedules = (props) => {
           setButtonName("New Schedule") 
       }
 
-  useEffect(async() => {
+  useEffect(() => {
     fetchXisooyin();
   }, [buttonName]);
 
@@ -84,7 +84,7 @@ const Schedules = (props) => {
       </div>
 
       {!newSchedule && <ScheduleContainer onEdit = {addScheduleHandler} />}
-      {newSchedule && <SettingsFile value = {value}/>}
+      {newSchedule && <NewSchedule value = {value}/>}
       
     </div>
   );
