@@ -111,25 +111,25 @@ const TheTable = (props) => {
   if (classPeriods.length > 0){
     classPeriods.map((c) => {
 
-      if (c.day == "saturday") {
+      if (c.day == "Saturday") {
         timeTable.saturday.splice(c.period, 1, c)
       }
-      if (c.day == "sunday") {
+      if (c.day == "Sunday") {
           timeTable.sunday.splice(c.period, 1, c)
       }
-      if (c.day == "monday") {
+      if (c.day == "Monday") {
           timeTable.monday.splice(c.period, 1, c)
       }
-      if (c.day == "tuesday") {
+      if (c.day == "Tuesday") {
         timeTable.tuesday.splice(c.period, 1, c)
       }
-      if (c.day == "wednesday") {
+      if (c.day == "Wednesday") {
        timeTable.wednesday.splice(c.period, 1, c)
       }
-      if (c.day == "thursday") {
+      if (c.day == "Thursday") {
         timeTable.thursday.splice(c.period, 1, c)
       }
-      if (c.day == "friday") {
+      if (c.day == "Friday") {
         timeTable.friday.splice(c.period, 1, c)
       }
     })

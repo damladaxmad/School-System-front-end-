@@ -10,6 +10,7 @@ import { BiArrowBack } from "react-icons/bi";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import RegisterStudents from "../containers/StudentContainers/RegisterStudents";
 import StudentProfile from "../containers/StudentContainers/StudentProfile";
+import AssignManyToClass from "../containers/StudentContainers/AssingManyToClass";
 
 const Students = () => {
   const [newStudents, setNewStudents] = useState(false)
@@ -21,6 +22,8 @@ const Students = () => {
   const [updatedStudent, setUpdatedStudent] = useState(null)
   const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
   const [showProfile, setShowProfile] = useState(false)
+  const [assignMany, setAssignMany] = useState(false)
+  const [studentIds, setStudentsIds] = useState('')
 
   
 
@@ -29,6 +32,7 @@ const Students = () => {
   };
   const handleClose = () => {
     setAnchorEl(null);
+    setAssignMany(true)
   };
 
   const changeHandler = () => {
@@ -114,8 +118,16 @@ const Students = () => {
     fetchStudents(status);
   }, [ignored, status]);
 
+  let studentsIds = '';
   const selectHandler = (data) => {
-    console.log(data)
+    data.map((d)=> {
+      studentsIds += d._id
+      studentsIds += ','
+    })
+    const slicedStudentsIds = studentsIds.slice(0, -1)
+    setStudentsIds(slicedStudentsIds)
+    // assingManyStudentsToClass(slicedStudentsIds, )
+
     setShowCornerIcon(true)
     if (data.length < 1) {
       setShowCornerIcon(false)
@@ -138,6 +150,10 @@ const Students = () => {
     setButtonName("Go To Students")
   }
 
+  const hideModal = () =>{
+    setAssignMany(false)
+  }
+
   return (
     <div
       style={{
@@ -158,6 +174,8 @@ const Students = () => {
           margin: "auto",
         }}
       >
+        {assignMany && <AssignManyToClass hideModal = {hideModal}
+        studentsIds = {studentIds}/>}
         <h2> {newStudents ? "Create New Students" : 
         showProfile ? "Student Profile" : "Students"}</h2>
         <Button

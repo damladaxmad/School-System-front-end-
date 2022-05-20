@@ -14,13 +14,13 @@ const NewSchedule = (props) => {
 
   let numbers = [1, 2, 3, 4, 5, 6];
   let days = [
-    { name: "saturday" },
-    { name: "sunday" },
-    { name: "monday" },
-    { name: "tuesday" },
-    { name: "wednesday" },
-    { name: "thursday" },
-    { name: "friday" },
+    { name: "Saturday" },
+    { name: "Sunday" },
+    { name: "Monday" },
+    { name: "Tuesday" },
+    { name: "Wednesday" },
+    { name: "Thursday" },
+    { name: "Friday" },
   ];
   const fasalo = useSelector((state) => state.allFasalo.fasalo);
 

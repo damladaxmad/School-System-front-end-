@@ -5,7 +5,7 @@ import { FormControl, Select, MenuItem } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 
-const AssignPopUp = (props) => {
+const AssignManyToClass = (props) => {
   const fasalo = useSelector((state) => state.allFasalo.fasalo);
 
   const [fasal, setFasal] = useState(fasalo[0]._id);
@@ -16,10 +16,9 @@ const AssignPopUp = (props) => {
 
   const buttonHandler = () => {
     props.hideModal();
-    axios.post(`/api/v1/students/${props.student._id}/${fasal}`).then((res) => {
+    axios.post(`/api/v1/students/${props.studentsIds}/${fasal}`).then((res) => {
         alert(res.data.message)
     });
-
   };
 
  
@@ -73,4 +72,4 @@ const AssignPopUp = (props) => {
   );
 };
 
-export default AssignPopUp;
+export default AssignManyToClass;

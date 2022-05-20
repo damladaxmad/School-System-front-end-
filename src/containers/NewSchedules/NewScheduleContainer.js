@@ -11,6 +11,31 @@ import CreatePeriod from "./CreatePeriod";
 import UpdatePeriod from "./UpdatePeriod";
 
 const NewScheduleContainer = (props) => {
+
+  const xisooyin = useSelector((state) => state.xiso.xisooyin);
+
+  let allPeriods = [0, 1, 2, 3, 4, 5]
+  let creatablePeriods = []
+  let updatablePeriods = []
+
+  const currentClassPeriods = xisooyin.filter((p)=> {
+    return props.fasal == p.id 
+  })
+  const currentPeriods = currentClassPeriods[0].periods.filter((p)=> {
+    return props.day == p.day
+  })  
+  currentPeriods.map((p) => {
+    updatablePeriods.push(p.period)
+  })
+  creatablePeriods = allPeriods.filter(item => 
+    !updatablePeriods.includes(item));
+
+  
+    useEffect(()=>{
+
+    }, [props.day, props.fasal])
+
+
   
   return (
     <>
@@ -19,12 +44,14 @@ const NewScheduleContainer = (props) => {
     padding: "0px 40px"
   }}>
 
-    <CreatePeriod/>
+    <CreatePeriod creatablePeriods = {creatablePeriods}
+    day = {props.day} fasal = {props.fasal}/>
     
     <Divider orientation="vertical"
     style={{ backgroundColor: "#DADBE4", opacity: 0.4 }}/>
 
-    <UpdatePeriod/>
+    <UpdatePeriod updatablePeriods = {updatablePeriods}
+    day = {props.day} fasal = {props.fasal}/>
     </div>
 
     </>

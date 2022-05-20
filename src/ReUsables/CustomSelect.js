@@ -9,6 +9,7 @@ const CustomSelect = (props) => {
 
   const handler = (e) => {
   setData(e.target.value);
+  !props.isLabel && props.dataHandler(e)
 };
 
   return (

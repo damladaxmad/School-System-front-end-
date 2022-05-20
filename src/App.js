@@ -28,6 +28,7 @@ function App() {
       .catch((err) => {
         console.log("Err: ", err);
       });
+      console.log(response)
     dispatch(setFasalo(response.data.data.classes));
   };
 
@@ -37,7 +38,7 @@ function App() {
       .catch((err) => {
         console.log("Err: ", err);
       });
-      console.log(response.data.data.courses)
+      console.log(response)
     dispatch(setMaadooyin(response.data.data.courses));
   }; 
 

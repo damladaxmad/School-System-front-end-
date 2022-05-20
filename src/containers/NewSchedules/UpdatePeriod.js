@@ -8,14 +8,18 @@ import axios from "axios";
 import CustomSelect from "../../ReUsables/CustomSelect";
 import "../../Pages/Examination.css"
 
-const UpdatePeriod = () => {
+const UpdatePeriod = (props) => {
    
     return (
     <div style = {{display: "flex", flexDirection: "column",
     alignItems: "center", gap: "20px"}}>
       <h2> Update Old Periods</h2>
-      <ThePeriod/>
-      <ThePeriod/>
+      {props.updatablePeriods.map(p=> 
+      <ThePeriod pNumber = {p+1}/>
+      )}
+      { props.updatablePeriods.length > 0 ? null :
+      <p> No periods to update</p>}
+      
       <Button variant="contained" style = {{
         marginTop: "30px",
         marginLeft: "20px",
@@ -27,10 +31,11 @@ const UpdatePeriod = () => {
     )
   }
 
-  const ThePeriod = () => {
+  const ThePeriod = (props) => {
 
     const teachers = useSelector((state) => state.macalin.macalimiin);
     const courses = useSelector((state) => state.maado.maadooyin);
+
     return (
       <div style = {{display: "flex", gap: "10px",
     width: "300px", flexDirection: "column", marginTop: '20px'
@@ -40,7 +45,7 @@ const UpdatePeriod = () => {
         <p style={{margin: "0px", padding: "6px 10px",
       backgroundColor: "white", borderRadius: "8px",
       fontWeight: "700", fontSize: "18px", color: "#F2994A"
-      }}> 4</p>
+      }}> {props.pNumber}</p>
       <TimePicker
           // onChange={(e) => startChangeHandler(e)}
           value= "12:00"
