@@ -13,6 +13,7 @@ import {
   import { SiGoogleclassroom } from "react-icons/si";
   import DashboardIcon from "@material-ui/icons/Dashboard";
   import GroupIcon from "@material-ui/icons/Group";
+  import { GiTeacher } from 'react-icons/gi';
   import React from "react";
   import { useNavigate, useLocation } from "react-router-dom";
   import jaabirLogo from "../../assets/images/jaabirLogo.jpg";
@@ -96,6 +97,11 @@ import {
           text: "Students",
           icon: <GroupIcon style={{fontSize: "20px", color: "white" }} />,
           path: "/students",
+        },
+        {
+          text: "Teachers",
+          icon: <GiTeacher style={{fontSize: "20px", color: "white" }} />,
+          path: "/teachers",
         },
         {
           text: "Classes",

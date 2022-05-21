@@ -4,14 +4,51 @@ import { FormControl, Select, MenuItem, Button, Divider, InputLabel } from "@mui
 import TimePicker from "react-time-picker";
 import "../../Pages/Examination.css";
 
-const TheCreatePeriod = React.memo((props) => {
-  
+const TheUpdatePeriod = React.memo((props) => {
+
+    const xisooyin = useSelector((state) => state.xiso.xisooyin);
+    const [currentPeriods, setCurrentPeriods] = useState([])
+    
+    useEffect(()=>{
+        let population = 0
+        xisooyin.map((x)=> {
+          if (x.id == props.fasal){
+            population = x.periods
+            return
+          }
+        })
+        population.map((p)=> {
+          if (p.day == props.day){
+            setCurrentPeriods([...currentPeriods, p])
+            return
+          }
+        })
+    },[])
+
+    console.log(currentPeriods)
+    const courseFunction = () => {
+        let course = 0
+        for (let i = 1; i<=6; i++){
+            if(props.pNumber == `p${i}`){
+                currentPeriods.map((p)=> {
+                    if (p.period == i-1){
+                      course = p.course._id
+                    }
+                  })
+                return course
+        }
+    }
+
+    }
+    
     const teachers = useSelector((state) => state.macalin.macalimiin);
     const courses = useSelector((state) => state.maado.maadooyin);
-    const [course, setCourse] = useState(courses[0]._id);
-    const [teacher, setTeacher] = useState(teachers[0]._id);
-    const [startTimer, setStartTimer] = useState("12:00");
-    const [endTimer, setEndTimer] = useState("10:21");
+    const [course, setCourse] = useState(() => courseFunction());
+    const [teacher, setTeacher] = useState(props.macalin);
+    const [startTimer, setStartTimer] = useState(props.waqtiBillaaw);
+    const [endTimer, setEndTimer] = useState(props.waqtiDhamaad);
+
+
   
     const teacherHandler = (e) => {
       setTeacher(e.target.value)
@@ -21,7 +58,7 @@ const TheCreatePeriod = React.memo((props) => {
   
     const courseHandler = (e) => {
       setCourse(e.target.value) 
-      props.course(e.target.value, props.pNumber)
+    //   props.course(e.target.value, props.pNumber)
     }
     const startChangeHandler = (e) => {
       setStartTimer(e);
@@ -34,7 +71,7 @@ const TheCreatePeriod = React.memo((props) => {
     
     useEffect(()=> {
     
-    }, [props])
+    }, [props, currentPeriods])
   
     return (
         <div style = {{display: "flex", gap: "10px",
@@ -113,4 +150,4 @@ const TheCreatePeriod = React.memo((props) => {
       )
     })
 
-    export default TheCreatePeriod
+    export default TheUpdatePeriod

@@ -26,7 +26,7 @@ const CreatePeriod = (props) => {
       }
     }
    }
-
+   
    const startTimerFun = (startTimer, period) => {
     for (let i = 1; i<=6; i++){
       if(period == `p${i}`){
@@ -36,7 +36,6 @@ const CreatePeriod = (props) => {
       }
     }
    }
-  
 
    const endTimerFun = (endTimer, period) => {
     for (let i = 1; i<=6; i++){
@@ -124,6 +123,8 @@ const CreatePeriod = (props) => {
       teacher = {teacherFun} course = {courseFun}
       startTimer ={startTimerFun} endTimer = {endTimerFun}/>
       )}
+      { props.creatablePeriods.length > 0 ? null :
+      <p> No periods to create</p>}
       <Button variant="contained" style = {{
         marginTop: "30px",
         marginLeft: "20px",

@@ -16,10 +16,11 @@ import { setMaadooyin } from "./redux/actions/maadoActions";
 import { setMacalimiin } from "./redux/actions/macalinActions";
 import SignupAndLogin from "./SignupAndLogin/SignupAndLogin";
 import "./App.css"
+import Teachers from "./Pages/Teaxhers";
 
 function App() {
 
-  const [showLayout, setShowLayout] = useState(false)
+  const [showLayout, setShowLayout] = useState(true)
   const dispatch = useDispatch();
 
   const fetchFasalo = async () => {
@@ -73,6 +74,7 @@ function App() {
           <Routes>
             <Route path= "/dashboard" element = {<Dashboard/>} />
             <Route path= "/students" element = {<Customers/>} />
+            <Route path= "/teachers" element = {<Teachers/>} />
             <Route path= "/classes" element = {<Lends/>} />
             <Route path= "/finance" element = {<Finance/>} />
             <Route path= "/examination" element = {<Examinantion/>} />
