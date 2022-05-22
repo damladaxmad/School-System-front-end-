@@ -20,8 +20,9 @@ import {
   import BottomProfile from "./BottomProfile"
   import { AiOutlineDollar } from "react-icons/ai";
   import { FaRegNewspaper } from "react-icons/fa";
-  import { MdAdminPanelSettings } from "react-icons/md";
+  import { MdAdminPanelSettings } from "react-icons/md"; 
   import { FiSettings } from "react-icons/fi";
+  import { HiPencilAlt } from "react-icons/hi";
   import { Schedule } from "@material-ui/icons";
   
   
@@ -129,10 +130,17 @@ import {
           path: "/settings",
         },
         {
+          text: "Admission",
+          icon: <HiPencilAlt style={{fontSize: "20px", color: "white" }} />,
+          path: "/admission",
+        },
+        {
           text: "Schedules",
           icon: <Schedule style={{fontSize: "20px", color: "white" }} />,
           path: "/schedules",
-        }
+        },
+        
+        
         
       ];
     

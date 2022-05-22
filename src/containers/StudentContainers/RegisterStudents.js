@@ -103,7 +103,7 @@ const RegisterStudents = (props) => {
         padding: "16px",
       }}
     >
-      <h2>Registeration Form </h2>
+      <h2>Register Students </h2>
       <form
         onSubmit={formik.handleSubmit}
         style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}

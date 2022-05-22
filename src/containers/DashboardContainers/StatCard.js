@@ -19,7 +19,7 @@ const StatCard = (props) => {
       
     <div
       style={{
-        width: "237px",
+        width: "236.5px",
         height: "95px",
         background: "#FFFFFF",
         borderRadius: "10px",

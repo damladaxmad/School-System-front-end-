@@ -16,7 +16,8 @@ import { setMaadooyin } from "./redux/actions/maadoActions";
 import { setMacalimiin } from "./redux/actions/macalinActions";
 import SignupAndLogin from "./SignupAndLogin/SignupAndLogin";
 import "./App.css"
-import Teachers from "./Pages/Teaxhers";
+import Teachers from "./Pages/Teachers";
+import Admission from "./Pages/Admission";
 
 function App() {
 
@@ -80,6 +81,7 @@ function App() {
             <Route path= "/examination" element = {<Examinantion/>} />
             <Route path= "/adminstration" element = {<Adminstration/>} />
             <Route path= "/settings" element = {<SettingsPage/>} />
+            <Route path= "/admission" element = {<Admission/>} />
             <Route path= "/schedules" element = {<Schedules />} />
             <Route path="*" element={<Navigate to="/dashboard" replace />} />
           </Routes>

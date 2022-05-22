@@ -4,7 +4,7 @@ import { TextField, Button } from "@mui/material";
 import axios from "axios";
 import SelectBox from "../../ReUsables/CustomSelect";
 
-const RegisterStudents = (props) => {
+const RegisterTeachers = (props) => {
   const arr = [
     { label: "Enter Name", type: "text", name: "name" },
     { label: "Enter Email", type: "gmail", name: "contact" },
@@ -88,7 +88,7 @@ const RegisterStudents = (props) => {
         padding: "16px",
       }}
     >
-      <h2>Registeration Form </h2>
+      <h2>Register Teacher </h2>
       <form
         onSubmit={formik.handleSubmit}
         style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}
@@ -129,4 +129,4 @@ const RegisterStudents = (props) => {
   );
 };
 
-export default RegisterStudents;
+export default RegisterTeachers;

@@ -5,7 +5,7 @@ import TimePicker from "react-time-picker";
 import "../../Pages/Examination.css";
 
 const TheCreatePeriod = React.memo((props) => {
-  
+    
     const teachers = useSelector((state) => state.macalin.macalimiin);
     const courses = useSelector((state) => state.maado.maadooyin);
     const [course, setCourse] = useState(courses[0]._id);

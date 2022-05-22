@@ -116,7 +116,8 @@ const CreatePeriod = (props) => {
 
     return (
     <div style = {{display: "flex", flexDirection: "column",
-    alignItems: "center", gap: "20px"}}>
+    alignItems: "center", gap: "20px",
+    width: "34%"}}>
       <h2> Create New Periods</h2>
       {props.creatablePeriods.map(p=> 
       <TheCreatePeriod pNumber = {`p${p+1}`}

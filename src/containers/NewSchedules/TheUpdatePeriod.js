@@ -5,46 +5,40 @@ import TimePicker from "react-time-picker";
 import "../../Pages/Examination.css";
 
 const TheUpdatePeriod = React.memo((props) => {
+  const xisooyin = useSelector((state) => state.xiso.xisooyin);
 
-    const xisooyin = useSelector((state) => state.xiso.xisooyin);
-    const [currentPeriods, setCurrentPeriods] = useState([])
-    
-    useEffect(()=>{
-        let population = 0
-        xisooyin.map((x)=> {
-          if (x.id == props.fasal){
-            population = x.periods
-            return
-          }
-        })
-        population.map((p)=> {
-          if (p.day == props.day){
-            setCurrentPeriods([...currentPeriods, p])
-            return
-          }
-        })
-    },[])
+  let currentPeriods = []
+  let population = 0
+  xisooyin.map((x)=> {
+    if (x.id == props.fasal){
+      population = x.periods
+    }
+  })
+  population.map((p)=> {
+    if (p.day == props.day){
+      currentPeriods.push(p)
+    }
+  })
+  console.log(props.day)
 
-    console.log(currentPeriods)
-    const courseFunction = () => {
-        let course = 0
-        for (let i = 1; i<=6; i++){
-            if(props.pNumber == `p${i}`){
-                currentPeriods.map((p)=> {
-                    if (p.period == i-1){
-                      course = p.course._id
-                    }
-                  })
-                return course
+    const teacherFun = () => {
+      const mac = {}
+      let teacher;
+        if (currentPeriods.length > 0){
+          currentPeriods.map((p)=>{
+            if (p.period == props.number){
+              Object.assign(mac, {[props.number]: p.teacher._id});
+              teacher = mac[props.number]
+            }
+          })
         }
-    }
-
-    }
+        return teacher
+      }
     
     const teachers = useSelector((state) => state.macalin.macalimiin);
     const courses = useSelector((state) => state.maado.maadooyin);
-    const [course, setCourse] = useState(() => courseFunction());
-    const [teacher, setTeacher] = useState(props.macalin);
+    const [course, setCourse] = useState();
+    const [teacher, setTeacher] = useState(()=> teacherFun());
     const [startTimer, setStartTimer] = useState(props.waqtiBillaaw);
     const [endTimer, setEndTimer] = useState(props.waqtiDhamaad);
 
@@ -70,8 +64,7 @@ const TheUpdatePeriod = React.memo((props) => {
     } 
     
     useEffect(()=> {
-    
-    }, [props, currentPeriods])
+    }, [props])
   
     return (
         <div style = {{display: "flex", gap: "10px",

@@ -19,7 +19,9 @@ const StudentsTable = (props) => {
     { title: "Teacher Full Name", field: "name" , width: "4%",},
     { title: "Sex", field: "sex" },
     { title: "Email Address", field: "contact" },
-    { title: "Salary", field: "salary" },
+    { title: "Salary", field: "salary", render: (row)=> <p>
+      ${row.salary}
+    </p> },
     { title: "Degree", field: "Degree", emptyValue: ()=> "null" },
     { title: "Field", field: "field", emptyValue: ()=> "null" },    
     { title: "Stutus", field: "status", render: (row)=> <div style={{
@@ -99,7 +101,7 @@ const StudentsTable = (props) => {
           showTextRowsSelected: false,
           toolbar: false,
           pageSizeOptions: [2, 5, 8, 10, 20, 25, 50, 100],
-          pageSize: 8,
+          pageSize: 5,
           draggable: false,
           // rowStyle: {
           //   overflowWrap: 'break-word'
