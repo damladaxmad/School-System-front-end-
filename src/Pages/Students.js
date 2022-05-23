@@ -32,9 +32,12 @@ const Students = () => {
   };
   const handleClose = () => {
     setAnchorEl(null);
-    setAssignMany(true)
   };
 
+  const assignMannyToClass = () => {
+    setAssignMany(true)
+    setAnchorEl(null);
+  }
   const changeHandler = () => {
     forceUpdate()
   }
@@ -286,7 +289,7 @@ const Students = () => {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={handleClose}>Assign to class</MenuItem>
+        <MenuItem onClick={assignMannyToClass}>Assign to class</MenuItem>
         <MenuItem >Delete Student</MenuItem>
       </Menu>
     </div>

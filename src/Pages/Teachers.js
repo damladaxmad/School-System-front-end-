@@ -30,10 +30,15 @@ const Teachers = () => {
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>, student) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
-    setAssignMany(true)
   };
+
+  const assignMannyToClass = () => {
+    setAssignMany(true)
+    setAnchorEl(null);
+  }
 
   const changeHandler = () => {
     forceUpdate()
@@ -277,7 +282,7 @@ const Teachers = () => {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={handleClose}>Assign to class</MenuItem>
+        <MenuItem onClick={assignMannyToClass}>Assign to class</MenuItem>
         <MenuItem >Delete Teachers</MenuItem>
       </Menu>
     </div>

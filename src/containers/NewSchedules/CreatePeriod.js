@@ -60,11 +60,6 @@ const CreatePeriod = (props) => {
     if (typeof period != "undefined") return true
      else return false
   }
-
-  const complete = isPeriodComplete(p.p3)
-  const engaged = isPeriodEngaged(p.p3)
-  console.log(complete)
-  console.log(engaged)
   
   const postNewPeriods = (periods) => {
     axios.post(`/api/v1/periods`, periods).then((res) => {
@@ -116,7 +111,7 @@ const CreatePeriod = (props) => {
 
     return (
     <div style = {{display: "flex", flexDirection: "column",
-    alignItems: "center", gap: "20px",
+    alignItems: "center", gap: "20px", marginLeft: "35px",
     width: "34%"}}>
       <h2> Create New Periods</h2>
       {props.creatablePeriods.map(p=> 
