@@ -5,8 +5,8 @@ import axios from "axios";
 import TheCreatePeriod from "./TheCreatePeriod";
 
 const CreatePeriod = (props) => {
-  const [p, setP] = useState({})
 
+  const [p, setP] = useState({})
 
   const teacherFun = (teacher, period) => {
    for (let i = 1; i<=6; i++){
@@ -117,21 +117,21 @@ const CreatePeriod = (props) => {
       {props.creatablePeriods.map(p=> 
       <TheCreatePeriod pNumber = {`p${p+1}`}
       teacher = {teacherFun} course = {courseFun}
-      startTimer ={startTimerFun} endTimer = {endTimerFun}/>
+      startTimer ={startTimerFun} endTimer = {endTimerFun}
+      key = {p}/>
       )}
       { props.creatablePeriods.length > 0 ? null :
       <p> No periods to create</p>}
-      <Button variant="contained" style = {{
+      { props.creatablePeriods.length > 0 && <Button variant="contained" style = {{
         marginTop: "30px",
         marginLeft: "20px",
         backgroundColor: "#2F49D1",
       }}
       onClick = {saveHandler}>
         Save Period
-      </Button>
+      </Button>}
     </div>
     )
   }
-
 
   export default CreatePeriod

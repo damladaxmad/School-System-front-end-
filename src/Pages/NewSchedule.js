@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button } from "@material-ui/core";
+import { Button, InputLabel } from "@material-ui/core";
 import { FaSave } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -59,7 +59,6 @@ const NewSchedule = (props) => {
         <div style={{backgroundColor: "white",
           borderRadius: "8px 8px 0px 0px"}}>
         <FormControl >
-          {/* <InputLabel>Gender</InputLabel> */}
 
           <Select
             style={{ margin: "20px", height: "40px", color: "#B9B9B9",
@@ -78,6 +77,7 @@ const NewSchedule = (props) => {
           </Select>
         </FormControl>
         <FormControl>
+        {/* <InputLabel>Select Day</InputLabel> */}
             <Select
               style={{
                 margin: "20px",

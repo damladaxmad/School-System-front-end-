@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { FormControl, Select, MenuItem, Button, Divider, InputLabel,
 } from "@mui/material";
 import TimePicker from "react-time-picker";
-import "../../Pages/Examination.css";
+import "./TimePicker.css"
 import { AlternateEmail } from "@material-ui/icons";
 
 const TheUpdatePeriod = React.memo((props) => {
@@ -177,11 +177,9 @@ const TheUpdatePeriod = React.memo((props) => {
         }}
       >
         <FormControl>
-          {/* <InputLabel> Enter Subject
-         </InputLabel> */}
           <Select
             style={{
-              height: "40px",
+              height: "36px",
               width: "250px",
               color: "black",
               backgroundColor: "white",
@@ -203,7 +201,7 @@ const TheUpdatePeriod = React.memo((props) => {
         <FormControl>
           <Select
             style={{
-              height: "40px",
+              height: "36px",
               width: "250px",
               color: "black",
               backgroundColor: "white",

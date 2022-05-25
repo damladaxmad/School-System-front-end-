@@ -1,24 +1,22 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
-import { FormControl, Select, MenuItem, Button, Divider, InputLabel } from "@mui/material";
+import { FormControl, Select, MenuItem, Button, Divider, InputLabel, TextField } from "@mui/material";
 import TimePicker from "react-time-picker";
-import "../../Pages/Examination.css";
+import "./TimePicker.css";
 
 const TheCreatePeriod = React.memo((props) => {
     
     const teachers = useSelector((state) => state.macalin.macalimiin);
-    const courses = useSelector((state) => state.maado.maadooyin);
-    const [course, setCourse] = useState(courses[0]._id);
-    const [teacher, setTeacher] = useState(teachers[0]._id);
-    const [startTimer, setStartTimer] = useState("12:00");
-    const [endTimer, setEndTimer] = useState("10:21");
+    const courses = useSelector((state) => state.maado.maadooyin);    
+    const [course, setCourse] = useState();
+    const [teacher, setTeacher] = useState();
+    const [startTimer, setStartTimer] = useState("0:00");
+    const [endTimer, setEndTimer] = useState("0:00");
   
     const teacherHandler = (e) => {
       setTeacher(e.target.value)
       props.teacher(e.target.value, props.pNumber)
-  
     }
-  
     const courseHandler = (e) => {
       setCourse(e.target.value) 
       props.course(e.target.value, props.pNumber)
@@ -71,14 +69,17 @@ const TheCreatePeriod = React.memo((props) => {
         <div style={{marginLeft: "40px", display: "flex", gap: "10px",
                 flexDirection: "column"}}>
      <FormControl >
-         {/* <InputLabel> Enter Subject
-         </InputLabel> */}
-        <Select
-          style={{  height: "40px", width: "250px",
+        
+        <TextField
+          select
+          size="small"
+          style={{ height: "36px", width: "250px",
             color: "black", backgroundColor: "white" }}
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={course}
+          label = {!course && "Select Course"}
+          InputLabelProps={{style : {color : 'black'} }}
           onChange={(e)=>courseHandler(e)}
             // label="Enter Subject"
         >
@@ -87,17 +88,21 @@ const TheCreatePeriod = React.memo((props) => {
               {data.name}
             </MenuItem>
           ))}
-        </Select>
+        </TextField>
       </FormControl>
   
       <FormControl >
-        <Select
-          style={{  height: "40px", width: "250px",
-            color: "black", backgroundColor: "white" }}
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={teacher}
-          onChange={teacherHandler}
+        <TextField
+           select
+           size="small"
+           style={{ height: "36px", width: "250px",
+             color: "black", backgroundColor: "white" }}
+           labelId="demo-simple-select-label"
+           id="demo-simple-select"
+           value={teacher}
+           label = {!teacher && "Select Teacher"}
+           InputLabelProps={{style : {color : 'black'} }}
+           onChange={teacherHandler}
           //   label="Gender"
         >
           {teachers.map((data, index) => (
@@ -105,7 +110,7 @@ const TheCreatePeriod = React.memo((props) => {
               {data.name}
             </MenuItem>
           ))}
-        </Select>
+        </TextField>
       </FormControl>
         </div>
           
