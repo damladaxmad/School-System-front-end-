@@ -2,34 +2,35 @@ import React, { useState, useEffect, useReducer } from "react";
 import { Button } from "@material-ui/core";
 import { MdAdd } from "react-icons/md";
 import { FormControl, Select, MenuItem, Menu } from "@mui/material";
-import StudentsTable from "../containers/StudentContainers/StudentsTable";
-import { setStudents } from "../redux/actions/studentsActions";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { BiArrowBack } from "react-icons/bi";
 import { BiDotsVerticalRounded } from "react-icons/bi";
-import RegisterStudents from "../containers/StudentContainers/RegisterStudents";
-import StudentProfile from "../containers/StudentContainers/StudentProfile";
-import AssignManyToClass from "../containers/StudentContainers/AssingManyToClass";
+import AssignManyToClass from "../containers/EmplooyeeContainers/AssingManyToClass";
+import { setEmployees } from "../redux/actions/employeesActions";
+import EmployeesTable from "../containers/EmplooyeeContainers/EmployeesTable";
+import RegisterEmployees from "../containers/EmplooyeeContainers/RegisterEmployees";
+import EmployeeProfile from "../containers/EmplooyeeContainers/EmployeeProfile";
 
-const Students = () => {
-  const [newStudents, setNewStudents] = useState(false)
-  const [buttonName, setButtonName] = useState('Add New Students')
+const Emplooyees = () => {
+  const [newEmployees, setNewEmployees] = useState(false)
+  const [buttonName, setButtonName] = useState('Add New Employees')
   const [update, setUpdate] = useState(false)
   const [showCornerIcon, setShowCornerIcon] = useState(false)
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-  const [updatedStudent, setUpdatedStudent] = useState(null)
+  const [updatedEmployee, setUpdatedEmployee] = useState(null)
   const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
   const [showProfile, setShowProfile] = useState(false)
   const [assignMany, setAssignMany] = useState(false)
-  const [studentIds, setStudentsIds] = useState('')
+  const [emplyeeIds, setEmployeesIds] = useState('')
 
   
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>, student) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -38,12 +39,13 @@ const Students = () => {
     setAssignMany(true)
     setAnchorEl(null);
   }
+
   const changeHandler = () => {
     forceUpdate()
   }
 
   const dispatch = useDispatch()
-  const students = useSelector((state) => state.students.students);
+  const employees = useSelector((state) => state.employees.employees);
   const statusArr = ["All", "Active", "Inactive"]
   const [status, setStatus] = useState(statusArr[0]);
   const [query, setQuery] = useState("");
@@ -59,17 +61,17 @@ const Students = () => {
     setStatus(e.target.value)
   }
 
-  const addStudentHandler = () => {
+  const addEmployeeHandler = () => {
     setQuery('')
-    if (buttonName == "Add New Students"){
-      setNewStudents(true)
-      setButtonName("Go To Students")
+    if (buttonName == "Add New Employees"){
+      setNewEmployees(true)
+      setButtonName("Go To Employees")
       setShowProfile(false)
       return
-    } else if (buttonName == "Go To Students") {
+    } else if (buttonName == "Go To Employees") {
       setShowProfile(false)
-      setNewStudents(false)
-      setButtonName("Add New Students") 
+      setNewEmployees(false)
+      setButtonName("Add New Employees") 
       setUpdate(false)
     }
    
@@ -77,50 +79,52 @@ const Students = () => {
   }
 
   const handler = (data) => { 
+ 
     if (data.length > 0) {
       return data.filter(
         (std) =>
         std.first_name.toLowerCase().includes(query) ||
-        std.city.toLowerCase().includes(query)
+        std.email.toLowerCase().includes(query)
       );
     } else {
       return
     }  
   };
 
-  const fetchStudents = async (status) => {
+  const fetchEmpoloyees = async (status) => {
     if (status !== "All"){
       const response = await axios
-      .get(`/api/v1/students?status=${status}`)
+      .get(`/api/v1/employees?status=${status}`)
       .catch((err) => {
         console.log("Err: ", err);
       });
-    dispatch(setStudents(response.data.data.students));
+      
+    dispatch(setEmployees(response.data.data.employees));
     } else {
       const response = await axios
-      .get("/api/v1/students")
+      .get("/api/v1/employees")
       .catch((err) => {
         console.log("Err: ", err);
       });
-    dispatch(setStudents(response.data.data.students));
+
+    dispatch(setEmployees(response.data.data.employees));
     }
 
   };
 
   useEffect(() => {
     // if (students.length > 0) return
-    fetchStudents(status);
+    fetchEmpoloyees(status);
   }, [ignored, status]);
 
-  let studentsIds = '';
+  let employeesIds = '';
   const selectHandler = (data) => {
     data.map((d)=> {
-      studentsIds += d._id
-      studentsIds += ','
+      employeesIds += d._id
+      employeesIds += ','
     })
-    const slicedStudentsIds = studentsIds.slice(0, -1)
-    setStudentsIds(slicedStudentsIds)
-    // assingManyStudentsToClass(slicedStudentsIds, )
+    const slicedEmployeesIds = employeesIds.slice(0, -1)
+    setEmployeesIds(slicedEmployeesIds)
 
     setShowCornerIcon(true)
     if (data.length < 1) {
@@ -128,11 +132,11 @@ const Students = () => {
     }
   }
 
-  const updateHandler = (student) => {
-    setNewStudents(true)
-    setButtonName("Go To Students")
+  const updateHandler = (employee) => {
+    setNewEmployees(true)
+    setButtonName("Go To Employees")
     setUpdate(true)
-    setUpdatedStudent(student)
+    setUpdatedEmployee(employee)
   }
 
   const resetFomr = () => {
@@ -141,7 +145,7 @@ const Students = () => {
 
   const showProfileHandler = () => {
     setShowProfile(true)
-    setButtonName("Go To Students")
+    setButtonName("Go To Empoloyees")
   }
 
   const hideModal = () =>{
@@ -169,18 +173,18 @@ const Students = () => {
         }}
       >
         {assignMany && <AssignManyToClass hideModal = {hideModal}
-        studentsIds = {studentIds}/>}
-        <h2> {newStudents ? "Create New Students" : 
-        showProfile ? "Student Profile" : "Students"}</h2>
+        employeesIds = {emplyeeIds}/>}
+        <h2> {newEmployees ? "Create New Employees" : 
+        showProfile ? "Employee Profile" : "Employees"}</h2>
         <Button
           variant="contained"
           style={{
             backgroundColor: "#2F49D1",
             color: "white",
           }}
-          onClick = {addStudentHandler}
+          onClick = {addEmployeeHandler}
           startIcon={
-            newStudents || showProfile ? <BiArrowBack
+            newEmployees || showProfile ? <BiArrowBack
               style={{
                 color: "white",
               }}
@@ -194,7 +198,7 @@ const Students = () => {
           {buttonName}
         </Button>
       </div>
-      {!newStudents && !showProfile &&
+      {!newEmployees && !showProfile &&
       <div
         style={{
           display: "flex",
@@ -264,12 +268,12 @@ const Students = () => {
           }} onClick = {handleClick} />}
         </div>
       </div>}
-      {!newStudents && !showProfile && <StudentsTable data={handler(students)} 
-      change = {changeHandler} selectStudents = {selectHandler}
+      {!newEmployees && !showProfile && <EmployeesTable data={handler(employees)} 
+      change = {changeHandler} selectEmpoloyees = {selectHandler}
       update = {updateHandler} showProfile = {showProfileHandler}/>}
-      {newStudents && <RegisterStudents update = {update}
-      student = {updatedStudent} reset = {resetFomr}/>}
-      {showProfile && <StudentProfile/>}
+      {newEmployees && <RegisterEmployees update = {update}
+      empoloyee = {updatedEmployee} reset = {resetFomr}/>}
+      {showProfile && <EmployeeProfile/>}
 
       <Menu
         id="basic-menu"
@@ -281,10 +285,10 @@ const Students = () => {
         }}
       >
         <MenuItem onClick={assignMannyToClass}>Assign to class</MenuItem>
-        <MenuItem >Delete Student</MenuItem>
+        <MenuItem >Delete Employees</MenuItem>
       </Menu>
     </div>
   );
 };
 
-export default Students;
+export default Emplooyees;

@@ -1,6 +1,6 @@
 import React from "react";
 
-const SettingsPage = () => {
+const Users = () => {
 
   
   return (
@@ -14,9 +14,9 @@ const SettingsPage = () => {
       flexDirection: "column",
     }}
   >
-    <h2> Settings</h2>
+    <h2> Users</h2>
     </div>
   );
 };
 
-export default SettingsPage;
+export default Users;

@@ -22,7 +22,9 @@ import {
   import { FaRegNewspaper } from "react-icons/fa";
   import { MdAdminPanelSettings } from "react-icons/md"; 
   import { FiSettings } from "react-icons/fi";
-  import { HiPencilAlt } from "react-icons/hi";
+  import { HiPencilAlt } from "react-icons/hi"; 
+  import { VscPerson } from "react-icons/vsc"; 
+  import { FaHouseUser } from "react-icons/fa";
   import { Schedule } from "@material-ui/icons";
   
   
@@ -54,12 +56,12 @@ import {
         padding: "0px 15px",
       },
       inActive: {
-        opacity: 0.6,
+        opacity: 0.7,
         padding: "0px 15px",
         height: "40px",
       },
       title: {
-        padding: theme.spacing(2),
+        padding: theme.spacing(1.7),
         fontSize: 18,
         fontWeight: "700",
       },
@@ -110,10 +112,15 @@ import {
           path: "/classes",
         },
         {
-          text: "Finance",
+          text: "Fees",
           icon: <AiOutlineDollar style={{ fontSize: "20px", color: "white" }} />,
-          path: "/Finance",
-        },
+          path: "/fees",
+        }, 
+        {
+          text: "Emplooyees",
+          icon: <VscPerson style={{ fontSize: "20px", color: "white" }} />,
+          path: "/emplooyees",
+        }, 
         {
           text: "Examinantion",
           icon: <FaRegNewspaper style={{fontSize: "20px", color: "white" }} />,
@@ -139,9 +146,12 @@ import {
           icon: <Schedule style={{fontSize: "20px", color: "white" }} />,
           path: "/schedules",
         },
-        
-        
-        
+        {
+          text: "Users",
+          icon: <FaHouseUser style={{fontSize: "20px", color: "white" }} />,
+          path: "/users",
+        }
+             
       ];
     
 
@@ -205,7 +215,7 @@ return (
             </ListItem>
           ))}
         </List>
-        <BottomProfile />
+        {/* <BottomProfile /> */}
       </Drawer>
 )
   }

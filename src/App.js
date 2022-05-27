@@ -4,7 +4,7 @@ import Dashboard from "./Pages/Dashboard";
 import Customers from "./Pages/Students";
 import Lends from "./Pages/Classes";
 import Layout from "./containers/layout";
-import Finance from "./Pages/Finance";
+import Fees from "./Pages/Fees";
 import Examinantion from "./Pages/Examination";
 import Adminstration from "./Pages/Adminstration";
 import SettingsPage from "./Pages/SettingsPage";
@@ -18,6 +18,8 @@ import SignupAndLogin from "./SignupAndLogin/SignupAndLogin";
 import "./App.css"
 import Teachers from "./Pages/Teachers";
 import Admission from "./Pages/Admission";
+import Emplooyees from "./Pages/Employees";
+import Users from "./Pages/Users";
 
 function App() {
 
@@ -77,12 +79,14 @@ function App() {
             <Route path= "/students" element = {<Customers/>} />
             <Route path= "/teachers" element = {<Teachers/>} />
             <Route path= "/classes" element = {<Lends/>} />
-            <Route path= "/finance" element = {<Finance/>} />
+            <Route path= "/fees" element = {<Fees/>} />
+            <Route path= "/emplooyees" element = {<Emplooyees/>} />
             <Route path= "/examination" element = {<Examinantion/>} />
             <Route path= "/adminstration" element = {<Adminstration/>} />
             <Route path= "/settings" element = {<SettingsPage/>} />
             <Route path= "/admission" element = {<Admission/>} />
             <Route path= "/schedules" element = {<Schedules />} />
+            <Route path= "/users" element = {<Users />} />
             <Route path="*" element={<Navigate to="/dashboard" replace />} />
           </Routes>
         </Layout>}
