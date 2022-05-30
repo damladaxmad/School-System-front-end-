@@ -10,6 +10,12 @@ const myData = [
 ];
 
 const Chart = () => {
+
+  const parentDivStyle = { background: "white", padding: "20px",
+    borderRadius: "10px", height: "350px", boxShadow: "1px 1px 1px #9E9E9E",
+    display: "flex", gap: "100px", alignItems: 'center'
+  }
+
   const secondary = {
     color: "#F2994A",
     title: "Secondary School",
@@ -21,17 +27,7 @@ const Chart = () => {
 
   return (
     <div
-      style={{
-        background: "white",
-        padding: "20px",
-        borderRadius: "10px",
-        height: "350px",
-        boxShadow: "1px 1px 1px #9E9E9E",
-        display: "flex",
-        gap: "100px",
-        // justifyContent: 'center',
-         alignItems: 'center'
-      }}
+      style={parentDivStyle}
     >
 
       <div>
@@ -66,16 +62,6 @@ const Chart = () => {
           }}
           containerComponent={
             <VictoryContainer
-              style={
-                {
-                  // float: "right",
-              
-                  // marginRight: "70px",
-                  // position: "absolute",
-                  // top: "225px",
-                  // right: "90px",
-                }
-              }
               responsive={false}
             />
           }

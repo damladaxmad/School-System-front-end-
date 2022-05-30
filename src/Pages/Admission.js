@@ -4,11 +4,13 @@ import "./Examination.css";
 import { TextField, Button, Typography } from "@mui/material";
 import { MdPersonAddAlt1 } from "react-icons/md";
 import { GiTeacher } from "react-icons/gi";
+import { GiPerson } from "react-icons/gi"; 
 import axios from "axios";
 import { BiArrowBack } from "react-icons/bi";
 import AdmissionActions from "../containers/AdmissionContainers/AdmissionActions";
 import RegisterStudents from "../containers/StudentContainers/RegisterStudents";
 import RegisterTeachers from "../containers/TeacherContainers/RegisterTeachers";
+import RegisterEmployees from "../containers/EmplooyeeContainers/RegisterEmployees";
 
 const Admission = () => {
   const iconStyle = { fontSize: "40px", fontWeight: "bold" };
@@ -16,14 +18,14 @@ const Admission = () => {
   const actions = [
     { name: "New Student", icon: <MdPersonAddAlt1 style={iconStyle} /> },
     { name: "New Teacher", icon: <GiTeacher style={iconStyle} /> },
-    { name: "New Employee", icon: <MdPersonAddAlt1 style={iconStyle} /> },
-    { name: "New Stuff", icon: <MdPersonAddAlt1 style={iconStyle} /> },
+    { name: "New Employee", icon: <GiPerson style={iconStyle} /> },
   ];
 
   const [home, setHome] = useState(true);
   const [states, setStates] = useState({
     teacher: false,
     student: false,
+    employee: false
   });
 
   const backHandler = () => {
@@ -37,6 +39,9 @@ const Admission = () => {
     }
     if (name == "New Student") {
       setStates({ student: true, teacher: false });
+    }
+    if (name == "New Employee") {
+      setStates({ student: false, teacher: false, employee: true });
     }
   };
 
@@ -96,6 +101,7 @@ const Admission = () => {
       )}
       {!home && states.student && <RegisterStudents />}
       {!home && states.teacher && <RegisterTeachers />}
+      {!home && states.employee && <RegisterEmployees />}
     </div>
   );
 };

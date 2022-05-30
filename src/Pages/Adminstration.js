@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useState, useEffect, useReducer } from "react"
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
+import Users from "../containers/AdminstrationContainers/Users"
 
 const Adminstration = () => {
 
-  const [value, setValue] = React.useState("one");
+  const statusArr = ["All", "Active", "Inactive"]
+    
+
+  const [value, setValue] = React.useState("users");
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
@@ -18,7 +22,7 @@ const Adminstration = () => {
       width: "95%",
       margin: "0px auto",
       display: "flex",
-      gap: "14px",
+      gap: "0px",
       flexDirection: "column",
     }}
   >
@@ -31,20 +35,21 @@ const Adminstration = () => {
             aria-label="secondary tabs example"
             disableFocusRipple = {true}
           >
-            <Tab
-            disableFocusRipple = {true}
-            disableRipple = {true}
-              value="one"
-              label="Classes"
-              style={{ fontSize: "16px", fontWeight: "700" }}
-            />
+            
+       
             <Tab 
             disableFocusRipple = {true}
             disableRipple = {true}
-            value="two" label="Students"
+            value="users" label="Users"
+            style={{ fontSize: "16px", fontWeight: "700" }} />
+            <Tab 
+            disableFocusRipple = {true}
+            disableRipple = {true}
+            value="stuff" label="Stuff"
             style={{ fontSize: "16px", fontWeight: "700" }} />
           </Tabs>
         </Box>
+    {value == "users" && <Users/>}
     </div>
   );
 };

@@ -6,3 +6,10 @@ export const setExams = (data) => {
     payload: data,
   };
 };
+
+export const setExamCharges = (data) => {
+  return {
+    type: ActionTypes.SET_EXAM_CHARGES,
+    payload: data,
+  };
+};

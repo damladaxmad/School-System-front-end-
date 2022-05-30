@@ -6,7 +6,7 @@ import PopupForm from "./AssignPopUp";
 import axios from "axios";
 import profile from "../../assets/images/tablePic.png"
 
-const StudentsTable = (props) => {
+const TeachersTable = (props) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const [show, setShow] = useState(false)
@@ -131,4 +131,4 @@ const StudentsTable = (props) => {
   );
 };
 
-export default StudentsTable;
+export default TeachersTable;

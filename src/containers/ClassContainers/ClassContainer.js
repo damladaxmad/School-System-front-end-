@@ -2,12 +2,12 @@ import React from "react";
 import { Typography, Divider, Button, Avatar } from "@material-ui/core";
 
 function ClassContainer(props) {
-
+const parentDivStyle = {backgroundColor: "#FFFFFF",
+padding: "14px", borderRadius: "10px", width: "31.9%", display: "flex",
+gap: "10px", flexDirection: "column"}
   
   return (
-    <div style = {{backgroundColor: "#FFFFFF",
-    padding: "14px", borderRadius: "10px", width: "31.9%", display: "flex",
-    gap: "10px", flexDirection: "column"}}>
+    <div style = {parentDivStyle}>
 
 
       <div style = {{display: "flex", justifyContent: "space-between",
@@ -24,8 +24,7 @@ function ClassContainer(props) {
        {props.value.name}
       </Typography>
       <p style = {{color: "#767676", margin: "0px"}}>
-    Secondary School Class with 60 student, 10 teachers
-    and 10 courses.
+    Secondary School Class with {props.value.students.length} students, {props.value.teachers.length} teachers and 10 courses.
       </p>
       <Divider style = {{backgroundColor: "#EEEEEE"}}/>
 

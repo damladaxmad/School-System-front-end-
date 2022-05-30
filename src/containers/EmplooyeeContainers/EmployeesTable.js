@@ -10,7 +10,7 @@ const EmployeesTable = (props) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const [show, setShow] = useState(false)
-  const [teacher, setTeacher] = useState('')
+  const [employee, setEmployee] = useState('')
 
   console.log(props.data)
 
@@ -42,22 +42,22 @@ const EmployeesTable = (props) => {
     props.change()
   }
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>, teacher) => {
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>, employee) => {
     setAnchorEl(event.currentTarget);
-    setTeacher(teacher)
+    setEmployee(employee)
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
 
-  const deleteTeacher = (id) => {
-    axios.delete(`/api/v1/teachers/${teacher._id}`)
+  const deleteEmployee = () => {
+    axios.delete(`/api/v1/employees/${employee._id}`)
     handleClose()
     props.change()
   };
 
-  const updateTeacher = () => {
-    props.update(teacher)
+  const updateEmployee = () => {
+    props.update(employee)
   }
 
   const selectionHandler = (data) => {
@@ -71,7 +71,7 @@ const EmployeesTable = (props) => {
 
   return (
     <div style={{ width: "95%", margin: "auto" }}>
- {show && <PopupForm hideModal = {hideModal} teacher = {teacher}
+ {show && <PopupForm hideModal = {hideModal} employee = {employee}
  />}
         <Menu
         id="basic-menu"
@@ -83,9 +83,9 @@ const EmployeesTable = (props) => {
         }}
         style = {{}}
       >
-        <MenuItem onClick={showModal}>Assign to class</MenuItem>
-        <MenuItem onClick={deleteTeacher}>Delete Teacher</MenuItem>
-        <MenuItem onClick={updateTeacher}>Update Teacher</MenuItem>
+        <MenuItem onClick={showModal}>Make User</MenuItem>
+        <MenuItem onClick={deleteEmployee}>Delete Emplooyee</MenuItem>
+        <MenuItem onClick={updateEmployee}>Update Emplooyee</MenuItem>
         <MenuItem onClick={showProfile}>Teacher Profile</MenuItem>
       </Menu>
       <MaterialTable

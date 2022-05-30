@@ -2,17 +2,12 @@ import React, { useEffect, useState } from "react";
 import { TextField, Button, } from "@mui/material";
 import { useFormik } from "formik";
 import axios from "axios";
-import Signup from "./Signup";
 import Login from "./Login";
 
 const SignupAndLogin = (props) => {
 
-  const [value, setValue] = useState("Login")
     const handler = () => {
         props.showHandler()
-    }
-    const pClick = (value) =>{
-      setValue(value)
     }
 
     const showHandler = () => {
@@ -26,7 +21,7 @@ const SignupAndLogin = (props) => {
         // height: "100%",
         width: "30%",
         margin: "auto",
-        marginTop: value == "Login" ? "140px" : "70px",
+        marginTop: "140px",
         display: "flex",
         gap: "20px",
         background: "white",
@@ -49,22 +44,18 @@ const SignupAndLogin = (props) => {
         background: "white",
         flexDirection: "row",
         justifyContent: "center",
-        fontSize:"24px", fontWeight: "700",
+        fontSize:"28px", fontWeight: "700",
         alignItems: "center",}}>
 
         <p style={{margin: "0px", cursor: "pointer",
-        color: value == "Login" ? "#2F49D1": "#9A9EA6",}}
-        onClick={() => pClick('Login')}>Login</p>
-
-        <p style={{margin: "0px", cursor: "pointer",
-        color: value == "Signup" ? "#2F49D1": "#9A9EA6",}}
-        onClick={() => pClick('Signup')}> Signup</p>
+        color: "#2F49D1",}}
+        >Login</p>
        
       </div>
 
 
-     {value == "Signup" ? <Signup showHandler = {showHandler}/> :
-      <Login showHandler = {showHandler}/>}
+     
+      <Login showHandler = {showHandler}/>
     </div>
   );
 };

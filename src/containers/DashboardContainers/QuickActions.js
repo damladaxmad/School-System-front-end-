@@ -3,17 +3,15 @@ import {  Typography } from "@material-ui/core";
 import Actions from "./Actions";
 
 const QuickActions = () => {
+  
+  const parentDivStyle = { background: "white", padding: "25px",
+    borderRadius: "10px", height: "200px",
+    width: "75%", float: "left",   boxShadow: "1px 1px 1px #9E9E9E"
+  }
+
   return (
     <div
-      style={{
-        background: "white",
-        padding: "25px",
-        borderRadius: "10px",
-        height: "200px",
-        width: "75%",
-        float: "left",
-        boxShadow: "1px 1px 1px #9E9E9E"
-      }}
+      style={parentDivStyle}
     >
       <Typography
         style={{ fontWeight: "600", fontSize: "24px", color: "#171717" }}

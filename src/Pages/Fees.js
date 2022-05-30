@@ -6,7 +6,7 @@ import MaterialTable from "material-table"
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 
 import axios from "axios";
-import ExamCharger from '../containers/FeeContainers/ExamCharger';
+import ExamCharger from '../containers/FeeContainers/ExamCharger/ExamCharger';
 import FeeCharger from '../containers/FeeContainers/FeeCharger';
 import Payments from '../containers/FeeContainers/Payment';
 

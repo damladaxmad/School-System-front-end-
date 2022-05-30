@@ -12,8 +12,6 @@ const StudentsTable = (props) => {
   const [show, setShow] = useState(false)
   const [student, setStudent] = useState('')
 
-
-
   const columns = [
    
     { title: "Student Full Name", field: "fullName" , width: "4%",

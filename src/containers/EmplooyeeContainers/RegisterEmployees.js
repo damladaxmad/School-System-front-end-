@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useFormik } from "formik";
-import { TextField, Button } from "@mui/material";
 import axios from "axios";
+import { TextField, Button } from "@mui/material";
 import SelectBox from "../../ReUsables/CustomSelect";
 
 const RegisterEmployees = (props) => {
@@ -70,8 +70,7 @@ const RegisterEmployees = (props) => {
       } else {
         axios.post(`/api/v1/employees`, values).then((res) => {});
         resetForm();
-      }
-     
+      }    
     
     },
   });

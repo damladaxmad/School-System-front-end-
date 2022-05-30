@@ -2,47 +2,68 @@ import React, { useEffect, useState } from "react";
 import MaterialTable from "material-table";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import {Typography, Button, MenuItem, Menu, Avatar} from "@mui/material"
+import ResetPopUp from "./ResetPopUp";
+import axios from "axios";
 
-const PaymentStudents = (props) => {
+const UsersTable = (props) => {
+
+  const materialOptions = {
+    showTitle: false,
+    exportButton: true,
+    sorting: false,
+    showTextRowsSelected: false,
+    toolbar: false,
+    pageSizeOptions: [2, 5, 8, 10, 20, 25, 50, 100],
+    pageSize: 4,
+    draggable: false,
+    actionsColumnIndex: -1,
+    headerStyle: { background: "#EFF0F6", fontSize: "13px", },
+  }
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const [show, setShow] = useState(false)
-  const [student, setStudent] = useState('')
+  const [user, setUser] = useState('')
 
   const columns = [
    
-    { title: "StudentId", field: "studentId" },
-    { title: "Student Full Name", field: "fullName" , width: "2%",},
-    { title: "Class", field: "className" },
-    { title: "Phone", field: "phone" },
-    { title: "Credit", field: "credit" },
-    { title: "Debit", field: "debit" },
-    { title: "Balance", field: "balance" },
+    { title: "Employee Name", field: "name", width: "4%" },
+    { title: "Username", field: "username" },
+    { title: "User Password", field: "password",
+  render:()=> <em> _ _ _ _ _ _ _ _ _ _</em> },
   ];
 
-//   const showModal = () =>{
-//     setShow(true)
-//     handleClose()
-//   }
+  const showModal = () =>{
+    setShow(true)
+    handleClose()
+  }
 
-//   const hideModal = () =>{
-//     setShow(false)
-//     props.change()
-//   }
+  const hideModal = () =>{
+    setShow(false)
+  }
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>, student) => {
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>, user) => {
     setAnchorEl(event.currentTarget);
-    setStudent(student)
+    setUser(user)
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
 
+  const deleteUser = () => {
+    axios.delete(`/api/v1/users/${user._id}`).then((res)=>
+      alert("Deleted successfully")
+    )
+    handleClose()
+    // props.change()
+  };
+
+
 
   return (
     <div style={{ width: "98%", margin: "auto" }}>
-
+ {show && <ResetPopUp hideModal = {hideModal} user = {user}
+ />}
         <Menu
         id="basic-menu"
         anchorEl={anchorEl}
@@ -53,28 +74,15 @@ const PaymentStudents = (props) => {
         }}
         style = {{}}
       >
-        <MenuItem >Fee Payment</MenuItem>
-        
+        <MenuItem onClick={showModal}>Reset User</MenuItem>
+        <MenuItem onClick={deleteUser}>Delete User</MenuItem>
+        <MenuItem >Give access</MenuItem>
+
       </Menu>
       <MaterialTable
         columns={columns}
         data={props.data}
-        options={{
-          rowStyle: {},
-          showTitle: false,
-          exportButton: true,
-          sorting: false,
-          showTextRowsSelected: false,
-          toolbar: false,
-          pageSizeOptions: [2, 5, 8, 10, 20, 25, 50, 100],
-          pageSize: 8,
-          draggable: false,
-          // rowStyle: {
-          //   overflowWrap: 'break-word'
-          // },
-          actionsColumnIndex: -1,
-          headerStyle: { background: "#EFF0F6", fontSize: "13px", },
-        }}
+        options={materialOptions}
         // onSelectionChange={(rows) => selectionHandler(rows)}
         actions={[
           {
@@ -97,4 +105,4 @@ const PaymentStudents = (props) => {
   );
 };
 
-export default PaymentStudents;
+export default UsersTable;

@@ -12,6 +12,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import profile from "../assets/images/profileDrawer.jpg";
 import Footer from "./Footer";
 import DrawerFile from "./DrawerContainers/DrawerFile";
+import AppBarFile from "./AppBarContainers/AppBar"
 
 const drawerWidth = 225;
 const useStyles = makeStyles((theme) => {
@@ -75,31 +76,7 @@ const Layout = ({ children }) => {
   return (
     <div className={classes.root} style={{ backgroundColor: "#f2f2f2" }}>
       {/* app bar */}
-      <AppBar
-        position="fixed"
-        className={classes.appBar}
-        elevation={1}
-        color="primary"
-      >
-        <Toolbar>
-          <Typography className={classes.appBarTitle}>
-         
-          </Typography>
-          <Typography style={{ fontWeight: "bold" }}></Typography>
-          <Avatar
-            className={classes.avatar}
-            style={{ backgroundColor: "#041E42" }}
-          >
-            <img
-              src={profile}
-              style={{
-                width: "100%",
-                height: "100%",
-              }}
-            />
-          </Avatar>
-        </Toolbar>
-      </AppBar>
+   <AppBarFile/>
    
       <DrawerFile/>
 

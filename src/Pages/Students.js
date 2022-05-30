@@ -48,11 +48,18 @@ const Students = () => {
   const [status, setStatus] = useState(statusArr[0]);
   const [query, setQuery] = useState("");
   const fasalo = useSelector((state) => state.allFasalo.fasalo);
+  let myClasses = Array.from(fasalo)
 
-  const [fasal, setFasal] = useState(fasalo[0]._id);
+  // Adding an All element to classes
+  myClasses.map((c, index) => {
+   if(index == 0 && c.name != "All")
+   myClasses.unshift({name: "All"})
+})  
+  
+
+  const [fasal, setFasal] = useState(myClasses[0].name);
   const fasalHandler = (e) => {
     setFasal(e.target.value);
-    // dispatch(setActiveClass(e.target.value));
   }; 
 
   const statusHandler = (e) => {
@@ -78,11 +85,19 @@ const Students = () => {
 
   const handler = (data) => { 
     if (data.length > 0) {
-      return data.filter(
-        (std) =>
+      if (query == ""){
+        return data.filter(
+          (std) =>
+          std.className == fasal || fasal == "All"
+        );
+      }
+      else {
+        return data.filter(
+          (std) =>
+          (std.className == fasal || fasal == "All") && (
         std.first_name.toLowerCase().includes(query) ||
-        std.city.toLowerCase().includes(query)
-      );
+        std.city.toLowerCase().includes(query)))
+      }
     } else {
       return
     }  
@@ -235,8 +250,8 @@ const Students = () => {
             value={fasal}
             onChange={fasalHandler}
           >
-            {fasalo.map((fasal, index) => (
-              <MenuItem value={fasal._id} key={index}>
+            {myClasses.map((fasal, index) => (
+              <MenuItem value={fasal.name} key={index}>
                 {fasal.name}
               </MenuItem>
             ))}

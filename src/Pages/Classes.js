@@ -47,8 +47,8 @@ function Classes() {
       </div>
 
       <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
-      {fasalo.map((product, index) => (
-          <ClassContainer value = {product} key = {index}/>
+      {fasalo.map((fasal, index) => (
+          <ClassContainer value = {fasal} key = {index}/>
         ))}
       </div>
     </div>

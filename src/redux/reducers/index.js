@@ -6,6 +6,8 @@ import { macalinReducer } from "./macalinReducer";
 import { dashboardReducer } from "./dashboardReducer";
 import { studentsReducer } from "./studentsReducer";
 import { teachersReducer } from "./teachersReducer";
+import { usersReducer } from "./usersReducer";
+import { activeUserReducer } from "./activeUserReducer";
 import { employeesReducer } from "./employeesReducer";
 import { examsReducer } from "./examsReducer";
 
@@ -17,6 +19,8 @@ const reducers = combineReducers({
   dashboard: dashboardReducer,
   students: studentsReducer,
   teachers: teachersReducer,
+  users: usersReducer,
+  activeUser: activeUserReducer,
   employees: employeesReducer,
   exams: examsReducer,
 });
