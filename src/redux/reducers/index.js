@@ -10,6 +10,7 @@ import { usersReducer } from "./usersReducer";
 import { activeUserReducer } from "./activeUserReducer";
 import { employeesReducer } from "./employeesReducer";
 import { examsReducer } from "./examsReducer";
+import { feesReducer } from "./feesReducer";
 
 const reducers = combineReducers({
   allFasalo: fasaloReducer,
@@ -23,5 +24,6 @@ const reducers = combineReducers({
   activeUser: activeUserReducer,
   employees: employeesReducer,
   exams: examsReducer,
+  fees: feesReducer,
 });
 export default reducers;

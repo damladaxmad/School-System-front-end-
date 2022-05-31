@@ -4,11 +4,7 @@ import { TextField, Button } from "@mui/material";
 import axios from "axios";
 
 const CreateExam = (props) => {
-    const [again, setAgain] = useState("")
-    if (props.updateExam) {
-        
-        console.log(props.updatedExamCharge.name)
-    }
+    
     const examChargesArr = [
         { label: "Enter Name", type: "text", name: "name" },
         { label: "Enter Description", type: "text", name: "description" },

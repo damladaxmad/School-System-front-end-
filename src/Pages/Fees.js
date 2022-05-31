@@ -7,7 +7,7 @@ import { BiDotsHorizontalRounded } from "react-icons/bi";
 
 import axios from "axios";
 import ExamCharger from '../containers/FeeContainers/ExamCharger/ExamCharger';
-import FeeCharger from '../containers/FeeContainers/FeeCharger';
+import FeeCharger from '../containers/FeeContainers/FeeCharger/FeeCharger';
 import Payments from '../containers/FeeContainers/Payment';
 
  const Fees = () => {
