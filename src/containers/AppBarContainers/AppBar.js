@@ -3,7 +3,8 @@ import React, {useState} from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import profile from "../../assets/images/profileDrawer.jpg";
+import femaleProfile from "../../assets/images/profileDrawer.jpg";
+import maleProfile from "../../assets/images/blueProfile.webp"
 import { Button, MenuItem, Menu} from "@mui/material"
 import { useSelector } from "react-redux";
 
@@ -50,7 +51,7 @@ const AppBarFile = () => {
         <Typography className={classes.appBarTitle}></Typography>
         <Typography style={{ fontWeight: "bold" }}></Typography>
         <Typography style = {{fontWeight: "600", marginRight: "10px"}}>
-       {activeUser ? activeUser : "Ahmed Ali"}
+       {activeUser ? activeUser.name : "Ahmed Ali"}
         </Typography>
         <Avatar
           className={classes.avatar}
@@ -58,7 +59,7 @@ const AppBarFile = () => {
           onClick={handleClick}
         >
           <img
-            src={profile}
+            src={femaleProfile}
             style={{
               width: "100%",
               height: "100%",

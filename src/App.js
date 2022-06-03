@@ -19,7 +19,7 @@ import "./App.css"
 import Teachers from "./Pages/Teachers";
 import Admission from "./Pages/Admission";
 import Emplooyees from "./Pages/Employees";
-import Users from "./Pages/Users";
+import Reports from "./Pages/Reports";
 
 function App() {
 
@@ -86,7 +86,7 @@ function App() {
             <Route path= "/settings" element = {<SettingsPage/>} />
             <Route path= "/admission" element = {<Admission/>} />
             <Route path= "/schedules" element = {<Schedules />} />
-            <Route path= "/users" element = {<Users />} />
+            <Route path= "/reports" element = {<Reports />} />
             <Route path="*" element={<Navigate to="/dashboard" replace />} />
           </Routes>
         </Layout>}

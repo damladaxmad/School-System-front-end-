@@ -25,7 +25,6 @@ const FeeCharger =  () => {
       });
     dispatch(setFeeCharges(response.data.data.feeCharges));
   }
-
   const deleteFeeCharge = (id) => {
     axios.delete(`/api/v1/feeCharges/${id}`).then(res => {
       alert("Successfully Deleted")

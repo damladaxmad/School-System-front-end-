@@ -24,7 +24,8 @@ import {
   import { FiSettings } from "react-icons/fi";
   import { HiPencilAlt } from "react-icons/hi"; 
   import { VscPerson } from "react-icons/vsc"; 
-  import { FaHouseUser } from "react-icons/fa";
+  import { FaHouseUser } from "react-icons/fa"; 
+  import { HiOutlineDocumentReport } from "react-icons/hi";
   import { Schedule } from "@material-ui/icons";
   
   
@@ -147,9 +148,9 @@ import {
           path: "/schedules",
         },
         {
-          text: "Users",
-          icon: <FaHouseUser style={{fontSize: "20px", color: "white" }} />,
-          path: "/users",
+          text: "Reports",
+          icon: <HiOutlineDocumentReport style={{fontSize: "20px", color: "white" }} />,
+          path: "/reports",
         }
              
       ];

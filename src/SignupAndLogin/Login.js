@@ -41,7 +41,7 @@ const Login = (props) => {
       });
       if (response.data.authenticated == true) {
         props.showHandler()
-        dispatch(setActiveUser(response.data.user.name))
+        dispatch(setActiveUser(response.data.user))
       }
     },
   });

@@ -17,10 +17,20 @@ const CreateFee = (props) => {
   const examCharges = useSelector(state => state.exams.examCharges)
   const monthsList =  ["January","February","March","April","May","June","July",
   "August","September","October","November","December"];
-  const [selectedMonths, setSelectedMonths] = useState([])
+
+  const monthFun = () => {
+    if (props.updateFee) return props.updatedFeeCharge.months
+    return []
+  }
+
+  const examFun = () => {
+    if (props.updateFee) return props.updatedFeeCharge.exam
+    return null
+  }
+  const [selectedMonths, setSelectedMonths] = useState(()=> monthFun() )
 
   const [month, setMonth] = useState()
-  const [exam, setExam] = useState()
+  const [exam, setExam] = useState(()=> examFun())
 
   const selectMonthHandler = (e) => {
     setMonth(e.target.value)
@@ -37,12 +47,22 @@ const CreateFee = (props) => {
   const [examChecked, setExamChecked] = useState(false)
 
 
-  const handleMonthlyCheckBox = () => {
-    setMontlyChecked((state)=> state ? false : true)
+  const handleMonthlyCheckBox = (param) => {
+    if (props.updateFee && props.updatedFeeCharge.months.length > 0
+      ) return setMontlyChecked(true)
+    if (param) setMontlyChecked(param)
+    else {
+      setMontlyChecked((state)=> state ? false : true)
+    }
   }
 
-  const handleExamCheckBox = () => {
-    setExamChecked((state)=> state ? false : true)   
+  const handleExamCheckBox = (param) => {
+    if (props.updateFee && props.updatedFeeCharge.exam != "undefined"
+      ) return setExamChecked(true)
+    if (param)   setExamChecked(param)
+    else {
+      setExamChecked((state)=> state ? false : true)   
+    }
   }
 
   const selectedMonthHandler = (e) => {
@@ -83,6 +103,9 @@ const CreateFee = (props) => {
                   props.refreshOnCreate(values.name)
                 });
                 resetForm();
+                setSelectedMonths([])
+                setMontlyChecked(false)
+                setExamChecked(false)
             } else if (props.updateFee) {
                 axios.patch(`/api/v1/feeCharges/${props.updatedFeeCharge._id}`,
                  values).then((res) => {
@@ -91,12 +114,22 @@ const CreateFee = (props) => {
                   });
                   props.updateRefresh()
                   resetForm();
+                  setSelectedMonths([])
+                  setMontlyChecked(false)
+                  setExamChecked(false)
             }
         },
       }); 
 
       useEffect(()=> {
       }, [props])
+      useEffect(()=> {
+        if (!props.updateFee) return
+        setSelectedMonths(()=> monthFun())
+        handleMonthlyCheckBox()
+        setExam(()=> examFun())
+        handleExamCheckBox()
+      }, [props.updateFee, formik.initialValues])
 
     return (
         <div style={{display: "flex", flexDirection: "column",

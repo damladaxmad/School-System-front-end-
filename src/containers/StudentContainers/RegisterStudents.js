@@ -88,7 +88,6 @@ const RegisterStudents = (props) => {
       values.sex = sex
       values.class = fasal
       values.status = status
-      if (values.sex && values.class){
         if (props.update){
           axios.patch(`/api/v1/students/${props.student._id}`, values).then((res) => {});
           props.reset()
@@ -96,8 +95,6 @@ const RegisterStudents = (props) => {
           axios.post(`/api/v1/students`, values).then((res) => {});
           resetForm();
         }
-      }
-      alert("Please fill in all the data")
     
     },
   });

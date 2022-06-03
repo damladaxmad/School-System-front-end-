@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import MaterialTable from "material-table";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import {Typography, Button, MenuItem, Menu, Avatar} from "@mui/material"
+import PayPopUp from "./PayPopUp";
 
 const PaymentStudents = (props) => {
 
@@ -21,15 +22,14 @@ const PaymentStudents = (props) => {
     { title: "Balance", field: "balance" },
   ];
 
-//   const showModal = () =>{
-//     setShow(true)
-//     handleClose()
-//   }
+  const showModal = () =>{
+    setShow(true)
+    handleClose()
+  }
 
-//   const hideModal = () =>{
-//     setShow(false)
-//     props.change()
-//   }
+  const hideModal = () =>{
+    setShow(false)
+  }
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>, student) => {
     setAnchorEl(event.currentTarget);
@@ -42,7 +42,8 @@ const PaymentStudents = (props) => {
 
   return (
     <div style={{ width: "98%", margin: "auto" }}>
-
+     {show && <PayPopUp hideModal = {hideModal}
+     student = {student}/> }
         <Menu
         id="basic-menu"
         anchorEl={anchorEl}
@@ -53,7 +54,8 @@ const PaymentStudents = (props) => {
         }}
         style = {{}}
       >
-        <MenuItem >Fee Payment</MenuItem>
+        <MenuItem onClick={showModal}>Fee Payment</MenuItem>
+        <MenuItem >Student Transactions</MenuItem>
         
       </Menu>
       <MaterialTable

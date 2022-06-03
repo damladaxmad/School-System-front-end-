@@ -14,7 +14,7 @@ const Users = () => {
       flexDirection: "column",
     }}
   >
-    <h2> Users</h2>
+    <h2> Reports</h2>
     </div>
   );
 };

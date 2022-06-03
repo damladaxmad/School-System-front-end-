@@ -13,7 +13,6 @@ const FeeChargerTable = (props) => {
         {title: "Description", field: "description", width: "4%"},
         {title: "Months", field: "months", render: (rowData)=> 
       <p> {`${rowData.months}`}</p>},
-        {title: "Exam", field: "exam"},
       ]
 
       const handleClick = (event: React.MouseEvent<HTMLButtonElement>,
@@ -81,7 +80,8 @@ const FeeChargerTable = (props) => {
               },
             ]}
             style={{ borderRadius: "10px", boxShadow: "none",
-          borderLeft: "1.5px solid #F5EFFF", borderRight: "1.5px solid #F5EFFF"}}
+          borderLeft: "1.5px solid #F5EFFF",
+          borderRight: "1.5px solid #F5EFFF",}}
           />
             </div>
     )
