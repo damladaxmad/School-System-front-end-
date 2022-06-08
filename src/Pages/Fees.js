@@ -4,7 +4,7 @@ import "./Examination.css"
 import { TextField, Button } from "@mui/material";
 import MaterialTable from "material-table"
 import { BiDotsHorizontalRounded } from "react-icons/bi";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
 import axios from "axios";
 import ExamCharger from '../containers/FeeContainers/ExamCharger/ExamCharger';
 import FeeCharger from '../containers/FeeContainers/FeeCharger/FeeCharger';
@@ -14,7 +14,7 @@ import { setExamCharges } from '../redux/actions/examsActions';
 import { setFeeCharges } from '../redux/actions/feesActions';
 
  const Fees = () => {
-
+  const activeUser = useSelector(state => state.activeUser.activeUser)
    const dispatch = useDispatch()
    const [state, setState] = useState("Exam Charger")
    const tabs = ["Exam Charger", "Fee Charger", "Post Charges", "Payments"]
@@ -58,15 +58,16 @@ import { setFeeCharges } from '../redux/actions/feesActions';
     }}
   >
     <div style={{display: "flex", gap: "10px", marginLeft: "10px"}}>
-      {tabs.map((tab)=> (
-      <p onClick={()=> tabClickHandler(tab)}
+      {tabs.map((tab)=> {
+        if (!activeUser.privillages.includes(tab)) return
+      else return <p onClick={()=> tabClickHandler(tab)}
       style={{margin: "0px", padding: "4px 6px",
     background: state == tab ? "#0061F7" : null,
     color: state == tab ? "white" : null,
     cursor: "pointer",
     fontSize: "16px", fontWeight: "600", borderRadius: "8px"}}>
       {tab}</p>
-      ))}
+ })}
     
     </div>
     {state !="Payments" && state !="Post Charges" && <div

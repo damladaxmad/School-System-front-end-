@@ -13,6 +13,7 @@ const AdmissionActions = (props) => {
     const actionHandler = () => {
         props.actionHandler(props.actionName)
     }
+
   return (
     <div>
       <div

@@ -86,13 +86,12 @@ import { useSelector } from "react-redux";
     };
   });
   
-  const DrawerFile = () => {
+  const DrawerFile = (props) => {
     const classes = useStyles();
     const navigate = useNavigate();
     const location = useLocation();
     
     const activeUser = useSelector(state => state.activeUser.activeUser)
-    console.log(activeUser)
 
     const menuItems = [
         {
@@ -121,7 +120,7 @@ import { useSelector } from "react-redux";
           path: "/fees",
         }, 
         {
-          text: "Emplooyees",
+          text: "Employees",
           icon: <VscPerson style={{ fontSize: "20px", color: "white" }} />,
           path: "/emplooyees",
         }, 
@@ -161,7 +160,11 @@ import { useSelector } from "react-redux";
       useEffect(()=> {
         navigate({ replace: true })
       },[])
-    
+
+      useEffect(()=> {
+        props.show(location.pathname)
+      }, [location])
+      
 
 return (
 

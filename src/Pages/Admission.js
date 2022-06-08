@@ -11,9 +11,11 @@ import AdmissionActions from "../containers/AdmissionContainers/AdmissionActions
 import RegisterStudents from "../containers/StudentContainers/RegisterStudents";
 import RegisterTeachers from "../containers/TeacherContainers/RegisterTeachers";
 import RegisterEmployees from "../containers/EmplooyeeContainers/RegisterEmployees";
+import {useSelector} from "react-redux"
 
 const Admission = () => {
   const iconStyle = { fontSize: "40px", fontWeight: "bold" };
+  const activeUser = useSelector(state => state.activeUser.activeUser)
 
   const actions = [
     { name: "New Student", icon: <MdPersonAddAlt1 style={iconStyle} /> },
@@ -90,13 +92,14 @@ const Admission = () => {
             flexWrap: "wrap",
           }}
         >
-          {actions.map((action) => (
-            <AdmissionActions
+          {actions.map((action) => {
+            if (!activeUser.privillages.includes(action.name)) return
+            else return ( <AdmissionActions
               actionName={action.name}
               actionHandler={actionHandler}
               icon={action.icon}
-            />
-          ))}
+            />)
+        })}
         </div>
       )}
       {!home && states.student && <RegisterStudents />}

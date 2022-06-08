@@ -7,9 +7,11 @@ import axios from "axios";
 import { setXisooyin } from "../redux/actions/xisoActions";
 import { useDispatch } from "react-redux";
 import NewSchedule from "./NewSchedule";
+import {useSelector} from "react-redux"
 
 const Schedules = (props) => {
-  
+
+  const activeUser = useSelector(state => state.activeUser.activeUser)
   const [newSchedule, setNewSchedule] = useState(false)
   const [value, setValue] = useState()
   const [buttonName, setButtonName] = useState('New Schedule')
@@ -26,6 +28,8 @@ const Schedules = (props) => {
       };
       
       const addScheduleHandler = (value) => {
+        if (!activeUser.privillages.includes("New Schedule"))
+        return alert("You have No Access")
         if (buttonName == "New Schedule"){
           setNewSchedule(true)
           setButtonName("Go To Schedules")

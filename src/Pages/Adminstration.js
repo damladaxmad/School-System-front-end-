@@ -4,11 +4,12 @@ import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import Users from "../containers/AdminstrationContainers/UsersContainer/Users"
 import Access from "../containers/AdminstrationContainers/AccessContainers/Access";
+import { useSelector } from "react-redux";
 
 const Adminstration = () => {
 
   const statusArr = ["All", "Active", "Inactive"]
-    
+  const activeUser = useSelector(state => state.activeUser.activeUser)
 
   const [value, setValue] = React.useState("users");
 
@@ -38,16 +39,17 @@ const Adminstration = () => {
           >
             
        
-            <Tab 
+          {activeUser.privillages.includes("Users") && <Tab 
             disableFocusRipple = {true}
             disableRipple = {true}
             value="users" label="Users"
-            style={{ fontSize: "16px", fontWeight: "700" }} />
-            <Tab 
+            style={{ fontSize: "16px", fontWeight: "700" }} />}
+
+          {activeUser.privillages.includes("Access") && <Tab 
             disableFocusRipple = {true}
             disableRipple = {true}
             value="access" label="Access"
-            style={{ fontSize: "16px", fontWeight: "700" }} />
+            style={{ fontSize: "16px", fontWeight: "700" }} />}
           </Tabs>
         </Box>
     {value == "users" && <Users/>}

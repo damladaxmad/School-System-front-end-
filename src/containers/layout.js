@@ -5,7 +5,7 @@ import {
   makeStyles,
 } from "@material-ui/core";
 
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -13,6 +13,7 @@ import profile from "../assets/images/profileDrawer.jpg";
 import Footer from "./Footer";
 import DrawerFile from "./DrawerContainers/DrawerFile";
 import AppBarFile from "./AppBarContainers/AppBar"
+import { useSelector } from "react-redux";
 
 const drawerWidth = 225;
 const useStyles = makeStyles((theme) => {
@@ -21,6 +22,9 @@ const useStyles = makeStyles((theme) => {
       background: "#F0F2FA",
       width: "100%",
       marginTop: "90px"
+    },
+    toolbar: {
+      
     },
     root: {
       display: "flex",
@@ -73,6 +77,13 @@ const useStyles = makeStyles((theme) => {
 
 const Layout = ({ children }) => {
   const classes = useStyles();
+  const activeUser = useSelector(state => state.activeUser.activeUser)
+  const [show, setShow] = useState(false)
+
+  const handleShow = (location) => {
+    if (location == "/") setShow(true)
+    if (location !== "/") setShow(false)
+  }
 
   return (
    
@@ -81,12 +92,14 @@ const Layout = ({ children }) => {
       {/* app bar */}
    <AppBarFile/>
    
-      <DrawerFile/>
+      <DrawerFile show = {handleShow}/>
 
 
       <div className={classes.page}>
         <div className={classes.toolbar}>
           {children}  
+          {show && <h2 style={{margin:"-5px 30px",}}>
+            Hello {activeUser.name}, Welcome Back!!</h2>}
           <Divider
             style={{
               backgroundColor: "#E0E1EA",

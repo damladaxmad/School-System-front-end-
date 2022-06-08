@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => {
 const AppBarFile = () => {
   const dispatch = useDispatch()
   const activeUser = useSelector((state) => state.activeUser.activeUser);
-  console.log(activeUser)
+  
   const classes = useStyles();
 
   const [anchorEl, setAnchorEl] = useState(null);

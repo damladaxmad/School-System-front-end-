@@ -15,48 +15,49 @@ const selectStyle = {  height: "40px", color: "#B9B9B9",
 width: "250px"}
 
 const Access = () => {
-  const [userAccess, setUserAccess] = useState({})
-  const [accesses, setAccesses] = useState([])
 
     const users = useSelector(state => state.users.users)
 
     const tabs = [
-      {name: "Dashboard", access: ["View", "Quick Actions"]},
-      {name: "Students", access: ["View", "Add New Students",
+      {name: "Dashboard", access: ["Dashboard", "Quick Actions"]},
+      {name: "Students", access: ["Students", "Add New Students",
       "Assign To Class", "Delete Student", "Update Student",
       "Student Profile"]},
-      {name: "Teachers", access: ["View", "Add New Teachers", 
+      {name: "Teachers", access: ["Teachers", "Add New Teachers", 
       "Assign To Class", "Delete Teacher", "Update Teacher",
       "Teacher Profile"]},
-      {name: "Classes", access: ["View", "Add New Class", "Edit", "Delete"]},
-      {name: "Fees", access: ["View", "Exam Charger", "Fee Charger",
+      {name: "Classes", access: ["Classes", "Add New Class", "Edit", "Delete"]},
+      {name: "Fees", access: ["Fees", "Exam Charger", "Fee Charger",
       "Post Charges", "Payments", "Student Transactions"]},
-      {name: "Employeess", access: ["View", "Add New Employees", 
+      {name: "Employees", access: ["Employees", "Add New Employees", 
       "Make User", "Delete Employee", "Update Employee",
       "Employee Profile"]},
-      {name: "Examination", access: ["View", "Students", "Add Exam"]},
-      {name: "Adminstration", access: ["View", "Users", "Access",
+      {name: "Examination", access: ["Examination", "Students", "Add Exam"]},
+      {name: "Adminstration", access: ["Adminstration", "Users", "Access",
       "Reset User", "Delete User"]},
-      {name: "Settings", access: ["View"]},
-      {name: "Admission", access: ["View", "New Student", "New Teacher",
+      {name: "Settings", access: ["Settings"]},
+      {name: "Admission", access: ["Admission", "New Student", "New Teacher",
         "New Employee"]},
-      {name: "Schedules", access: ["View", "New Schedule", "Edit Schedule"]},
-      {name: "Reports", access: ["View", "Print", "Export"]},
+      {name: "Schedules", access: ["Schedules", "New Schedule", "Edit Schedule"]},
+      {name: "Reports", access: ["Reports", "Print", "Export"]},
     ]
-    const [currenUserPriv, setCurrenUserPriv] = useState()
+
+    const [currentUserPrivillages, setCurrentUserPrivillages] = useState()
+    const [userAccess, setUserAccess] = useState([])
+
+    
     const [user, setUser] = useState(users[0]._id);
-
-    useEffect(()=> {
-      users.map(u=> {
-        if (u._id == user)
-        setCurrenUserPriv(u.privillages)
-      })
-    }, [user])
-
     const userHandler = (e) => {
       setUser(e.target.value);
     }; 
     
+
+    useEffect(()=> {
+      users.map(u => {
+        if (u._id == user) setCurrentUserPrivillages(u.privillages)
+    },[])
+
+    }, [user])
     const [tab, setTab] = useState(tabs[0].name);
     const tabHandler = (e) => {
       setTab(e.target.value); 
@@ -65,8 +66,19 @@ const Access = () => {
     const [selectAll, setSelectAll] = useState(false)
     const [engaged, setEngaged] = useState(false)
     const selectAllCeckBox = () => {
+        let all;
         setSelectAll(state => state ? false : true)
-        setEngaged(true)
+        tabs.map(t => {
+          if (t.name == tab){
+            all = t.access 
+          }
+        })
+        if (!selectAll) {
+          const realAll = [...all, ...currentUserPrivillages]
+          const pure = realAll.filter((v, i, a) => a.indexOf(v) === i);
+          setCurrentUserPrivillages(pure)
+        } 
+        if (selectAll) setCurrentUserPrivillages([])
     }
 
     const unEngageAllHandler = () => {
@@ -82,48 +94,41 @@ const Access = () => {
   })
 
   const addUserAccess = (access) => {
-    setAccesses(prev => [...prev, access])
-    setUserAccess({...userAccess, name: tab, access: accesses})
+    setUserAccess([...userAccess, access])
   }
 
   const removeUserAccess = (access) => {
-    let newAccess;
-    currenUserPriv.map(el => {
-      if (el.access?.includes(access)){
-        newAccess = el.access.filter(el => el !== access)
-      }
-    })
-    setCurrenUserPriv()
+    setUserAccess(arr => arr.filter(el => el !== access))
   }
-  console.log(currenUserPriv)
   
-  const resetUserAccess = () => {
-    setUserAccess({})
-    setAccesses([])
+  const resetUserAccess = (access) => {
+    setUserAccess([])
   }
 
-  useEffect(()=> {
+  console.log(currentUserPrivillages)
 
-  }, [currenUserPriv])
 
   useEffect(()=> {
     resetUserAccess()
+    setSelectAll(false)
   }, [user, tab])
 
-  useEffect(()=> {
-    setUserAccess({...userAccess, name: tab, access: accesses})
-  }, [accesses])
-
-  const updateUserPrivilledges = async (data) => {
-    await axios.patch(`api/v1/users/${user}`, 
-    {privillages: data}).then(
-      ()=> alert("success")
-    )
+  
+  const UpdateUserPrivillages = async (data) => {
+    console.log(currentUserPrivillages)
+    console.log(userAccess)
+    const response = await axios.patch(`api/v1/users/${user}`,
+    {privillages: [...currentUserPrivillages, ...userAccess]})
+    .then(()=> alert("Successfully Given Access"))
   }
+
   const saveHandler = () => {
-    setCurrenUserPriv(state => [...state, userAccess])
-    const all = [...currenUserPriv, userAccess]
-    updateUserPrivilledges(all)
+    UpdateUserPrivillages("sths")
+  }
+
+  const removeCurrentUserPrivillages = (access) => {
+    const filteredArr = currentUserPrivillages.filter(el => el !==access)
+    setCurrentUserPrivillages(filteredArr)
   }
 
 
@@ -196,8 +201,9 @@ const Access = () => {
               addUserAccess = {addUserAccess}
               removeUserAccess = {removeUserAccess}
               tab = {tab} userAccess = {userAccess} user = {user}
-              resetUserAccess = {resetUserAccess}
-              currenUserPriv = {currenUserPriv}/>
+              resetUserAccess = {resetUserAccess} 
+              currentUserPrivillages = {currentUserPrivillages}
+              removeCurrentUserPrivillages = {removeCurrentUserPrivillages}/>
             ))}
         </div>
        {/* {userAccess.map(access => (
@@ -213,30 +219,21 @@ const RenderCheckBoxes = (props) => {
 
   const [accessCheck, setAccessCheck] = useState(false)
 
-  let currenAccess;
-  props.currenUserPriv?.map(c => {
-    if (c.name == props.tab){
-      currenAccess = c.access
-    }
-  })
-
   const accessCheckHanlder = (data) => {
-    if (currenAccess?.includes(data)){
+    if (props.currentUserPrivillages?.includes(props.value)){
+      props.removeCurrentUserPrivillages(data)
       setAccessCheck(false)
-     return props.removeUserAccess(data) 
     }
-    if (!accessCheck) {
-      setAccessCheck(state => state ? false : true)
-      props.addUserAccess(data)
-    }
-    if (accessCheck){
+    if (!props.currentUserPrivillages?.includes(props.value)){
       setAccessCheck(state => state ? false : true)
     }
+      if (!accessCheck && !props.currentUserPrivillages?.includes(props.value)) props.addUserAccess(data)
+      if (accessCheck) props.removeUserAccess(data)
   }
 
   useEffect(()=> {
-    
-  },[props.currenUserPriv, currenAccess])
+
+  }, [props.currentUserPrivillages])
 
   useEffect(()=> {
     setAccessCheck(false)
@@ -250,7 +247,8 @@ const RenderCheckBoxes = (props) => {
           <Checkbox style={{padding: "10px 25px"}}
             value = {props.value}
             color="primary"
-            checked = {currenAccess?.includes(props.value) ? true : accessCheck}
+            checked = {props.currentUserPrivillages?.includes(props.value) ? true
+              : accessCheck}
             onChange = {()=>accessCheckHanlder(props.value)}/>}
             label={props.value} />
       </FormGroup>

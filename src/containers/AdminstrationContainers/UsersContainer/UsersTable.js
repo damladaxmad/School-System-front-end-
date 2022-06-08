@@ -21,9 +21,7 @@ const UsersTable = (props) => {
   }
 
   const [anchorEl, setAnchorEl] = useState(null);
-  const [subAnchorEl, setSubAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-  const subOpen = Boolean(subAnchorEl);
   const [show, setShow] = useState(false)
   const [user, setUser] = useState('')
 
@@ -52,9 +50,6 @@ const UsersTable = (props) => {
     setAnchorEl(null);
   };
 
-  const subHandleClose = () => {
-    setSubAnchorEl(null);
-  };
 
   const deleteUser = () => {
     axios.delete(`/api/v1/users/${user._id}`).then((res)=>
@@ -63,14 +58,6 @@ const UsersTable = (props) => {
     handleClose()
     // props.change()
   };
-
-  const focusHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setSubAnchorEl(event.currentTarget);
-  };
-
-  const subMenuDown = () => {
-    setSubAnchorEl(null)
-  }
 
 
 
@@ -94,34 +81,12 @@ const UsersTable = (props) => {
         style = {{}}
       >
         <MenuItem onClick={showModal}>Reset User</MenuItem>
-        <MenuItem 
-      
-        onClick={deleteUser}>Delete User</MenuItem>
-        <MenuItem 
-          id="sub-button"
-          aria-controls={subOpen ? 'sub-menu' : undefined}
-          aria-haspopup="true"
-          aria-expanded={subOpen ? 'true' : undefined}
-        onMouseOver={focusHandler}>
-          Give access</MenuItem>
+        <MenuItem onClick={deleteUser}>Delete User</MenuItem>
+        <MenuItem > Give access</MenuItem>
 
       </Menu>
 
-      <Menu
-        id="sub-menu"
-        anchorEl={subAnchorEl}
-        open={subOpen}
-        onClose={subHandleClose}
-        MenuListProps={{
-          'aria-labelledby': 'basic-button',
-        }}
-        style = {{}}
-      >
-        <MenuItem >Submenu item 1</MenuItem>
-        <MenuItem >Submenu item 2</MenuItem>
-        <MenuItem >Submenu item 3</MenuItem>
 
-      </Menu>
       <MaterialTable
         columns={columns}
         data={props.data}
