@@ -18,12 +18,29 @@ import SignupAndLogin from "./SignupAndLogin/SignupAndLogin";
 import "./App.css"
 import Teachers from "./Pages/Teachers";
 import Admission from "./Pages/Admission";
-import Emplooyees from "./Pages/Employees";
+import Employees from "./Pages/Employees";
 import Reports from "./Pages/Reports";
+import { useSelector } from "react-redux";
+
+const pages = [
+<Route path= "/dashboard" element = {<Dashboard/>} />,
+<Route path= "/students" element = {<Customers/>} />,
+     <Route path= "/teachers" element = {<Teachers/>} />,
+     <Route path= "/classes" element = {<Lends/>} />,
+     <Route path= "/fees" element = {<Fees/>} />,
+     <Route path= "/emplooyees" element = {<Employees/>} />,
+     <Route path= "/examination" element = {<Examinantion/>} />,
+     <Route path= "/adminstration" element = {<Adminstration/>} />,
+     <Route path= "/settings" element = {<SettingsPage/>} />,
+     <Route path= "/admission" element = {<Admission/>} />,
+     <Route path= "/schedules" element = {<Schedules />} />,
+     <Route path= "/reports" element = {<Reports />} />,
+]
 
 function App() {
 
-  const [showLayout, setShowLayout] = useState(true)
+  const isLogin = useSelector(state => state.isLogin.isLogin)
+  const [showLayout, setShowLayout] = useState(isLogin)
   const dispatch = useDispatch();
 
   const fetchFasalo = async () => {
@@ -66,8 +83,13 @@ function App() {
     fetchMacalimiin(); 
   }, []);
 
+  useEffect(()=> {
+    setShowLayout(isLogin)
+  }, [isLogin])
+
   return (
-   
+    
+
    <div className="App" style={{backgroundColor: "#F0F2FA"}}>
       <Router>
     {!showLayout && 
@@ -75,23 +97,14 @@ function App() {
     showHandler = {showHandler}/>} />}
       {showLayout && <Layout>
           <Routes>
-            <Route path= "/dashboard" element = {<Dashboard/>} />
-            <Route path= "/students" element = {<Customers/>} />
-            <Route path= "/teachers" element = {<Teachers/>} />
-            <Route path= "/classes" element = {<Lends/>} />
-            <Route path= "/fees" element = {<Fees/>} />
-            <Route path= "/emplooyees" element = {<Emplooyees/>} />
-            <Route path= "/examination" element = {<Examinantion/>} />
-            <Route path= "/adminstration" element = {<Adminstration/>} />
-            <Route path= "/settings" element = {<SettingsPage/>} />
-            <Route path= "/admission" element = {<Admission/>} />
-            <Route path= "/schedules" element = {<Schedules />} />
-            <Route path= "/reports" element = {<Reports />} />
-            <Route path="*" element={<Navigate to="/dashboard" replace />} />
+            {pages.map(page => (
+              page
+            ))}
           </Routes>
         </Layout>}
       </Router>
     </div>
+         
   );
 }
 

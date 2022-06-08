@@ -1,8 +1,9 @@
 import { ActionTypes } from "../constants/action-types";
 
-export const setActiveUser = (data) => {
+
+export const fetchStudentsRedux = (data) => {
   return {
-    type: ActionTypes.SET_ACTIVE_USER,
+    type: ActionTypes.FETCH_STUDENTS,
     payload: data,
   };
 };

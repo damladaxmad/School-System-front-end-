@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setActiveUser } from "../redux/actions/activeUseActions";
+import { setIsLogin } from "../redux/actions/isLoginActions";
 
 const Login = (props) => {
   const dispatch = useDispatch()
@@ -42,6 +43,7 @@ const Login = (props) => {
       if (response.data.authenticated == true) {
         props.showHandler()
         dispatch(setActiveUser(response.data.user))
+        dispatch(setIsLogin(true))
       }
     },
   });

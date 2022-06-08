@@ -14,7 +14,7 @@ import {
   import DashboardIcon from "@material-ui/icons/Dashboard";
   import GroupIcon from "@material-ui/icons/Group";
   import { GiTeacher } from 'react-icons/gi';
-  import React from "react";
+  import React, { useEffect } from "react";
   import { useNavigate, useLocation } from "react-router-dom";
   import jaabirLogo from "../../assets/images/jaabirLogo.jpg";
   import BottomProfile from "./BottomProfile"
@@ -27,6 +27,7 @@ import {
   import { FaHouseUser } from "react-icons/fa"; 
   import { HiOutlineDocumentReport } from "react-icons/hi";
   import { Schedule } from "@material-ui/icons";
+import { useSelector } from "react-redux";
   
   
   const drawerWidth = 225;
@@ -89,7 +90,9 @@ import {
     const classes = useStyles();
     const navigate = useNavigate();
     const location = useLocation();
-  
+    
+    const activeUser = useSelector(state => state.activeUser.activeUser)
+    console.log(activeUser)
 
     const menuItems = [
         {
@@ -154,6 +157,10 @@ import {
         }
              
       ];
+
+      useEffect(()=> {
+        navigate({ replace: true })
+      },[])
     
 
 return (
@@ -197,8 +204,11 @@ return (
         <Divider style={{ backgroundColor: "white", opacity: 0.1 }} />
         {/* links/list section */}
         <List>
-          {menuItems.map((item, index) => (
-            <ListItem
+          {menuItems.map((item, index) => {
+            if (!activeUser?.privillages?.includes(item.text)) return
+            else {
+              
+           return <ListItem
               button
               key={index}
               onClick={() => navigate(item.path)}
@@ -214,7 +224,8 @@ return (
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText primary={item.text} />
             </ListItem>
-          ))}
+            }
+      })}
         </List>
         {/* <BottomProfile /> */}
       </Drawer>

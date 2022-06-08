@@ -2,7 +2,8 @@ import React, { useState, useEffect, useReducer } from "react"
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
-import Users from "../containers/AdminstrationContainers/Users"
+import Users from "../containers/AdminstrationContainers/UsersContainer/Users"
+import Access from "../containers/AdminstrationContainers/AccessContainers/Access";
 
 const Adminstration = () => {
 
@@ -45,11 +46,12 @@ const Adminstration = () => {
             <Tab 
             disableFocusRipple = {true}
             disableRipple = {true}
-            value="stuff" label="Stuff"
+            value="access" label="Access"
             style={{ fontSize: "16px", fontWeight: "700" }} />
           </Tabs>
         </Box>
     {value == "users" && <Users/>}
+    {value == "access" && <Access/>}
     </div>
   );
 };

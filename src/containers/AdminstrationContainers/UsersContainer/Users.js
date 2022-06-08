@@ -6,7 +6,7 @@ import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import UsersTable from "./UsersTable";
 import axios from "axios";
-import { setUsers } from "../../redux/actions/usersActions";
+import { setUsers } from "../../../redux/actions/usersActions";
 
 const Users = () => {
   const dispatch = useDispatch();
@@ -51,7 +51,6 @@ const Users = () => {
       .catch((err) => {
         console.log("Err: ", err);
       });
-      console.log(response)
     dispatch(setUsers(response.data.data.users));
   };
 

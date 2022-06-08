@@ -12,7 +12,7 @@ import RegisterStudents from "../containers/StudentContainers/RegisterStudents";
 import StudentProfile from "../containers/StudentContainers/StudentProfile";
 import AssignManyToClass from "../containers/StudentContainers/AssingManyToClass";
 
-const Students = () => {
+const Students = (props) => {
   const [newStudents, setNewStudents] = useState(false)
   const [buttonName, setButtonName] = useState('Add New Students')
   const [update, setUpdate] = useState(false)
@@ -24,8 +24,8 @@ const Students = () => {
   const [showProfile, setShowProfile] = useState(false)
   const [assignMany, setAssignMany] = useState(false)
   const [studentIds, setStudentsIds] = useState('')
-
-  
+  const fetchers = useSelector(state => state.fetchers.fetchers.fetchStudents)
+  console.log(fetchers)
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>, student) => {
     setAnchorEl(event.currentTarget);
@@ -104,6 +104,7 @@ const Students = () => {
   };
 
   const fetchStudents = async (status) => {
+    console.log("in it")
     if (status !== "All"){
       const response = await axios
       .get(`/api/v1/students?status=${status}`)
@@ -126,6 +127,11 @@ const Students = () => {
     // if (students.length > 0) return
     fetchStudents(status);
   }, [ignored, status]);
+
+  useEffect(()=>{
+    if (!fetchers) return
+    fetchStudents()
+  }, [fetchers])
 
   let studentsIds = '';
   const selectHandler = (data) => {
@@ -174,7 +180,7 @@ const Students = () => {
         backgroundColor: "#EFF0F6",
       }}
     >
-      <div
+      {!props.called && <div
         style={{
           display: "flex",
           justifyContent: "space-between",
@@ -208,7 +214,7 @@ const Students = () => {
         >
           {buttonName}
         </Button>
-      </div>
+      </div>}
       {!newStudents && !showProfile &&
       <div
         style={{

@@ -70,11 +70,14 @@ const useStyles = makeStyles((theme) => {
   };
 });
 
+
 const Layout = ({ children }) => {
   const classes = useStyles();
 
   return (
+   
     <div className={classes.root} style={{ backgroundColor: "#f2f2f2" }}>
+      
       {/* app bar */}
    <AppBarFile/>
    
@@ -83,7 +86,7 @@ const Layout = ({ children }) => {
 
       <div className={classes.page}>
         <div className={classes.toolbar}>
-          {children}
+          {children}  
           <Divider
             style={{
               backgroundColor: "#E0E1EA",
@@ -94,6 +97,7 @@ const Layout = ({ children }) => {
         </div>
       </div>
     </div>
+
   );
 };
 

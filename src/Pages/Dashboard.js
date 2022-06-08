@@ -34,8 +34,6 @@ const Dashboard = () => {
     fetchDashboard();
   }, []);
 
-  console.log(dashboard)
-
   return (
     <div
       style={{

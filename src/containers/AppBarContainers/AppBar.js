@@ -6,7 +6,14 @@ import Toolbar from "@material-ui/core/Toolbar";
 import femaleProfile from "../../assets/images/profileDrawer.jpg";
 import maleProfile from "../../assets/images/blueProfile.webp"
 import { Button, MenuItem, Menu} from "@mui/material"
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import Box from '@mui/material/Box';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
+import { FiLogOut } from "react-icons/fi";  
+import { AiOutlineEdit } from "react-icons/ai";  
+import { setIsLogin } from "../../redux/actions/isLoginActions";
 
 const drawerWidth = 225;
 const useStyles = makeStyles((theme) => {
@@ -30,16 +37,24 @@ const useStyles = makeStyles((theme) => {
 });
 
 const AppBarFile = () => {
+  const dispatch = useDispatch()
   const activeUser = useSelector((state) => state.activeUser.activeUser);
-    const [anchorEl, setAnchorEl] = useState(null);
-    const open = Boolean(anchorEl);
-    const handleClose = () => {
-        setAnchorEl(null);
-      };
-      const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        setAnchorEl(event.currentTarget);
-      };
+  console.log(activeUser)
   const classes = useStyles();
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const logoutHandler = () => {
+    dispatch(setIsLogin(false))
+  }
+
   return (
     <AppBar
       position="fixed"
@@ -67,19 +82,55 @@ const AppBarFile = () => {
           />
         </Avatar>
       </Toolbar>
+      
       <Menu
-        id="basic-menu"
         anchorEl={anchorEl}
+        id="account-menu"
         open={open}
         onClose={handleClose}
-        MenuListProps={{
-          'aria-labelledby': 'basic-button',
+        onClick={handleClose}
+        PaperProps={{
+          elevation: 0,
+          sx: {
+            overflow: 'visible',
+            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+            mt: 1.5,
+            '& .MuiAvatar-root': {
+              width: 32,
+              height: 32,
+              ml: -0.5,
+              mr: 1,
+            },
+            '&:before': {
+              content: '""',
+              display: 'block',
+              position: 'absolute',
+              top: 0,
+              right: 14,
+              width: 10,
+              height: 10,
+              bgcolor: 'background.paper',
+              transform: 'translateY(-50%) rotate(45deg)',
+              zIndex: 0,
+            },
+          },
         }}
-        style = {{}}
+        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem >Change Password</MenuItem>
-        <MenuItem >Update username</MenuItem>
-        <MenuItem >Logout</MenuItem>
+       
+        <MenuItem>
+          <ListItemIcon>
+            <AiOutlineEdit fontSize="medium" style={{color: "black"}}/>
+          </ListItemIcon>
+          Edit Profile
+        </MenuItem>
+        <MenuItem onClick = {logoutHandler}>
+          <ListItemIcon>
+            <FiLogOut fontSize="medium" style={{color: "black"}} />
+          </ListItemIcon>
+          Logout
+        </MenuItem>
       </Menu>
     </AppBar>
   );

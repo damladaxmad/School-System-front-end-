@@ -10,7 +10,9 @@ import { usersReducer } from "./usersReducer";
 import { activeUserReducer } from "./activeUserReducer";
 import { employeesReducer } from "./employeesReducer";
 import { examsReducer } from "./examsReducer";
-import { feesReducer } from "./feesReducer";
+import { feesReducer } from "./feesReducer"; 
+import { fetchersReducer } from "./fetchersReducer"; 
+import { isLoginReducer } from "./isLoginReducer";
 
 const reducers = combineReducers({
   allFasalo: fasaloReducer,
@@ -25,5 +27,7 @@ const reducers = combineReducers({
   employees: employeesReducer,
   exams: examsReducer,
   fees: feesReducer,
+  fetchers: fetchersReducer,
+  isLogin: isLoginReducer,
 });
 export default reducers;

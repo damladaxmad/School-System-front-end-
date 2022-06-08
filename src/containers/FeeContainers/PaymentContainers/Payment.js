@@ -2,8 +2,13 @@ import React, { useState, useEffect, useReducer } from "react"
 import { FormControl, Select, MenuItem, Menu } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import PaymentStudents from "./PaymentStudents";
+import DataFetchers, { fetchStudents, useFetch } from "../../../funcrions/DataFetchers";
+import { setStudents } from "../../../redux/actions/studentsActions";
+import axios from "axios";
+import { fetchStudentsRedux } from "../../../redux/actions/fetchersActions";
 
 const Payments = () => {
+    const dispatch = useDispatch()
     const statusArr = ["All", "Active", "Inactive"]
     const [status, setStatus] = useState(statusArr[0]);
     const [query, setQuery] = useState("");
@@ -29,7 +34,7 @@ const Payments = () => {
         std.studentId.toString().toLowerCase().includes(query)
       );
     } else {
-      return
+      dispatch(fetchStudentsRedux(true))
     }  
   };
 

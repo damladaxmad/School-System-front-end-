@@ -12,7 +12,6 @@ const PayPopUp = (props) => {
     }
 
     const loginArr = [
-        { label: "Enter Type", type: "text", name: "type" },
         { label: "Enter Amount", type: "number", name: "credit" },
         { label: "Enter Description", type: "tex", name: "description" },
         { label: "Student Name", type: "tex", name: "student" },
@@ -20,10 +19,6 @@ const PayPopUp = (props) => {
 
       const validate = (values) => {
         const errors = {};
-    
-        if (!values.type) {
-          errors.type = "Field is Required";
-        }
     
         if (!values.credit) {
           errors.credit = "Field is Required";
@@ -37,7 +32,6 @@ const PayPopUp = (props) => {
     
       const formik = useFormik({
         initialValues: {
-          type: "",
           credit: "",
           description: "",
           student: props.student.fullName
@@ -45,6 +39,7 @@ const PayPopUp = (props) => {
         validate,
         onSubmit: async (values, { resetForm }) =>  {
             values.student = props.student._id
+            values.type = "Payment"
             axios.post(`/api/v1/transactions`, values).then((res) => {
                 alert("Successfully Payed")
               });
@@ -78,6 +73,7 @@ const PayPopUp = (props) => {
             variant="outlined"
             disabled = {a.name == "student" ? true : false}
             placeholder={a.label}
+            label = {a.name}
             id={a.name}
             name={a.name}
             type={a.type}
