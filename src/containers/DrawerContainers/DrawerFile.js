@@ -63,8 +63,8 @@ import { useSelector } from "react-redux";
         height: "40px",
       },
       title: {
-        padding: theme.spacing(1.7),
-        fontSize: 18,
+        // padding: theme.spacing(1),
+        fontSize: 16,
         fontWeight: "700",
       },
       appBar: {
@@ -125,7 +125,7 @@ import { useSelector } from "react-redux";
           path: "/emplooyees",
         }, 
         {
-          text: "Examinantion",
+          text: "Examination",
           icon: <FaRegNewspaper style={{fontSize: "20px", color: "white" }} />,
           path: "/examination",
         },
@@ -178,7 +178,7 @@ return (
         <div
           style={{
             display: "flex",
-            justifyContent: "center",
+            justifyContent: "space-between",
             alignItems: "center",
             padding: "10px",
           }}
@@ -193,13 +193,13 @@ return (
             />
           </Avatar>
           <Typography variant="h5" className={classes.title}>
-            JAABIR
+            Racayaam Soft
           </Typography>
           <MdMenuOpen
             style={{
               fontSize: "20px",
               color: "rgba(255, 255, 255, 0.5)",
-              marginLeft: "50px",
+              // float: "left",
               cursor: "pointer",
             }}
           />

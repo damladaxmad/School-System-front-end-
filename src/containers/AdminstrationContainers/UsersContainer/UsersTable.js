@@ -29,8 +29,7 @@ const UsersTable = (props) => {
    
     { title: "Employee Name", field: "name", width: "4%" },
     { title: "Username", field: "username" },
-    { title: "User Password", field: "password",
-  render:()=> <em> _ _ _ _ _ _ _ _ _ _</em> },
+    { title: "User Password", field: "Password" },
   ];
 
   const showModal = () =>{

@@ -1,15 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import { Typography, Divider, Button, Avatar } from "@material-ui/core";
-
-function ClassContainer(props) {
+import axios from "axios";
+import AddClass from "./AddClass";
 const parentDivStyle = {backgroundColor: "#FFFFFF",
 padding: "14px", borderRadius: "10px", width: "31.9%", display: "flex",
 gap: "10px", flexDirection: "column"}
+
+function ClassContainer(props) {
+
+  const [show, setShow] = useState(false)
+  const [update, setUpdate] = useState(true)
+
+  const deleteClass = () => {
+    axios.delete(`api/v1/classes/${props.value._id}`).then(()=>
+    alert("successfull deleted"))
+    props.change()
+  }
+
+  const editHandler = () => {
+    setShow(true)
+    setUpdate(true)
+  }
+
+  const hideModal = () => {
+    setShow(false)
+    setUpdate(false)
+  }
   
   return (
     <div style = {parentDivStyle}>
 
-
+      {show && <AddClass update = {update} value = {props.value}
+      hideModal = {hideModal} change = {()=> props.change()}/>}
+      
       <div style = {{display: "flex", justifyContent: "space-between",
     alignItems: "center"}}>
 
@@ -30,12 +53,17 @@ gap: "10px", flexDirection: "column"}
 
       <div style = {{display: "flex", gap: "16px",
         justifyContent: "flex-end"}}>
+          <Button variant = "outlined" style={{
+            backgroundColor: "white", color: "black"
+        }}> View</Button>
         <Button variant = "outlined" style={{
             backgroundColor: "white", color: "black"
-        }}> Edit</Button>
+        }}
+        onClick = {editHandler}> Edit</Button>
         <Button variant = "outlined" style={{
             backgroundColor: "white", color: "red"
-        }}> Delete</Button>
+        }}
+        onClick = {deleteClass}> Delete</Button>
       </div>
 
 

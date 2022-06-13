@@ -99,7 +99,7 @@ const Layout = ({ children }) => {
         <div className={classes.toolbar}>
           {children}  
           {show && <h2 style={{margin:"-5px 30px",}}>
-            Hello {activeUser.name}, Welcome Back!!</h2>}
+            Hello {activeUser.name},  Welcome Back!!</h2>}
           <Divider
             style={{
               backgroundColor: "#E0E1EA",

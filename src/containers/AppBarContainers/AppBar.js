@@ -14,6 +14,7 @@ import Tooltip from '@mui/material/Tooltip';
 import { FiLogOut } from "react-icons/fi";  
 import { AiOutlineEdit } from "react-icons/ai";  
 import { setIsLogin } from "../../redux/actions/isLoginActions";
+import EditProfile from "./EditProfile";
 
 const drawerWidth = 225;
 const useStyles = makeStyles((theme) => {
@@ -39,6 +40,7 @@ const useStyles = makeStyles((theme) => {
 const AppBarFile = () => {
   const dispatch = useDispatch()
   const activeUser = useSelector((state) => state.activeUser.activeUser);
+  const [show, setShow] = useState(false)
   
   const classes = useStyles();
 
@@ -55,6 +57,14 @@ const AppBarFile = () => {
     dispatch(setIsLogin(false))
   }
 
+  const editHandler = () => {
+    setShow(true)
+  }
+
+  const hideModal = () => {
+    setShow(false)
+  }
+
   return (
     <AppBar
       position="fixed"
@@ -62,6 +72,7 @@ const AppBarFile = () => {
       elevation={1}
       color="primary"
     >
+      {show && <EditProfile user = {activeUser} hideModal = {hideModal}/>}
       <Toolbar>
         <Typography className={classes.appBarTitle}></Typography>
         <Typography style={{ fontWeight: "bold" }}></Typography>
@@ -119,7 +130,7 @@ const AppBarFile = () => {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
        
-        <MenuItem>
+        <MenuItem onClick={editHandler}>
           <ListItemIcon>
             <AiOutlineEdit fontSize="medium" style={{color: "black"}}/>
           </ListItemIcon>

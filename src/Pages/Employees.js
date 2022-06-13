@@ -51,12 +51,6 @@ const Emplooyees = () => {
   const [query, setQuery] = useState("");
   const fasalo = useSelector((state) => state.allFasalo.fasalo);
 
-  const [fasal, setFasal] = useState(fasalo[0]._id);
-  const fasalHandler = (e) => {
-    setFasal(e.target.value);
-    // dispatch(setActiveClass(e.target.value));
-  }; 
-
   const statusHandler = (e) => {
     setStatus(e.target.value)
   }
@@ -228,24 +222,7 @@ const Emplooyees = () => {
           onChange={(e) => setQuery(e.target.value)}
         />
         <div style={{ display: "flex", gap: "20px" }}>
-        <FormControl >
-          {/* <InputLabel>Gender</InputLabel> */}
-
-          <Select
-            style={{  height: "40px", color: "#B9B9B9",
-            width: "150px", }}
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={fasal}
-            onChange={fasalHandler}
-          >
-            {fasalo.map((fasal, index) => (
-              <MenuItem value={fasal._id} key={index}>
-                {fasal.name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+ 
           <FormControl style={{ padding: "0px", margin: "0px" }}>
           <Select
             style={{  height: "40px", color: "#B9B9B9",
