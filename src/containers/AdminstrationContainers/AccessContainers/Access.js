@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FormControl, Select, MenuItem, Menu, Divider } from "@mui/material";
 import {
   FormGroup,
@@ -8,6 +8,7 @@ import {
   Button,
 } from "@material-ui/core";
 import axios from "axios";
+import { setUsers } from "../../../redux/actions/usersActions";
 
 const parentDivStyle = {
   display: "flex",
@@ -26,6 +27,7 @@ const selectStyle = { height: "40px", color: "#B9B9B9", width: "250px" };
 
 const Access = () => {
   const users = useSelector((state) => state.users.users);
+  const dispatch = useDispatch()
 
   const tabs = [
     { name: "Dashboard", access: ["Dashboard", "Quick Actions"] },
@@ -104,7 +106,17 @@ const Access = () => {
     setTab(e.target.value);
   };
 
+  const fetchUsers = async () => {
+    const response = await axios
+      .get("/api/v1/users")
+      .catch((err) => {
+        console.log("Err: ", err);
+      });
+    dispatch(setUsers(response.data.data.users));
+  };
+
   useEffect(() => {
+    fetchUsers()
     users.map((u) => {
       if (u._id == user) setCurrentUserPrivillages(u.privillages);
     }, []);
@@ -155,6 +167,7 @@ const Access = () => {
 
   const removeUserAccess = (access) => {
     setUserAccess((arr) => arr.filter((el) => el !== access));
+    setCurrentUserPrivillages((arr) => arr.filter((el) => el !== access));
   };
 
   const resetUserAccess = (access) => {
@@ -165,6 +178,8 @@ const Access = () => {
     resetUserAccess();
     setSelectAll(false);
   }, [user, tab]);
+
+console.log(currentUserPrivillages, userAccess)  
 
   const UpdateUserPrivillages = async (data) => {
     console.log(currentUserPrivillages);

@@ -15,6 +15,8 @@ import { FiLogOut } from "react-icons/fi";
 import { AiOutlineEdit } from "react-icons/ai";  
 import { setIsLogin } from "../../redux/actions/isLoginActions";
 import EditProfile from "./EditProfile";
+// const {BrowserWindow} = window.require('electron').remote
+// const remote = window.require('electron').remote
 
 const drawerWidth = 225;
 const useStyles = makeStyles((theme) => {
@@ -55,6 +57,9 @@ const AppBarFile = () => {
 
   const logoutHandler = () => {
     dispatch(setIsLogin(false))
+    // const win = remote.getCurrentWindow();
+    // win.setSize(700, 500);
+    // win.center();
   }
 
   const editHandler = () => {

@@ -27,7 +27,8 @@ import {
   import { FaHouseUser } from "react-icons/fa"; 
   import { HiOutlineDocumentReport } from "react-icons/hi";
   import { Schedule } from "@material-ui/icons";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setIsLogin, setIsReports } from "../../redux/actions/isLoginActions";
   
   
   const drawerWidth = 225;
@@ -90,6 +91,7 @@ import { useSelector } from "react-redux";
     const classes = useStyles();
     const navigate = useNavigate();
     const location = useLocation();
+    const dispatch = useDispatch()
     
     const activeUser = useSelector(state => state.activeUser.activeUser)
 
@@ -214,7 +216,10 @@ return (
            return <ListItem
               button
               key={index}
-              onClick={() => navigate(item.path)}
+              onClick={() => {
+                if (item.text == "Reports" ) return dispatch(setIsReports(true))
+                navigate(item.path)
+              }}
               classes={{
                 primary: classes.fontSize,
               }}

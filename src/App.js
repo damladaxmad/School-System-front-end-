@@ -34,13 +34,15 @@ const pages = [
      <Route path= "/settings" element = {<SettingsPage/>} />,
      <Route path= "/admission" element = {<Admission/>} />,
      <Route path= "/schedules" element = {<Schedules />} />,
-     <Route path= "/reports" element = {<Reports />} />,
+     
 ]
 
 function App() {
 
   const isLogin = useSelector(state => state.isLogin.isLogin)
+  const isReports = useSelector(state => state.isLogin.isReports)
   const [showLayout, setShowLayout] = useState(isLogin)
+  const [showReports, setShowReports] = useState(isReports)
   const dispatch = useDispatch();
 
   const fetchFasalo = async () => {
@@ -85,17 +87,20 @@ function App() {
 
   useEffect(()=> {
     setShowLayout(isLogin)
-  }, [isLogin])
+    setShowReports(isReports)
+  }, [isLogin, isReports])
 
   return (
     
 
-   <div className="App" style={{backgroundColor: "#F0F2FA"}}>
+   <div className="App" style={{backgroundColor: "#F0F2FA", display: "flex",
+   justifyContent: "center",}}>
       <Router>
     {!showLayout && 
     <Route path= "/signup" element = {<SignupAndLogin
     showHandler = {showHandler}/>} />}
-      {showLayout && <Layout>
+   {showReports && <Route path= "/reports" element = {<Reports />} />}
+      {showLayout && !showReports && <Layout>
           <Routes>
             {pages.map(page => (
               page

@@ -51,7 +51,9 @@ const Login = (props) => {
   return (
     <form
       onSubmit={formik.handleSubmit}
-      style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}
+      style={{ display: "flex", gap: "16px", flexWrap: "wrap",
+      justifyContent: "center"
+     }}
     >
       {loginArr.map((a, index) => (
         <div>
@@ -81,7 +83,7 @@ const Login = (props) => {
 
       <button
         style={{
-          width: "300px",
+          width: "290px",
           fontSize: "20px",
           backgroundColor: "#2F49D1",
           fontWeight: "600",

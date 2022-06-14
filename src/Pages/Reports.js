@@ -1,5 +1,6 @@
-import React from "react";
-import { useContext } from "react";
+import React, { useState } from "react";
+import Header from "../containers/ReportsContainer/Header";
+
 
 const Users = () => {
 
@@ -8,15 +9,16 @@ const Users = () => {
     <div
     style={{
       height: "100%",
-      width: "95%",
+      width: "100%",
       margin: "0px auto",
       display: "flex",
       gap: "14px",
       flexDirection: "column",
     }}
   >
-    <h2> Reports</h2>
-    
+    {/* Top Blue Header */}
+   
+    <Header/>
 
     </div>
   );

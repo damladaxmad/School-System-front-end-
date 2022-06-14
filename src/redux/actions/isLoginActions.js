@@ -7,3 +7,10 @@ export const setIsLogin = (data) => {
     payload: data,
   };
 };
+
+export const setIsReports = (data) => {
+  return {
+    type: ActionTypes.SET_IS_REPORTS,
+    payload: data,
+  };
+};
