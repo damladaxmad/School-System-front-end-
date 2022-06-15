@@ -13,7 +13,8 @@ const Header = () => {
     return (
         <div style={{background: "#0061F7", height: "70px",
         display: "flex", flexDirection: "row", gap: "40px",
-        alignItems: "center", justifyContent: "space-between"}}>
+        alignItems: "center", justifyContent: "space-between",
+        width:"100%"}}>
   
       <div style = {{
         display: "flex", flexDirection: "row", gap: "40px",

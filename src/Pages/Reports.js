@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Header from "../containers/ReportsContainer/Header";
-
+import ReportPage from "../containers/ReportsContainer/ReportPageContainer/ReportPage";
+import Ribbon from "../containers/ReportsContainer/Ribbon";
 
 const Users = () => {
-
   
   return (
     <div
@@ -12,13 +12,14 @@ const Users = () => {
       width: "100%",
       margin: "0px auto",
       display: "flex",
-      gap: "14px",
       flexDirection: "column",
+      alignItems:"center"
     }}
   >
-    {/* Top Blue Header */}
    
     <Header/>
+    <Ribbon/>
+    <ReportPage/>
 
     </div>
   );
