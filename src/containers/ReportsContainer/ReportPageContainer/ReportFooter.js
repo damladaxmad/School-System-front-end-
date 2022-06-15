@@ -6,6 +6,7 @@ const ReportFooter = () => {
         gap: "8px",
         flexDirection: "column",
         alignItems: "center",
+        marginTop: "0px",
         marginBottom: "20px",
       }}
     >

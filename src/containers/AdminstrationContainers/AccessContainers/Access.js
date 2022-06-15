@@ -95,9 +95,11 @@ const Access = () => {
 
   const [currentUserPrivillages, setCurrentUserPrivillages] = useState();
   const [userAccess, setUserAccess] = useState([]);
+  const [refresh, setRefresh] = useState(1)
 
   const [user, setUser] = useState(users[0]._id);
   const userHandler = (e) => {
+    fetchUsers()
     setUser(e.target.value);
   };
 
@@ -120,36 +122,36 @@ const Access = () => {
     users.map((u) => {
       if (u._id == user) setCurrentUserPrivillages(u.privillages);
     }, []);
-  }, [user, tab]);
+  }, [user, tab, refresh]);
 
   const [selectAll, setSelectAll] = useState(false);
   const [engaged, setEngaged] = useState(false);
 
-  // const selectAllCeckBox = () => {
-  //   let all;
-  //   setSelectAll((state) => (state ? false : true));
-  //   tabs.map((t) => {
-  //     if (t.name == tab) {
-  //       all = t.access;
-  //     }
-  //   });
-  //   if (!selectAll) {
-  //     const realAll = [...all, ...currentUserPrivillages];
-  //     const pure = realAll.filter((v, i, a) => a.indexOf(v) === i);
-  //     setCurrentUserPrivillages(pure);
-  //   }
-  //   if (selectAll) {
-  //     const filteredArr = currentUserPrivillages.filter(
-  //       (item) => !tabs[currentTab].access.includes(item)
-  //     );
-  //     setCurrentUserPrivillages(filteredArr);
-  //     // console.log(filteredArr)
-  //   }
-  // };
-
   const selectAllCeckBox = () => {
+    let all;
     setSelectAll((state) => (state ? false : true));
-  }
+    tabs.map((t) => {
+      if (t.name == tab) {
+        all = t.access;
+      }
+    });
+    if (!selectAll) {
+      const realAll = [...all, ...currentUserPrivillages];
+      const pure = realAll.filter((v, i, a) => a.indexOf(v) === i);
+      setCurrentUserPrivillages(pure);
+    }
+    if (selectAll) {
+      const filteredArr = currentUserPrivillages.filter(
+        (item) => !tabs[currentTab].access.includes(item)
+      );
+      setCurrentUserPrivillages(filteredArr);
+      setRefresh(state => state + 1)
+    }
+  };
+
+  // const selectAllCeckBox = () => {
+  //   setSelectAll((state) => (state ? false : true));
+  // }
   const unEngageAllHandler = () => {
     setEngaged(false);
   };
@@ -177,18 +179,17 @@ const Access = () => {
   useEffect(() => {
     resetUserAccess();
     setSelectAll(false);
-  }, [user, tab]);
-
-console.log(currentUserPrivillages, userAccess)  
+  }, [user, tab, refresh]);
 
   const UpdateUserPrivillages = async (data) => {
-    console.log(currentUserPrivillages);
-    console.log(userAccess);
     const response = await axios
       .patch(`api/v1/users/${user}`, {
         privillages: [...currentUserPrivillages, ...userAccess],
       })
-      .then(() => alert("Successfully Given Access"));
+      .then(() => {
+        alert("Successfully Given Access")
+        fetchUsers()
+      });
   };
 
   const saveHandler = () => {
@@ -299,6 +300,7 @@ console.log(currentUserPrivillages, userAccess)
             resetUserAccess={resetUserAccess}
             currentUserPrivillages={currentUserPrivillages}
             removeCurrentUserPrivillages={removeCurrentUserPrivillages}
+            refresh = {refresh}
           />
         ))}
       </div>
@@ -329,7 +331,7 @@ const RenderCheckBoxes = (props) => {
 
   useEffect(() => {
     setAccessCheck(false);
-  }, [props.tab]);
+  }, [props.tab, props.refresh]);
 
   return (
     <FormGroup>
